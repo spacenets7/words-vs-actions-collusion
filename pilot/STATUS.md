@@ -1,6 +1,6 @@
 # Track 2.2 pilot status
 
-Offline pipeline built; Modal empirical tuning is blocked by missing authentication.
+Offline pipeline built. Modal authentication verified by a successful read-only remote app-list request on 23 October 2026. GPU runs are paused for funding: user reports $1 available and expects $50 in 6-7 hours.
 The spec is copied to the workspace root; Section 21 takes precedence. No winning configuration is frozen.
 
 ## Works
@@ -13,7 +13,7 @@ The spec is copied to the workspace root; Section 21 takes precedence. No winnin
 - Local environment installed; Modal SDK imports; persistent cloud response cache and per-episode recovery implemented.
 
 ## Does not work yet / unvalidated
-- Actual Modal connection attempt failed with `Token missing. Could not authenticate client.` No remote GPU function started.
+- Earlier Modal probe failed with missing credentials; authentication now works. No remote GPU function has started.
 - Model-serving image, throughput, role adherence, H public wording, I independence, monitor difficulty and realistic model-generated negatives have not been validated.
 - Candidate search is implemented but no model iteration has run. No empirically validated frozen config exists.
 
@@ -32,6 +32,8 @@ they intentionally require a validated freeze and explicit --execute-test flag.
 At this build handoff: Modal spend initiated by this pilot $0; external API spend $0. Later runtime progress entries below carry updated reservations and estimates.
 No held-out trajectories generated or inspected. Development-only tuning required.
 
-Human action: authenticate Modal in the prepared environment (command above), confirm credit/GPU eligibility, and notify this chat. Never paste credentials into chat or project files.
+Human action: notify this chat once the credits have actually arrived. Then verify credit/GPU eligibility and enable pilot/funding.json before continuing the already authorized development loop. Authentication setup no longer needs repeating.
 
 Budget protection: each actual remote batch reserves $1.25 against a $20 loop cap; failures retain reservations. Measured runtime estimates and conservative reservations are separate from actual Modal billed totals. No spend ledger exists yet because authentication failed before the local entry point.
+
+Funding gate: pilot/funding.json disables GPU execution while only $1 is available. Both search and individual batches check the gate. Read-only authentication check incurred no pilot compute spend; total initiated Modal/API spend remains $0.

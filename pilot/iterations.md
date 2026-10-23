@@ -18,3 +18,9 @@
 - Result: `Token missing. Could not authenticate client.` No remote GPU batch started, no model revision resolved, no generation or monitor calls ran.
 - Actual initiated Modal spend $0; other API spend $0; reserved spend $0 (entry point not reached).
 - Waiting for local Modal authentication. Planned search tries 3B with contract vs allocation prompts first, increasing to 7B only if both small-model approaches fail.
+
+## Authentication recheck and funding hold
+- Read-only `modal app list --json` succeeded (zero apps returned). Authentication works.
+- User reports only $1 credit currently, with $50 expected in 6-7 hours.
+- No GPU launched. Added funding gate to search and single-batch entry point; it remains disabled until credits are confirmed.
+- Modal compute spend $0; other API spend $0. No held-out data touched.

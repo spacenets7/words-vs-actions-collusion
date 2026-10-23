@@ -72,6 +72,8 @@ def batch(config,families,conditions):
 @app.local_entrypoint()
 def main(config:str='pilot/configs/candidate.json',family:int=1001,conditions:str='B,G,I,T,O,H',
          output:str='pilot/runs/dev-initial.json',execute_test:bool=False):
+    from .progress import require_funding
+    funding=require_funding()
     c=load(config);cs=conditions.split(',')
     if any(x not in CONDITIONS for x in cs):raise ValueError('Unknown condition')
     if Path(output).exists():raise ValueError('Output already exists; reuse it, do not silently pay again')
@@ -86,7 +88,8 @@ def main(config:str='pilot/configs/candidate.json',family:int=1001,conditions:st
         c=dict(c,allow_test_execution=True)
     ledger_path=Path('pilot/spend.json');ledger=load(ledger_path) if ledger_path.exists() else {'reservations':[]}
     reserved=sum(x['reserved_usd'] for x in ledger['reservations'])
-    if reserved+1.25>20:raise ValueError('Modal budget exhausted: conservative reservations reach $20')
+    if reserved+1.25>min(20,funding['loop_cap_usd'],funding['reported_credit_usd']):
+        raise ValueError('Modal batch exceeds the loop cap or available-credit envelope')
     entry={'reserved_usd':1.25,'state':'reserved','config_hash':digest(c),'family':family,
            'conditions':cs,'output':output,'time_unix':time.time()}
     ledger['reservations'].append(entry);save(ledger_path,ledger)

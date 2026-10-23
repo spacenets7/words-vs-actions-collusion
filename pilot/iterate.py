@@ -9,7 +9,7 @@ from pathlib import Path
 from sklearn.metrics import roc_auc_score
 from .core import load,save,CONDITIONS
 from .cli import freeze
-from .progress import record
+from .progress import record,require_funding
 
 def assess(data):
     episodes=data['episodes'];scores=data['scores']
@@ -44,6 +44,7 @@ def run_remote(config_path,family,conditions,output):
     return load(output)
 
 def main():
+    require_funding()
     p=argparse.ArgumentParser();p.add_argument('--resume',action='store_true');args=p.parse_args()
     base=load('pilot/configs/candidate.json');winner=None
     for model in ['Qwen/Qwen2.5-3B-Instruct','Qwen/Qwen2.5-7B-Instruct']:

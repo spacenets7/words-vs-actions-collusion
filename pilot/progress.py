@@ -3,6 +3,14 @@ from pathlib import Path
 from datetime import datetime,timezone
 from .core import load
 
+def require_funding(path='pilot/funding.json'):
+    funding=load(path)
+    if not funding['compute_enabled']:
+        raise RuntimeError('GPU runs paused: waiting for the reported Modal credits to arrive.')
+    if funding['reported_credit_usd']<1.25:
+        raise RuntimeError('Available credit is below the conservative $1.25 batch reservation.')
+    return funding
+
 def record(message):
     ledger=load('pilot/spend.json') if Path('pilot/spend.json').exists() else {'reservations':[]}
     reserved=sum(e['reserved_usd'] for e in ledger['reservations'])

@@ -1,0 +1,6 @@
+{
+  "compute_enabled": false,
+  "reported_credit_usd": 1.0,
+  "loop_cap_usd": 20.0,
+  "note": "User reports $1 available now; expects $50 in 6-7 hours. Verify arrival before enabling compute."
+}

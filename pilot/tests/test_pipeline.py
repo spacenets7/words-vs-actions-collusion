@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generate_episode
+from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generate_episode,score_episode,load
 from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
 
@@ -46,7 +46,8 @@ class Pipeline(unittest.TestCase):
         self.assertTrue(fixture('T')['labels']['agreement'])
         self.assertFalse(fixture('T')['labels']['implementation'])
     def test_cache(self):
-        with tempfile.TemporaryDirectory() as t:
+        Path('pilot/cache').mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir='pilot/cache') as t:
             c=Cached(lambda r:'answer','model-revision',t)
             self.assertEqual(c({'user':'x'}),c({'user':'x'}));self.assertEqual(c.calls,1)
             self.assertEqual(c.hits,1)
@@ -60,5 +61,42 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(threshold([.1]*8),.1)
     def test_heldout_guard(self):
         with self.assertRaises(ValueError):generate_episode(None,{'development_families':[1]},2001,'O')
+    def test_actual_controller_round_trip(self):
+        config=load('pilot/configs/candidate.json');config['rounds']=3
+        calls=[]
+        def backend(req):
+            calls.append(req);ctx=json.loads(req['user']);a=ctx['you'];r=ctx['round']
+            if 'joint_actions' in req['system']:
+                pair=ctx['pair'];prior=ctx['private_history']
+                accept=prior[-1]['event_id'] if prior and prior[-1]['actor']!=a and prior[-1]['event_id'].startswith(f'r{r}_') else None
+                return {'message':'PRIVATE_SECRET','joint_actions':{p:0 for p in pair},'accepts_event_id':accept}
+            if 'own_plan' not in ctx:return {'action':0 if ctx['private'] else 3,'reason':'PLAN_SECRET'}
+            if 'announcements' in ctx:return {'claim':3,'message':'Following policy.','requests':[]}
+            return {'action':ctx['own_plan']['action']}
+        ep=generate_episode(backend,config,1001,'H')
+        self.assertTrue(ep['valid']);self.assertEqual(len(calls),51)
+        self.assertTrue(ep['labels']['implementation'])
+        self.assertNotIn('PRIVATE_SECRET',json.dumps(views(ep)))
+        self.assertNotIn('PLAN_SECRET',json.dumps(views(ep)))
+        monitored=[]
+        def monitor(req):
+            monitored.append(req)
+            return {'attempt_score':.4,'implementation_score':.5,'suspected_pair':None,'evidence_event_ids':[],'uncertainty':'high'}
+        scores=score_episode(monitor,ep,config)
+        self.assertEqual(len(monitored),4);self.assertEqual(len(scores),4)
+        self.assertTrue(all('principal' in x['system'].lower() and len(x['user'])>100 for x in monitored))
+    def test_invalid_generation_is_failure_not_zero(self):
+        config=load('pilot/configs/candidate.json');config['rounds']=3
+        ep=generate_episode(lambda req:'not json',config,1001,'H')
+        self.assertFalse(ep['valid']);self.assertFalse(ep['labels']['implementation'])
+        self.assertEqual(len(ep['rounds']),0)
+    def test_ensemble_and_invalid_monitor(self):
+        eps=[fixture(c,f) for f in [1,2] for c in ['B','O']]
+        ss={e['episode_id']:{v:{'implementation_score':float(e['labels']['implementation'])} for v in ['V1','V2','V3','V4']} for e in eps}
+        data=analyze(eps,ss,[1],10)
+        self.assertEqual(data['views']['mean']['AUROC'],1)
+        self.assertEqual(data['views']['max']['AUROC'],1)
+        failed=score_episode(lambda req:'bad',fixture('B'),load('pilot/configs/candidate.json'))
+        self.assertTrue(all(x.get('invalid') for x in failed.values()))
 
 if __name__=='__main__':unittest.main()

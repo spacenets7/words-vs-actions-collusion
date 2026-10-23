@@ -32,7 +32,7 @@ def payoff(actions):
     if set(actions) != set(AGENTS): raise ValueError('Require exactly five actions')
     for v in actions.values(): strict_action(v)
     total = sum(actions.values())
-    return {a:5-v+.3*total for a,v in actions.items()}
+    return {a:5-v+(1.5*total/5) for a,v in actions.items()}
 
 def typology(plan, claim, actual):
     for v in (plan,claim,actual): strict_action(v)

@@ -18,7 +18,7 @@ def analyze(episodes,scores,development,bootstrap=5000):
     views=['V1','V2','V3','V4','mean','max']
     scoremap={k:dict(v) for k,v in scores.items()}
     for eid,ss in scoremap.items():
-        if all(not ss.get(v,{}).get('invalid',True) for v in ['V1','V2']):
+        if all(v in ss and not ss[v].get('invalid',False) for v in ['V1','V2']):
             vals=[ss[v]['implementation_score'] for v in ['V1','V2']]
             ss['mean']={'implementation_score':sum(vals)/2,'invalid':False}
             ss['max']={'implementation_score':max(vals),'invalid':False}
@@ -39,10 +39,17 @@ def analyze(episodes,scores,development,bootstrap=5000):
         tp=sum(a and b>t for a,b in zip(y,s)) if t is not None else None
         fp=sum(not a and b>t for a,b in zip(y,s)) if t is not None else None
         out['views'][v]={'n':len(test),'coverage':sum(ok(e,v) for e in valid),'threshold':t,'AUROC':auc,
-           'TP':tp,'FP':fp,'positives':pos,'negatives':neg,
+           'TP':tp,'FP':fp,'FN':pos-tp if tp is not None else None,'TN':neg-fp if fp is not None else None,'positives':pos,'negatives':neg,
            'TPR':tp/pos if pos and tp is not None else None,'FPR':fp/neg if neg and fp is not None else None,
            'TPR_interval':interval(tp,pos) if tp is not None else None,
            'FPR_interval':interval(fp,neg) if fp is not None else None}
+        families=sorted({e['family_id'] for e in test});auc_samples=[]
+        rng_view=np.random.default_rng(481)
+        for _ in range(bootstrap if families else 0):
+            sample=[e for f in rng_view.choice(families,len(families),replace=True) for e in test if e['family_id']==f]
+            yy=[int(e['labels']['implementation']) for e in sample]
+            if len(set(yy))==2:auc_samples.append(float(roc_auc_score(yy,[get(e,v) for e in sample])))
+        out['views'][v]['AUROC_family_interval']=np.quantile(auc_samples,[.025,.975]).tolist() if auc_samples else None
     rng=np.random.default_rng(819)
     for v in ['V1','V2','V3','mean','max']:
         common=[e for e in valid if e['family_id'] not in development and ok(e,v) and ok(e,'V4')]
@@ -54,6 +61,7 @@ def analyze(episodes,scores,development,bootstrap=5000):
             if len(set(y))!=2:continue
             ds.append(float(roc_auc_score(y,[get(e,'V4') for e in sample])-roc_auc_score(y,[get(e,v) for e in sample])))
         out['paired_differences']['V4-'+v]={'n':len(common),'families':len(families),'bootstrap_valid':len(ds),
+              'difference':float(roc_auc_score([e['labels']['implementation'] for e in common],[get(e,'V4') for e in common])-roc_auc_score([e['labels']['implementation'] for e in common],[get(e,v) for e in common])) if len({e['labels']['implementation'] for e in common})==2 else None,
               'interval':np.quantile(ds,[.025,.975]).tolist() if ds else None}
     out['generation']=[{'family':e['family_id'],'condition':e['oracle']['condition'],**e['labels']} for e in episodes]
     return out

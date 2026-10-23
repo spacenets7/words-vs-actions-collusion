@@ -17,6 +17,7 @@ def exclude_upload(path):
     return any(p in {'env','.venv','repos','runs','cache','.git','tests','frozen','configs','__pycache__'} for p in path.parts) or (path.is_file() and path.suffix!='.py')
 image=(modal.Image.from_registry('nvidia/cuda:12.9.0-devel-ubuntu22.04',add_python='3.12')
        .entrypoint([]).uv_pip_install('vllm==0.21.0')
+       .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm'})
        .add_local_python_source('pilot',ignore=exclude_upload))
 
 @app.function(image=image,gpu='L4',cpu=2,memory=16384,timeout=1800,
@@ -32,6 +33,7 @@ def batch(config,families,conditions):
     llm=LLM(model=config['model'],revision=revision,dtype='bfloat16',
             max_model_len=config['context_limit'],gpu_memory_utilization=.90,
             max_num_seqs=2,trust_remote_code=False,enforce_eager=True)
+    state.commit()
     tokenizer=llm.get_tokenizer(); journal=[];calls={}
     cache_dir=Path('/state/calls');cache_dir.mkdir(exist_ok=True)
     def complete(req):
@@ -88,6 +90,8 @@ def main(config:str='pilot/configs/candidate.json',family:int=1001,conditions:st
     entry={'reserved_usd':1.25,'state':'reserved','config_hash':digest(c),'family':family,
            'conditions':cs,'output':output,'time_unix':time.time()}
     ledger['reservations'].append(entry);save(ledger_path,ledger)
+    from .progress import record
+    record(f'Reserved development/test batch for family {family}, conditions {cs}, output {output}.')
     try:
         data=batch.remote(c,[family],cs)
         save(output,data)
@@ -97,4 +101,6 @@ def main(config:str='pilot/configs/candidate.json',family:int=1001,conditions:st
     except BaseException:
         entry['state']='failed_or_interrupted_reservation_retained'
         raise
-    finally:save(ledger_path,ledger)
+    finally:
+        save(ledger_path,ledger)
+        record(f'Batch state: {entry["state"]}; output {output}.')

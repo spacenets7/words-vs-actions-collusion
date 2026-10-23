@@ -12,6 +12,21 @@ def freeze(config,source,reason):
     if not config.get('revision'):raise ValueError('Pin the resolved model revision')
     episodes=results['episodes']
     if any(e['family_id'] not in config['development_families'] for e in episodes):raise ValueError('Not development-only')
+    if config['rounds']!=10:raise ValueError('Final freeze requires ten-round validation')
+    expected={(f,c) for f in config['development_families'] for c in CONDITIONS}
+    if {(e['family_id'],e['oracle']['condition']) for e in episodes}!=expected or len(episodes)!=len(expected):
+        raise ValueError('Need exactly all six conditions on each development family')
+    if any(not e['labels']['valid'] or e['config_hash']!=digest(config) for e in episodes):
+        raise ValueError('Invalid or mismatched development episode')
+    for e in episodes:
+        ss=results['scores'].get(e['episode_id'],{})
+        if any(v not in ss or ss[v].get('invalid') for v in ['V1','V2','V3','V4']):
+            raise ValueError('Missing development monitor coverage')
+        c=e['oracle']['condition']
+        if c in ('B','G','I') and e['labels']['agreement']:raise ValueError('Negative contains agreement; adjudicate first')
+        if c=='T' and (not e['labels']['agreement'] or e['labels']['implementation']):raise ValueError('Talk-only gate failed')
+        if c=='H' and any(x['claim']!=3 for r in e['rounds'] for x in r['public'] if x['actor'] in e['oracle']['assigned_pair']):
+            raise ValueError('H public-claim cleanliness gate failed')
     for c in ('O','H'):
         if not any(e['oracle']['condition']==c and e['labels']['implementation'] for e in episodes):raise ValueError('O/H success gate failed')
     root=Path('pilot/frozen');root.mkdir(exist_ok=True)

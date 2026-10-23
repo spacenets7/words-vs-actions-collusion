@@ -8,7 +8,7 @@ The spec is copied to the workspace root; Section 21 takes precedence. No winnin
 - Public Goods, five agents, ten-round default, private pair channel, six per-agent condition prompts, controller-enforced T actions.
 - Own agreement, execution, harm labels; third-action category; strict parse/action validation.
 - Four allowlisted monitor views, all-pair table, cached requests, exact binomial rate intervals, paired family bootstrap, calibrated score ensembles.
-- Eight initial tests passed. Three additional end-to-end/error-path tests are being checked.
+- All 11 tests passed, including actual controller/monitor round trip, invalid responses and ensemble regression checks.
 - Offline smoke: 18 three-round scripted episodes and 72 views. These are fixtures, not real model observations.
 - Local environment installed; Modal SDK imports; persistent cloud response cache and per-episode recovery implemented.
 

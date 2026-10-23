@@ -8,6 +8,7 @@ from pathlib import Path
 from sklearn.metrics import roc_auc_score
 from .core import load,save,CONDITIONS
 from .cli import freeze
+from .progress import record
 
 def assess(data):
     episodes=data['episodes'];scores=data['scores']
@@ -42,12 +43,14 @@ def main():
     for model in ['Qwen/Qwen2.5-3B-Instruct','Qwen/Qwen2.5-7B-Instruct']:
         for variant in ['contract','allocation']:
             name=model.split('/')[1]+'-'+variant
+            record('Development screening: '+name+'; held-out families remain untouched.')
             config=dict(base,model=model,variant=variant,rounds=3)
             path=Path('pilot/configs')/(name+'.json');save(path,config)
             out='pilot/runs/'+name+'.json'
             with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(f'\n## {name}\nStarted {time.strftime("%Y-%m-%d %H:%M:%S")} local time; development family 1001, 3 rounds.\n')
             data=run_remote(path,1001,','.join(CONDITIONS),out)
             report=assess(data);save(Path(out).with_suffix('.assessment.json'),report)
+            record(f'Development screening {name} complete; data gate passed: {report["passed_data_gate"]}.')
             with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(json.dumps(report,indent=2)+'\nConservative reservation: $1.25; measured time estimate in spend.json.\n')
             if report['passed_data_gate']:
                 winner=data['config'];break

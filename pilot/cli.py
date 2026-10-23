@@ -1,0 +1,45 @@
+import argparse
+import hashlib
+import subprocess
+from pathlib import Path
+from .core import CONDITIONS, fixture, views, save, load, digest, POLICY, MONITOR
+from .analysis import analyze
+
+def freeze(config,source,reason):
+    # A freeze is valid only with a real development report and complete provenance.
+    results=load(source)
+    if results.get('scripted') or not results.get('remote_completed'):raise ValueError('Cannot freeze scripted or unfinished results')
+    if not config.get('revision'):raise ValueError('Pin the resolved model revision')
+    episodes=results['episodes']
+    if any(e['family_id'] not in config['development_families'] for e in episodes):raise ValueError('Not development-only')
+    for c in ('O','H'):
+        if not any(e['oracle']['condition']==c and e['labels']['implementation'] for e in episodes):raise ValueError('O/H success gate failed')
+    root=Path('pilot/frozen');root.mkdir(exist_ok=True)
+    save(root/'config.json',config)
+    (root/'WHY.md').write_text(reason,encoding='utf-8')
+    files=[p for p in Path('pilot').rglob('*.py') if 'repos' not in p.parts and 'env' not in p.parts and '.venv' not in p.parts]
+    files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',Path(source)]
+    save(root/'hashes.json',{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files})
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['smoke','analyze','freeze','verify-freeze'])
+    p.add_argument('--input');p.add_argument('--config',default='pilot/configs/candidate.json');p.add_argument('--reason',default='')
+    p.add_argument('--out',default='pilot/runs/offline');a=p.parse_args();c=load(a.config)
+    if a.command=='smoke':
+        # Synthetic tests are intentionally separated from real development data.
+        eps=[fixture(k,f,3) for f in [11,12,13] for k in CONDITIONS]
+        save(Path(a.out)/'fixtures.json',{'scripted':True,'episodes':eps})
+        for e in eps:
+            for v,d in views(e).items():save(Path(a.out)/'views'/f'{e["episode_id"]}-{v}.json',d)
+        print('18 scripted three-round fixtures; 72 views. Not model results.')
+    elif a.command=='analyze':
+        data=load(a.input);save(Path(a.out)/'metrics.json',analyze(data['episodes'],data['scores'],c['development_families']))
+        print('Metrics saved; development-only runs have no held-out AUROC.')
+    elif a.command=='freeze':freeze(c,a.input,a.reason)
+    else:
+        h=load('pilot/frozen/hashes.json')
+        bad=[p for p,v in h.items() if not Path(p).exists() or hashlib.sha256(Path(p).read_bytes()).hexdigest()!=v]
+        if bad:raise ValueError('Changed frozen dependencies: '+str(bad))
+        print('Frozen hashes verified.')
+
+if __name__=='__main__':main()

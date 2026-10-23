@@ -1,0 +1,9 @@
+pilot/env/
+pilot/.venv/
+pilot/repos/
+pilot/cache/
+pilot/runs/
+**/__pycache__/
+*.pyc
+.env
+.pytest_cache/

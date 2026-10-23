@@ -1,0 +1,14 @@
+{
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "revision": null,
+  "variant": "contract",
+  "rounds": 10,
+  "temperature": 0.7,
+  "token_limits": {"private": 256, "plan": 160, "public": 256, "action": 64},
+  "monitor_tokens": 384,
+  "context_limit": 16384,
+  "development_families": [1001, 1002],
+  "test_families": [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008],
+  "allow_test_execution": false,
+  "upstream_commit": "fd11aca351e52c65c929e1a7d46d9f087f237adf"
+}

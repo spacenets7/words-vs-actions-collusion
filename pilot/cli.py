@@ -35,6 +35,8 @@ def freeze(config,source,reason):
     files=[p for p in Path('pilot').rglob('*.py') if 'repos' not in p.parts and 'env' not in p.parts and '.venv' not in p.parts]
     files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',Path(source)]
     save(root/'hashes.json',{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files})
+    from .progress import record
+    record('Empirical development configuration frozen with hashes; see pilot/frozen/config.json and WHY.md. Held-out generation remains a separate explicit command.')
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('command',choices=['smoke','analyze','freeze','verify-freeze'])

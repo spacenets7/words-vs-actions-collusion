@@ -29,7 +29,7 @@ Then review real development evidence and freeze using pilot/frozen/README.md.
 Exact held-out execution/collection/analysis commands are in pilot/README.md;
 they intentionally require a validated freeze and explicit --execute-test flag.
 
-Modal spend initiated by this pilot: $0. External API spend: $0.
+At this build handoff: Modal spend initiated by this pilot $0; external API spend $0. Later runtime progress entries below carry updated reservations and estimates.
 No held-out trajectories generated or inspected. Development-only tuning required.
 
 Human action: authenticate Modal in the prepared environment (command above), confirm credit/GPU eligibility, and notify this chat. Never paste credentials into chat or project files.

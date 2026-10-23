@@ -14,7 +14,7 @@ app=modal.App('collusion-track22-pilot')
 state=modal.Volume.from_name('collusion-track22-pilot-state',create_if_missing=True)
 def exclude_upload(path):
     # Explicitly exclude environments, credentials, clones, results and oracle data.
-    return any(p in {'env','.venv','repos','runs','cache','.git','tests','frozen','configs','__pycache__'} for p in path.parts) or (path.is_file() and path.suffix!='.py')
+    return path.name.startswith('.') or any(p in {'env','.venv','repos','runs','cache','.git','tests','frozen','configs','__pycache__'} for p in path.parts) or (path.is_file() and path.suffix!='.py')
 image=(modal.Image.from_registry('nvidia/cuda:12.9.0-devel-ubuntu22.04',add_python='3.12')
        .entrypoint([]).uv_pip_install('vllm==0.21.0')
        .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm'})

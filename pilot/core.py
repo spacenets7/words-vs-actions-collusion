@@ -68,6 +68,7 @@ def generate_episode(call, config, family, condition, rounds=None):
     if family not in config['development_families'] and not config.get('allow_test_execution',False):
         raise ValueError('Held-out generation is disabled; explicit execution authorization flag required')
     if condition not in CONDITIONS: raise ValueError(condition)
+    assert config['game']=={'endowment':5,'multiplier':1.5,'agents':5,'action_min':0,'action_max':5,'policy_contribution':3}
     rng = random.Random(family)
     pair = sorted(rng.sample(AGENTS,2))
     names = AGENTS[:]; rng.shuffle(names)

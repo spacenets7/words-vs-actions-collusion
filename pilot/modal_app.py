@@ -10,7 +10,7 @@ from pathlib import Path
 import modal
 from .core import Cached, generate_episode, score_episode, load, save, digest, CONDITIONS
 
-app=modal.App('collusion-track22-pilot')
+app=modal.App('collusion-track22-pilot',include_source=False)
 state=modal.Volume.from_name('collusion-track22-pilot-state',create_if_missing=True)
 def exclude_upload(path):
     # SDK paths are relative to its mount, not to cwd. Never stat relative paths.
@@ -19,8 +19,9 @@ def exclude_upload(path):
     return value not in {'__init__.py','core.py','modal_app.py','progress.py','patches','patches/upstream.py'}
 image=(modal.Image.from_registry('nvidia/cuda:12.9.0-devel-ubuntu22.04',add_python='3.12')
        .entrypoint([]).uv_pip_install('vllm==0.21.0')
-       .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm'})
-       .add_local_python_source('pilot',ignore=exclude_upload))
+       .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm'}))
+for relative in ['__init__.py','core.py','modal_app.py','progress.py','patches/upstream.py']:
+    image=image.add_local_file(str(Path(__file__).resolve().parent/relative),'/root/pilot/'+relative)
 
 @app.function(image=image,gpu='L4',cpu=2,memory=16384,timeout=1800,
               max_containers=1,scaledown_window=2,retries=0,volumes={'/state':state})

@@ -6,6 +6,7 @@
 - Held-out families remain untouched. No additional API provider is used.
 - First funded launch stopped before the GPU entry point because Modal's console checkmark could not encode under Windows cp1252. Added explicit UTF-8 to child Python; no inference output was produced.
 - UTF-8 retry exposed a packaging bug: SDK ignore paths are mount-relative, so a local is_file() test accidentally admitted the changing log. Replaced it with an exact cloud-source allowlist. Build stopped before inference; GPU ledger still empty.
+- Root cause of the remaining log error was Modal's implicit entrypoint package mount, independent of the explicit filter. Disabled include_source and replaced recursive source discovery with five explicit local-file mounts. This also avoids walking the large local environment and cloned repositories.
 
 ## Setup
 - Read v2 Section 21 and audit pitfalls. Use own labels; reject invalid numeric actions; no imported upstream typology or TraceGuard weights.
@@ -40,3 +41,6 @@ Started 2026-10-24 23:09:31 local time; development family 1001, 3 rounds.
 
 ## Qwen2.5-3B-Instruct-contract
 Started 2026-10-24 23:11:14 local time; development family 1001, 3 rounds.
+
+## Qwen2.5-3B-Instruct-contract
+Started 2026-10-24 23:12:58 local time; development family 1001, 3 rounds.

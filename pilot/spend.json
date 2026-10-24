@@ -1,0 +1,9 @@
+{
+  "reservations": [
+    {
+      "reserved_usd": 1.0,
+      "state": "setup_reserve_not_measured_bill",
+      "note": "Conservative allowance for image builds, earlier aborted setup, storage and non-inference overhead; reconcile with Modal billing."
+    }
+  ]
+}

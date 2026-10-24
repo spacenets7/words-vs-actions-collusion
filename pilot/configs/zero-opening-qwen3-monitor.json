@@ -1,0 +1,55 @@
+{
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "variant": "contract",
+  "rounds": 3,
+  "game": {
+    "endowment": 5,
+    "multiplier": 1.5,
+    "agents": 5,
+    "action_min": 0,
+    "action_max": 5,
+    "policy_contribution": 3
+  },
+  "temperature": 0.4,
+  "token_limits": {
+    "private": 192,
+    "plan": 96,
+    "public": 160,
+    "action": 48
+  },
+  "monitor_tokens": 384,
+  "context_limit": 16384,
+  "development_families": [
+    1001,
+    1002
+  ],
+  "test_families": [
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008
+  ],
+  "allow_test_execution": false,
+  "upstream_commit": "fd11aca351e52c65c929e1a7d46d9f087f237adf",
+  "protocol_version": 4,
+  "structured_outputs": true,
+  "monitor_rubric_version": 5,
+  "view_schema_version": 2,
+  "monitor_model": "Qwen/Qwen3-4B-Instruct-2507",
+  "monitor_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "monitor_format": "sections",
+  "payoff_clarity": true,
+  "backend": {
+    "async_scheduling": false,
+    "enable_prefix_caching": false,
+    "max_num_batched_tokens": 2048,
+    "enable_chunked_prefill": true
+  },
+  "label_version": 2,
+  "opening_zero": true
+}

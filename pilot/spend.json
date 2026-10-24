@@ -185,7 +185,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "279c56b5e4bd3663fb377a6e2b59563c67214cd2851363c3a197ec86299e2e6e",
       "family": 1001,
       "conditions": [
@@ -198,7 +198,64 @@
       ],
       "output": "pilot/runs/observation-first.json.generation.json",
       "time_unix": 1792884035.8429556,
-      "app_id": "ap-l51mFltR7tk6Jub3gh8JJM"
+      "app_id": "ap-l51mFltR7tk6Jub3gh8JJM",
+      "measured_estimate_usd": 0.11130526743242136,
+      "seconds": 392.306737038
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "279c56b5e4bd3663fb377a6e2b59563c67214cd2851363c3a197ec86299e2e6e",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/observation-first.json.monitor.json",
+      "time_unix": 1792884465.3741906,
+      "app_id": "ap-l51mFltR7tk6Jub3gh8JJM",
+      "measured_estimate_usd": 0.0781857123659802,
+      "seconds": 275.573496285
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "c312ed560f20500d2ef5240420552de067e5514a6426209d4c8d2998814b6a1d",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/zero-opening-qwen3-monitor.json.generation.json",
+      "time_unix": 1792884956.026808,
+      "app_id": "ap-WIfuPKChOaNZv56LftIxkt",
+      "measured_estimate_usd": 0.08728326616305113,
+      "seconds": 307.638750046
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "c312ed560f20500d2ef5240420552de067e5514a6426209d4c8d2998814b6a1d",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/zero-opening-qwen3-monitor.json.monitor.json",
+      "time_unix": 1792885343.1468356,
+      "app_id": "ap-WIfuPKChOaNZv56LftIxkt"
     }
   ]
 }

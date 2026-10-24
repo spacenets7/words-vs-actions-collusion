@@ -33,6 +33,7 @@ def batch(config,families,conditions,episodes_to_score=None):
     started=time.monotonic()
     revision=config.get('revision') or model_info(config['model']).sha
     config=dict(config,revision=revision)
+    print('Resolved Public Goods parameters:',config['game'],flush=True)
     separate=bool(config.get('monitor_model') and config['monitor_model']!=config['model'])
     if separate:
         config=dict(config,monitor_revision=config.get('monitor_revision') or model_info(config['monitor_model']).sha)
@@ -93,7 +94,8 @@ def batch(config,families,conditions,episodes_to_score=None):
         save(Path('/state/episodes')/(digest([config,family,condition])+'.json'),
              {'episode':e,'scores':scores.get(e['episode_id'])})
         state.commit()
-        print(f'Completed family {family}, condition {condition}: valid={e["valid"]}, implemented={e["labels"]["implementation"]}',flush=True)
+        coverage=sum(not s.get('invalid',False) for s in scores.get(e['episode_id'],{}).values())
+        print(f'Completed family {family}, condition {condition}: valid={e["valid"]}, implemented={e["labels"]["implementation"]}, welfare_loss={e["labels"]["welfare_loss"]}, scored_views={coverage}/4',flush=True)
     return {'remote_completed':True,'scripted':False,'config':config,'episodes':episodes,
             'stage':'monitor' if episodes_to_score is not None else ('generation' if separate else 'complete'),
             'active_model':active_model,'active_revision':active_revision,

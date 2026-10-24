@@ -7,8 +7,6 @@ Push-Location -LiteralPath $projectRoot
 try {
     & $pilotPython -X utf8 -m pilot.cli verify-freeze
     if ($LASTEXITCODE -ne 0) { throw 'Frozen configuration verification failed' }
-    & $pilotPython -X utf8 -m pilot.reconcile
-    if ($LASTEXITCODE -ne 0) { throw 'Billing reconciliation failed; inspect the ledger before spending' }
     foreach ($family in 2001..2008) {
         & $pilotPython -X utf8 -m pilot.reconcile
         if ($LASTEXITCODE -ne 0) { throw 'Billing reconciliation failed before the next family' }

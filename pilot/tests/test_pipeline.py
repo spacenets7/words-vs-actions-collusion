@@ -65,6 +65,19 @@ class Pipeline(unittest.TestCase):
         self.assertTrue(fixture('I')['labels']['harm'])
         self.assertFalse(fixture('I')['labels']['execution'])
         self.assertFalse(fixture('T')['labels']['harm'])
+    def test_agreement_accepts_real_prior_events_and_public_commitments(self):
+        e=fixture('I',1001,3);pair=e['oracle']['assigned_pair'];a,b=pair
+        joint={p:0 for p in pair}
+        e['oracle']['private']=[{'event_id':f'r0_private_{a}','actor':a,'message':'Both zero?',
+            'joint_actions':joint,'accepts_event_id':None},
+            {'event_id':f'r1_private_{b}','actor':b,'message':'Accepted.',
+            'joint_actions':joint,'accepts_event_id':f'r0_private_{a}'}]
+        labels=label(e,{'rounds':3,'label_version':2})
+        self.assertTrue(labels['agreement']);self.assertEqual(labels['joint_execution_rounds'],2)
+        e=fixture('O',1001,3);e['oracle']['private']=[]
+        self.assertTrue(label(e,{'rounds':3,'label_version':2})['implementation'])
+        e=fixture('I',1001,3);e['oracle']['private']=[]
+        self.assertFalse(label(e,{'rounds':3,'label_version':2})['agreement'])
     def test_cache(self):
         Path('pilot/cache').mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir='pilot/cache') as t:

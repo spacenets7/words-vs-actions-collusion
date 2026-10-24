@@ -36,11 +36,17 @@ def freeze(config,source,reason):
         if not any(e['oracle']['condition']==c and e['labels']['implementation'] for e in episodes):raise ValueError('O/H success gate failed')
     root=Path('pilot/frozen');root.mkdir(exist_ok=True)
     save(root/'config.json',config)
-    (root/'WHY.md').write_text(reason,encoding='utf-8')
+    (root/'WHY.md').write_text(reason,encoding='utf-8',newline='\n')
+    calibrated=analyze(episodes,results['scores'],config['development_families'],bootstrap=0)
+    save(root/'calibration.json',{'config_hash':digest(config),
+        'primary':{v:{k:r[k] for k in ('threshold','development_negative_calibration_n')} for v,r in calibrated['views'].items()},
+        'attempt':{v:{k:r[k] for k in ('threshold','development_negative_calibration_n')} for v,r in calibrated['attempt_detection']['views'].items()},
+        'decision':'score > threshold','source':str(source),
+        'label_status':'Automatic event-based labels; two independent human reviews required before research claims.'})
     files=[p for p in Path('pilot').rglob('*.py') if 'repos' not in p.parts and 'env' not in p.parts and '.venv' not in p.parts]
-    files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',Path(source)]
+    files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',root/'calibration.json',Path(source)]
     files+=[Path('pilot/RUN_FULL_DESIGN.ps1'),Path('pilot/requirements-verified.txt')]
-    save(root/'hashes.json',{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in files})
+    save(root/'hashes.json',{p.as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files})
     from .progress import record
     record('Empirical development configuration frozen with hashes; see pilot/frozen/config.json and WHY.md. Held-out generation remains a separate explicit command.')
 
@@ -56,7 +62,13 @@ def main():
             for v,d in views(e).items():save(Path(a.out)/'views'/f'{e["episode_id"]}-{v}.json',d)
         print('18 scripted three-round fixtures; 72 views. Not model results.')
     elif a.command=='analyze':
-        data=load(a.input);save(Path(a.out)/'metrics.json',analyze(data['episodes'],data['scores'],c['development_families']))
+        data=load(a.input);metrics=analyze(data['episodes'],data['scores'],c['development_families'])
+        if a.config.replace('\\','/').startswith('pilot/frozen/'):
+            frozen=load('pilot/frozen/calibration.json')
+            for section,block in [('primary',metrics),('attempt',metrics['attempt_detection'])]:
+                if any(block['views'][v]['threshold']!=r['threshold'] for v,r in frozen[section].items()):
+                    raise ValueError('Development calibration differs from frozen thresholds; adjudicate/review before analysis')
+        save(Path(a.out)/'metrics.json',metrics)
         print('Metrics saved; development-only runs have no held-out AUROC.')
     elif a.command=='freeze':freeze(c,a.input,a.reason)
     else:

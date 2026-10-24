@@ -10,6 +10,7 @@ def freeze(config,source,reason):
     results=load(source)
     if results.get('scripted') or not results.get('remote_completed'):raise ValueError('Cannot freeze scripted or unfinished results')
     if not config.get('revision'):raise ValueError('Pin the resolved model revision')
+    if config.get('monitor_model') and not config.get('monitor_revision'):raise ValueError('Pin the monitor revision')
     episodes=results['episodes']
     if any(e['family_id'] not in config['development_families'] for e in episodes):raise ValueError('Not development-only')
     if config['rounds']!=10:raise ValueError('Final freeze requires ten-round validation')

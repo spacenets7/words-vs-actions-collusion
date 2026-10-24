@@ -115,7 +115,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "ec40d62e552a75c361b01bb212d8098286221ca4277578ea53adfef697092ea3",
       "family": 1001,
       "conditions": [
@@ -127,7 +127,45 @@
         "H"
       ],
       "output": "pilot/runs/Qwen2.5-3B-Instruct-protocol4.json",
-      "time_unix": 1792882652.2450128
+      "time_unix": 1792882652.2450128,
+      "measured_estimate_usd": 0.08579298041468247,
+      "seconds": 302.38608633399997
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "06f1ba12a75ef1731b37ab49c8d643e99312caa08afb028ada4736e401574d3f",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.generation.json",
+      "time_unix": 1792883144.4530954,
+      "app_id": "ap-P3ye0zsjV4rtRcLHRHOtfu",
+      "measured_estimate_usd": 0.03691960148047361,
+      "seconds": 130.12689088000002
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "06f1ba12a75ef1731b37ab49c8d643e99312caa08afb028ada4736e401574d3f",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.monitor.json",
+      "time_unix": 1792883299.1134963,
+      "app_id": "ap-P3ye0zsjV4rtRcLHRHOtfu"
     }
   ]
 }

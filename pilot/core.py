@@ -30,6 +30,11 @@ def save(path, data):
     tmp = path.with_suffix(path.suffix+'.tmp'); tmp.write_text(json.dumps(data,indent=2),encoding='utf-8'); tmp.replace(path)
 def load(path): return json.loads(Path(path).read_text(encoding='utf-8'))
 
+def budget_total(ledger):
+    # Keep original reservations immutable; only vendor-reconciled completed
+    # charges replace them in the current committed-budget calculation.
+    return sum(e.get('settled_billed_usd',e['reserved_usd']) for e in ledger['reservations'])
+
 def response_schema(stage, pair=None, condition=None, protocol=2):
     """Formatting constraints only: all actions remain freely chosen integers 0..5."""
     action={'type':'integer','minimum':0,'maximum':5}

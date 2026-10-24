@@ -5,7 +5,8 @@ from .core import load,save,canonical,digest
 def main():
     p=argparse.ArgumentParser();p.add_argument('--output',required=True);a=p.parse_args()
     # Only final validation and scheduled test records: no screening runs or fixtures.
-    files=[Path('pilot/runs/validation-combined.json')]+sorted(Path('pilot/runs').glob('test-*.json'))
+    files=[Path('pilot/runs/validation-combined.json')]+[p for p in sorted(Path('pilot/runs').glob('test-*.json'))
+        if not p.name.endswith(('.generation.json','.monitor.json'))]
     frozen=load('pilot/frozen/config.json')
     episodes={};scores={};config_hashes=set()
     for file in files:

@@ -81,7 +81,7 @@ def main():
     winner=dict(winner,rounds=10);candidate=Path('pilot/configs/selected-development.json');save(candidate,winner)
     combined={'remote_completed':True,'scripted':False,'config':winner,'episodes':[],'scores':{},'batches':[]}
     for family in base['development_families']:
-        for group in ('B,G,I','T,O,H'):
+        for group in ('B,G,I,T,O,H',):
             tag=digest(winner)[:8]
             output=f'pilot/runs/validation-{family}-{group.replace(chr(44), chr(45))}-{tag}.json'
             data=run_remote(candidate,family,group,output)

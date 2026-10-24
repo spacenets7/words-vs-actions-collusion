@@ -148,3 +148,19 @@ Modal conservative reserved ceiling: $8.25; completed-runtime estimate: $0.8234.
 ### Progress 2026-10-24T23:03:01.328244+00:00
 Batch state: completed; output pilot/runs/Qwen2.5-3B-Instruct-protocol4.json.
 Modal conservative reserved ceiling: $8.25; completed-runtime estimate: $0.9092. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:05:34.622257+00:00
+Rejected 3B reason-first monitor after factual review. Retain 3B agents, test a separate 7B auditor; two separately reserved/recoverable RPC phases, no held-out data.
+Modal conservative reserved ceiling: $8.25; completed-runtime estimate: $0.9092. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:05:44.475793+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.generation.json.
+Modal conservative reserved ceiling: $9.00; completed-runtime estimate: $0.9092. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:08:19.111494+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.generation.json.
+Modal conservative reserved ceiling: $9.00; completed-runtime estimate: $0.9461. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:08:19.126769+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.monitor.json.
+Modal conservative reserved ceiling: $9.75; completed-runtime estimate: $0.9461. Actual billed usage requires dashboard reconciliation. External API spend: $0.

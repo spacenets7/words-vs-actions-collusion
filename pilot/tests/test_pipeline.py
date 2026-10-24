@@ -7,8 +7,24 @@ from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generat
 from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
 from pilot.review import export_review
+from pilot.reconcile import settle
+from pilot.core import budget_total
+from datetime import datetime,timezone
 
 class Pipeline(unittest.TestCase):
+    def test_billing_settlement_keeps_original_reservations(self):
+        now=datetime(2026,10,25,0,tzinfo=timezone.utc)
+        ledger={'reservations':[{'reserved_usd':.75,'state':'completed','app_id':'app','output':p} for p in ['gen','monitor']]}
+        rows=[{'object_id':'app','cost':'0.20','interval_start':'2026-10-24T22:00:00'}]
+        finished={p:datetime(2026,10,24,22,30,tzinfo=timezone.utc).timestamp() for p in ['gen','monitor']}
+        self.assertEqual(len(settle(ledger,rows,finished,now)),1)
+        self.assertEqual([x['reserved_usd'] for x in ledger['reservations']],[.75,.75])
+        self.assertAlmostEqual(budget_total(ledger),.2)
+        pending={'reservations':[{'reserved_usd':.75,'state':'reserved'}]}
+        with self.assertRaises(ValueError):settle(pending,rows,{},now)
+        stale={'reservations':[{'reserved_usd':.75,'state':'completed','app_id':'app','output':'late'}]}
+        late={'late':datetime(2026,10,24,23,10,tzinfo=timezone.utc).timestamp()}
+        self.assertEqual(settle(stale,rows,late,now),[])
     def test_payoff_and_upstream(self):
         for a in [dict.fromkeys('ABCDE',3),dict(zip('ABCDE',[0,0,3,3,3]))]:
             self.assertEqual(payoff(a),evaluate(a))

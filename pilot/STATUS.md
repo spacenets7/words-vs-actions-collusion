@@ -1,6 +1,6 @@
 # Track 2.2 pilot status
 
-Offline pipeline built. Modal authentication verified by a successful read-only remote app-list request on 23 October 2026. GPU runs are paused for funding: user reports $1 available and expects $50 in 6-7 hours.
+Offline pipeline built. User confirmed Modal credits ready on 24 October 2026. Funding hold lifted; beginning development-only empirical trials with the original $20 cap. No configuration frozen yet.
 The spec is copied to the workspace root; Section 21 takes precedence. No winning configuration is frozen.
 
 ## Works

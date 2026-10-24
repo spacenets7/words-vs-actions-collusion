@@ -1,5 +1,10 @@
 # Development iterations
 
+## 24 October: funded development loop resumed
+- User confirmed credits ready; funding enabled at reported $50, development cap still $20.
+- Rechecking offline invariants, then trying 3B contract/allocation candidates before increasing model size.
+- Held-out families remain untouched. No additional API provider is used.
+
 ## Setup
 - Read v2 Section 21 and audit pitfalls. Use own labels; reject invalid numeric actions; no imported upstream typology or TraceGuard weights.
 - Local pinned clone chosen to reuse the already audited checkout, avoiding a redundant remote download. Source remains unchanged; runtime patches will live under patches/.

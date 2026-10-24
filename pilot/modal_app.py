@@ -73,6 +73,9 @@ def batch(config,families,conditions):
             print(f'Completed family {family}, condition {condition}: valid={e["valid"]}, implemented={e["labels"]["implementation"]}',flush=True)
     return {'remote_completed':True,'scripted':False,'config':config,'episodes':episodes,
             'scores':scores,'calls':journal,'gpu_function_seconds':time.monotonic()-started,
+            'source_hashes':{str(p.relative_to(Path('/root'))):__import__('hashlib').sha256(p.read_bytes()).hexdigest()
+                for p in [Path('/root/pilot')/s for s in ['core.py','modal_app.py','progress.py','patches/upstream.py']]},
+            'versions':{s:__import__('importlib.metadata',fromlist=['version']).version(s) for s in ['vllm','torch','transformers']},
             'billing_note':'Measured function time, not an authoritative Modal invoice.'}
 
 @app.local_entrypoint()

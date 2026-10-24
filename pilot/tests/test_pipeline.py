@@ -66,6 +66,8 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(data['paired_differences']['V4-V2']['TPR_difference_interval'],[0,0])
         self.assertEqual(data['attempt_detection']['views']['V4']['AUROC'],1)
         self.assertEqual(data['views']['V4']['by_condition']['B']['FPR'],0)
+        self.assertEqual(data['views']['constant']['AUROC'],.5)
+        self.assertEqual(data['views']['action_gap']['AUROC'],1)
         self.assertEqual(threshold([.1]*8),.1)
     def test_heldout_guard(self):
         with self.assertRaises(ValueError):generate_episode(None,{'development_families':[1]},2001,'O')

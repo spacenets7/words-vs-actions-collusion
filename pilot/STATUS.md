@@ -128,3 +128,19 @@ Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.7045.
 ### Progress 2026-10-24T22:46:54.272022+00:00
 Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-protocol3.json.
 Modal conservative reserved ceiling: $7.50; completed-runtime estimate: $0.7045. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:49:54.456958+00:00
+Modal Usage & Billing read-only check: account usage $0.77, credits applied $0.77, cash charges $0.00, account credits $79.23. Live display is delayed/internally asynchronous; snapshot saved, final reconciliation pending.
+Modal conservative reserved ceiling: $7.50; completed-runtime estimate: $0.7045. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:54:27.914543+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-Instruct-protocol3.json.
+Modal conservative reserved ceiling: $7.50; completed-runtime estimate: $0.8234. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:57:23.745970+00:00
+Protocol 3 passed generation gates but monitor AUROC failed. Re-scoring same development trajectories with reason-first monitor and final deterministic tables; no larger agent model and no held-out data.
+Modal conservative reserved ceiling: $7.50; completed-runtime estimate: $0.8234. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:57:32.259696+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-protocol4.json.
+Modal conservative reserved ceiling: $8.25; completed-runtime estimate: $0.8234. Actual billed usage requires dashboard reconciliation. External API spend: $0.

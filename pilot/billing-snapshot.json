@@ -1,0 +1,10 @@
+{
+  "observed_utc": "2026-10-24T22:49:54.453956+00:00",
+  "source": "Authenticated Modal Usage & Billing overview",
+  "displayed_usage_usd": 0.77,
+  "credits_applied_usd": 0.77,
+  "displayed_cash_charges_usd": 0,
+  "remaining_account_credits_usd": 79.23,
+  "scope": "Account billing period Oct 1-31 2026; not isolated project invoice",
+  "caveat": "Live display lag: ephemeral-app breakdown concurrently showed .81. Running batch not final."
+}

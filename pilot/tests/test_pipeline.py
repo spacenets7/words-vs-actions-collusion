@@ -8,7 +8,7 @@ from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
 from pilot.review import export_review
 from pilot.reconcile import settle
-from pilot.core import budget_total
+from pilot.core import budget_total,render_evidence
 from datetime import datetime,timezone
 
 class Pipeline(unittest.TestCase):
@@ -100,6 +100,21 @@ class Pipeline(unittest.TestCase):
         item['requests']=[{'target':'C','action':0}];self.assertFalse(clean_public(e))
         item['requests']=[];item['message']='Following the private agreement.'
         self.assertFalse(clean_public(e))
+    def test_monitor_observation_validation(self):
+        e=fixture('I');c=load('pilot/configs/candidate.json')
+        c.update(monitor_rubric_version=4,monitor_format='sections',structured_outputs=True)
+        def answer(req):
+            view=req['system'].split('visibility: ')[1].split('.')[0]
+            return {'observed_actions':None if view=='V1' else dict.fromkeys('ABCDE',3),
+                'rationale':'copy test','attempt_score':.5,'implementation_score':.5,
+                'suspected_pair':None,'evidence_event_ids':[],'uncertainty':'high'}
+        scores=score_episode(answer,e,c)
+        self.assertFalse(scores['V1'].get('invalid',False))
+        self.assertTrue(all(scores[v].get('invalid') for v in ['V2','V3','V4']))
+        text=render_evidence(views(e)['V4'],'sections')
+        self.assertTrue(text.startswith('POLICY:'))
+        self.assertIn('CLAIMS_VS_OUTCOMES:',text)
+        self.assertNotIn('assigned_pair',text)
     def test_cloud_source_allowlist(self):
         from pilot.modal_app import exclude_upload
         for path in ['.env','dev-loop.log','runs/oracle.json','env/package.py','repos/source.py','configs/candidate.json']:

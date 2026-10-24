@@ -164,3 +164,27 @@ Modal conservative reserved ceiling: $9.00; completed-runtime estimate: $0.9461.
 ### Progress 2026-10-24T23:08:19.126769+00:00
 Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.monitor.json.
 Modal conservative reserved ceiling: $9.75; completed-runtime estimate: $0.9461. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:12:49.490002+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.monitor.json.
+Modal conservative reserved ceiling: $9.75; completed-runtime estimate: $1.0221. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:15:27.038584+00:00
+7B auditor also failed factual/format checks. Running four synthetic known-answer extraction tests with synchronous scheduling, prefix caching disabled, and compact-vs-pretty input. No empirical freeze.
+Modal billed-or-reserved budget envelope: $9.75; completed-runtime estimate: $1.0221. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:15:34.222628+00:00
+Reserved development/test batch for family 1001, conditions ['B'], output pilot/runs/diagnostic-synchronous.json.
+Modal billed-or-reserved budget envelope: $10.50; completed-runtime estimate: $1.0221. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:18:15.562515+00:00
+Batch state: completed; output pilot/runs/diagnostic-synchronous.json.
+Modal billed-or-reserved budget envelope: $10.50; completed-runtime estimate: $1.0600. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:20:23.818353+00:00
+Known-answer probe passed long input extraction but failed a short all-three case. Testing observation-first validated audit, policy-first evidence layout, bounded peer requests, and payoff clarity. Earlier results not trusted or frozen.
+Modal billed-or-reserved budget envelope: $10.50; completed-runtime estimate: $1.0600. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:20:35.855638+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/observation-first.json.generation.json.
+Modal billed-or-reserved budget envelope: $11.25; completed-runtime estimate: $1.0600. Actual billed usage requires dashboard reconciliation. External API spend: $0.

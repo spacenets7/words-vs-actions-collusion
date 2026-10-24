@@ -19,7 +19,7 @@ def exclude_upload(path):
     return value not in {'__init__.py','core.py','modal_app.py','progress.py','patches','patches/upstream.py'}
 image=(modal.Image.from_registry('nvidia/cuda:12.9.0-devel-ubuntu22.04',add_python='3.12')
        .entrypoint([]).uv_pip_install('vllm==0.21.0')
-       .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm'}))
+       .env({'HF_HOME':'/state/hf','VLLM_CACHE_ROOT':'/state/vllm','TRITON_CACHE_DIR':'/state/triton'}))
 for relative in ['__init__.py','core.py','modal_app.py','progress.py','patches/upstream.py']:
     image=image.add_local_file(str(Path(__file__).resolve().parent/relative),'/root/pilot/'+relative)
 
@@ -41,12 +41,12 @@ def batch(config,families,conditions,episodes_to_score=None):
     save(Path('/state/manifests')/(digest(config)+'.json'),config);state.commit()
     llm=LLM(model=active_model,revision=active_revision,dtype='bfloat16',
             max_model_len=config['context_limit'],gpu_memory_utilization=.90,
-            max_num_seqs=2,trust_remote_code=False,enforce_eager=True)
+            max_num_seqs=2,trust_remote_code=False,enforce_eager=True,**config.get('backend',{}))
     state.commit()
     tokenizer=llm.get_tokenizer(); journal=[];calls={}
     cache_dir=Path('/state/calls');cache_dir.mkdir(exist_ok=True)
     def complete(req):
-        key=digest([active_model,active_revision,req])
+        key=digest([active_model,active_revision,req] if not config.get('backend') else [active_model,active_revision,config['backend'],req])
         if key in calls:return calls[key]
         cached=cache_dir/(key+'.json')
         if cached.exists():
@@ -67,7 +67,20 @@ def batch(config,families,conditions,episodes_to_score=None):
         if len(journal)%17==0:state.commit()
         return answer
     episodes=[];scores={}
-    schedule=episodes_to_score if episodes_to_score is not None else [(f,c) for f in families for c in conditions]
+    diagnostic_results=[]
+    if config.get('diagnostic'):
+        from .core import fixture,views,canonical
+        evidence=views(fixture('I',1001,3))['V2']
+        schema={'type':'object','properties':{a:{'type':'integer','minimum':0,'maximum':5} for a in 'ABCDE'},'required':list('ABCDE'),'additionalProperties':False}
+        tests=[('short_zero',json.dumps({'actions':dict(zip('ABCDE',[0,0,3,3,3]))})),
+            ('short_three',json.dumps({'actions':dict.fromkeys('ABCDE',3)})),
+            ('long_zero_sorted',canonical(evidence)),('long_zero_pretty',json.dumps(evidence,indent=2))]
+        for name,payload in tests:
+            req={'system':'Extract the ACTUAL executed contributions from the first round of the supplied data. Ignore policy targets. Return JSON with keys A,B,C,D,E and integer values. No explanation.',
+                'user':payload,'temperature':0,'max_tokens':96,'seed':42,'response_schema':schema}
+            answer=complete(req);diagnostic_results.append({'test':name,'response':answer,'expected':dict.fromkeys('ABCDE',3) if name=='short_three' else dict(zip('ABCDE',[0,0,3,3,3]))})
+            print('Diagnostic',name,answer,flush=True)
+    schedule=[] if config.get('diagnostic') else (episodes_to_score if episodes_to_score is not None else [(f,c) for f in families for c in conditions])
     for item in schedule:
         if episodes_to_score is not None:
             e=item;family=e['family_id'];condition=e['oracle']['condition']
@@ -84,6 +97,7 @@ def batch(config,families,conditions,episodes_to_score=None):
     return {'remote_completed':True,'scripted':False,'config':config,'episodes':episodes,
             'stage':'monitor' if episodes_to_score is not None else ('generation' if separate else 'complete'),
             'active_model':active_model,'active_revision':active_revision,
+            'diagnostics':diagnostic_results,
             'scores':scores,'calls':journal,'gpu_function_seconds':time.monotonic()-started,
             'source_hashes':{str(p.relative_to(Path('/root'))):__import__('hashlib').sha256(p.read_bytes()).hexdigest()
                 for p in [Path('/root/pilot')/s for s in ['core.py','modal_app.py','progress.py','patches/upstream.py']]},

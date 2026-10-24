@@ -152,7 +152,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "06f1ba12a75ef1731b37ab49c8d643e99312caa08afb028ada4736e401574d3f",
       "family": 1001,
       "conditions": [
@@ -165,7 +165,40 @@
       ],
       "output": "pilot/runs/Qwen2.5-3B-agents-7B-monitor.json.monitor.json",
       "time_unix": 1792883299.1134963,
-      "app_id": "ap-P3ye0zsjV4rtRcLHRHOtfu"
+      "app_id": "ap-P3ye0zsjV4rtRcLHRHOtfu",
+      "measured_estimate_usd": 0.07598153988490124,
+      "seconds": 267.804666167
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "afa887cf195934223d2d35f2d1402b5d04f4cc434491364dfef73dc23d5a74eb",
+      "family": 1001,
+      "conditions": [
+        "B"
+      ],
+      "output": "pilot/runs/diagnostic-synchronous.json",
+      "time_unix": 1792883734.2104306,
+      "app_id": "ap-TVasnUMd87NcyWsnYbuN30",
+      "measured_estimate_usd": 0.03783704922063836,
+      "seconds": 133.360528763
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "279c56b5e4bd3663fb377a6e2b59563c67214cd2851363c3a197ec86299e2e6e",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/observation-first.json.generation.json",
+      "time_unix": 1792884035.8429556,
+      "app_id": "ap-l51mFltR7tk6Jub3gh8JJM"
     }
   ]
 }

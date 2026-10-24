@@ -1,5 +1,9 @@
 # Development iterations
 
+## 25 October: user confirmed GPU access ready
+- Resumed development-only search using the cached image, starting with Qwen2.5-3B-Instruct contract prompts.
+- Setup reserve $1.00 retained; total loop cap $20. No held-out execution authorized by this task.
+
 ## 24 October: funded development loop resumed
 - User confirmed credits ready; funding enabled at reported $50, development cap still $20.
 - Rechecking offline invariants, then trying 3B contract/allocation candidates before increasing model size.
@@ -48,3 +52,6 @@ Started 2026-10-24 23:11:14 local time; development family 1001, 3 rounds.
 
 ## Qwen2.5-3B-Instruct-contract
 Started 2026-10-24 23:12:58 local time; development family 1001, 3 rounds.
+
+## Qwen2.5-3B-Instruct-contract
+Started 2026-10-25 00:14:38 local time; development family 1001, 3 rounds.

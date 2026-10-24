@@ -1,6 +1,6 @@
 # Track 2.2 pilot status
 
-Offline pipeline built; 12 tests pass. User confirmed Modal credits ready on 24 October 2026. CUDA/vLLM inference image built and cached. Real development trials are blocked by Modal's requirement to add a payment method before using L4 GPUs. User will add it and notify this chat. The original $20 cap remains; no configuration frozen yet.
+Offline pipeline built; 12 tests pass. User confirmed ready on 25 October 2026 after the payment-method blocker. Resuming cached-image development-only trials under the original $20 cap. GPU eligibility and the first real model batch are being verified. No configuration frozen yet.
 The spec is copied to the workspace root; Section 21 takes precedence. No winning configuration is frozen.
 
 ## Works
@@ -66,3 +66,7 @@ Modal conservative reserved ceiling: $0.00; completed-runtime estimate: $0.0000.
 ### Progress 2026-10-24T17:42:58.163143+00:00
 Development screening: Qwen2.5-3B-Instruct-contract; held-out families remain untouched.
 Modal conservative reserved ceiling: $0.00; completed-runtime estimate: $0.0000. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:44:38.866723+00:00
+Development screening: Qwen2.5-3B-Instruct-contract; held-out families remain untouched.
+Modal conservative reserved ceiling: $1.00; completed-runtime estimate: $0.0000. Actual billed usage requires dashboard reconciliation. External API spend: $0.

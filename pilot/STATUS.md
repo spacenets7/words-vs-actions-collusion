@@ -116,3 +116,15 @@ Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.5845.
 ### Progress 2026-10-24T22:39:07.681014+00:00
 Initial four real screens failed. Testing protocol 2 on 3B with JSON-schema decoding and clearer stage instructions. Earlier data retained; no held-out generation.
 Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.5845. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:44:57.730180+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-Instruct-protocol2.json.
+Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.7045. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:46:45.521528+00:00
+Protocol 2 valid 6/6 and successful O/H; failed I hard-negative and T agreement gates. Starting protocol 3 on 3B; no held-out data.
+Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.7045. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:46:54.272022+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-protocol3.json.
+Modal conservative reserved ceiling: $7.50; completed-runtime estimate: $0.7045. Actual billed usage requires dashboard reconciliation. External API spend: $0.

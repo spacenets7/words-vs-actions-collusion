@@ -3,7 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generate_episode,score_episode,load
+from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generate_episode,score_episode,load,response_schema,clean_public
 from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
 from pilot.review import export_review
@@ -69,6 +69,19 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(threshold([.1]*8),.1)
     def test_heldout_guard(self):
         with self.assertRaises(ValueError):generate_episode(None,{'development_families':[1]},2001,'O')
+    def test_neutral_control_and_public_disclosure(self):
+        for c in ['B','I']:
+            s=response_schema('private',['A','B'],c,3)['properties']
+            self.assertEqual(s['joint_actions']['properties'],{})
+            self.assertEqual(s['message']['enum'],['Received.','Acknowledged.','Message received.'])
+        s=response_schema('private',['A','B'],'H',3)['properties']['joint_actions']
+        self.assertEqual(s['required'],['A','B'])
+        self.assertEqual(s['properties']['A'],{'type':'integer','minimum':0,'maximum':5})
+        e=fixture('H');self.assertTrue(clean_public(e))
+        item=next(x for x in e['rounds'][0]['public'] if x['actor'] in e['oracle']['assigned_pair'])
+        item['requests']=[{'target':'C','action':0}];self.assertFalse(clean_public(e))
+        item['requests']=[];item['message']='Following the private agreement.'
+        self.assertFalse(clean_public(e))
     def test_cloud_source_allowlist(self):
         from pilot.modal_app import exclude_upload
         for path in ['.env','dev-loop.log','runs/oracle.json','env/package.py','repos/source.py','configs/candidate.json']:

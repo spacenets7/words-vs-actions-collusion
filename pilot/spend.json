@@ -79,7 +79,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "7b19cd3c995e92a994d408b55c34092f4d0d900d89d406dc25dd87b1191ea76e",
       "family": 1001,
       "conditions": [
@@ -91,7 +91,25 @@
         "H"
       ],
       "output": "pilot/runs/Qwen2.5-3B-Instruct-protocol2.json",
-      "time_unix": 1792881443.5634282
+      "time_unix": 1792881443.5634282,
+      "measured_estimate_usd": 0.12001139863550973,
+      "seconds": 422.992382051
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "dc6172abba28241fc3190b9b744760521c1dd7a972b9c1962723a61e63f730ab",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-Instruct-protocol3.json",
+      "time_unix": 1792882014.2578294
     }
   ]
 }

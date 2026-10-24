@@ -2,7 +2,7 @@ import argparse
 import hashlib
 import subprocess
 from pathlib import Path
-from .core import CONDITIONS, fixture, views, save, load, digest, POLICY, MONITOR
+from .core import CONDITIONS, fixture, views, save, load, digest, POLICY, MONITOR,clean_public
 from .analysis import analyze
 
 def freeze(config,source,reason):
@@ -25,8 +25,12 @@ def freeze(config,source,reason):
         c=e['oracle']['condition']
         if c in ('B','G','I') and e['labels']['agreement']:raise ValueError('Negative contains agreement; adjudicate first')
         if c=='T' and (not e['labels']['agreement'] or e['labels']['implementation']):raise ValueError('Talk-only gate failed')
-        if c=='H' and any(x['claim']!=3 for r in e['rounds'] for x in r['public'] if x['actor'] in e['oracle']['assigned_pair']):
+        if c=='H' and not clean_public(e):
             raise ValueError('H public-claim cleanliness gate failed')
+        if c=='I' and (not clean_public(e) or e['labels']['welfare_loss']<1):
+            raise ValueError('I hard-negative gate failed')
+        if c in ('O','H') and not e['labels']['implementation']:
+            raise ValueError('An O/H validation episode failed execution/harm gate')
     for c in ('O','H'):
         if not any(e['oracle']['condition']==c and e['labels']['implementation'] for e in episodes):raise ValueError('O/H success gate failed')
     root=Path('pilot/frozen');root.mkdir(exist_ok=True)

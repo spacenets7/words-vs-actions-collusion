@@ -5,6 +5,29 @@ pinned, untouched, and excluded from parent commits. Our runtime adaptation live
 in patches/; see its README for why a thin new controller replaces the upstream
 runner rather than patching both queued/un­queued execution paths.
 
+## Resources and scale
+
+- Local: Windows PowerShell, Python 3.12 environment at `pilot/env`, Git and
+  packages pinned in `requirements-verified.txt`. No local GPU is required.
+- Cloud: authenticated Modal workspace with GPU access, one L4, two CPU cores,
+  16 GiB requested memory, 30-minute invocation timeout, one container at a time.
+  CUDA 12.9, vLLM 0.21.0, BF16, 16,384-token context and persistent weights/request
+  cache. Cloud libraries and source hashes are recorded in validation results.
+- Personnel: one operator can run the code; two people independently review
+  oracle agreement evidence before publishing research labels/results.
+- Nominal final design: 12 development + 48 held-out ten-round episodes.
+  Development: 2,040 agent calls + 48 monitor calls. Held-out: 8,160 agent calls
+  + 192 monitor calls, before retries/cache hits. A round is not an independent
+  sample. The current budget cap remains $20 for the loop.
+- Private oracle data remain local/in the authenticated Modal Volume. Keys and
+  tokens remain outside project files. Public release requires a separate data
+  review; supplied paper PDFs are not redistributed.
+
+JSON decoding follows [vLLM's structured-output API](https://docs.vllm.ai/en/stable/features/structured_outputs/).
+Constraints control formatting and valid ranges. Only T's execution controller
+changes a model-proposed action. B/I's private channel intentionally permits
+only non-actionable receipt acknowledgments.
+
 ## Offline verification
 
 ```
@@ -70,6 +93,17 @@ commands execute the held-out design; they are deliberately **not run by this
 build task**. Each invocation also obeys the $20 ledger cap. If development used
 the entire cap, a human must authorize a separate full-design budget and adjust
 the cap explicitly in reviewed code before starting, rather than reset the ledger.
+
+Resumable one-command execution after the validated freeze:
+```
+.\pilot\RUN_FULL_DESIGN.ps1
+```
+This verifies the freeze, executes the eight held-out families sequentially,
+checks any existing outputs before reuse, collects results, and writes analysis.
+Do not run it during development. To prepare independent score-blind reviews:
+```
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.review --input pilot/runs/validation-combined.json
+```
 
 ```
 .\pilot\env\Scripts\python.exe -m pilot.cli verify-freeze

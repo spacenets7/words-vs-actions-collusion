@@ -5,6 +5,7 @@ import subprocess
 import sys
 import time
 import re
+import hashlib
 from pathlib import Path
 from sklearn.metrics import roc_auc_score
 from .core import load,save,CONDITIONS,digest,clean_public
@@ -78,12 +79,17 @@ def main():
             if winner:break  # Increase model size only if the smaller model failed both approaches.
     if not winner:raise RuntimeError('No candidate passed data gates. No configuration frozen.')
     winner=dict(winner,rounds=10);candidate=Path('pilot/configs/selected-development.json');save(candidate,winner)
-    combined={'remote_completed':True,'scripted':False,'config':winner,'episodes':[],'scores':{}}
+    combined={'remote_completed':True,'scripted':False,'config':winner,'episodes':[],'scores':{},'batches':[]}
     for family in base['development_families']:
         for group in ('B,G,I','T,O,H'):
             tag=digest(winner)[:8]
-            data=run_remote(candidate,family,group,f'pilot/runs/validation-{family}-{group.replace(chr(44), chr(45))}-{tag}.json')
+            output=f'pilot/runs/validation-{family}-{group.replace(chr(44), chr(45))}-{tag}.json'
+            data=run_remote(candidate,family,group,output)
+            if digest(data['config'])!=digest(winner):raise ValueError('Validation configuration changed')
             combined['episodes']+=data['episodes'];combined['scores'].update(data['scores'])
+            combined['batches'].append({'file':output,'sha256':hashlib.sha256(Path(output).read_bytes()).hexdigest(),
+                'source_hashes':data.get('source_hashes'),'versions':data.get('versions'),
+                'seconds':data['gpu_function_seconds']})
             save('pilot/runs/validation-combined.json',combined)
     reports=[assess(dict(combined,episodes=[e for e in combined['episodes'] if e['family_id']==f])) for f in base['development_families']]
     save('pilot/runs/final-development-assessments.json',reports)

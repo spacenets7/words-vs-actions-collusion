@@ -1,55 +1,33 @@
 # Track 2.2 pilot status
 
-Offline pipeline built; 12 tests pass. User confirmed ready on 25 October 2026 after the payment-method blocker. Resuming cached-image development-only trials under the original $20 cap. GPU eligibility and the first real model batch are being verified. No configuration frozen yet.
-The spec is copied to the workspace root; Section 21 takes precedence. No winning configuration is frozen.
+Updated 25 October 2026 (Asia/Calcutta). GPU access works. Four real development screens completed (3B/7B, contract/allocation), but none met all data-quality gates. Testing a clearer stage protocol with schema-constrained generation on the cheap 3B model. No configuration frozen yet. Held-out families generated/inspected: ZERO.
 
 ## Works
-- Untouched upstream clone under pilot/repos/ at fd11aca351e52c65c929e1a7d46d9f087f237adf; changes isolated to pilot/patches runtime adapter and independent controller.
-- Public Goods, five agents, ten-round default, private pair channel, six per-agent condition prompts, controller-enforced T actions.
-- Own agreement, execution, harm labels; third-action category; strict parse/action validation.
-- Four allowlisted monitor views, all-pair table, cached requests, exact binomial rate intervals, paired family bootstrap, calibrated score ensembles.
-- All 12 tests passed, including controller/monitor round trip, invalid responses, ensemble regression checks and cloud source-upload isolation.
-- Offline smoke: 18 three-round scripted episodes and 72 views. These are fixtures, not real model observations.
-- Local environment installed; Modal SDK imports; persistent cloud response cache and per-episode recovery implemented.
+- Public Goods pipeline: five agents, private pair channel, six conditions, strict actions, T controller, own agreement/execution/harm labels.
+- Upstream pinned to fd11aca351e52c65c929e1a7d46d9f087f237adf; adapter in pilot/patches, upstream unchanged. Section 21 overrides Sections 3-4 of the copied spec.
+- Four allowlisted monitor views, all-ten-pair report, persistent Modal request cache, view-specific metrics, exact rate intervals, paired family bootstrap.
+- Twelve offline tests passed; arithmetic and private-evidence leak tests included.
+- Modal L4 serves Qwen2.5 3B and 7B through vLLM 0.21.0. Revisions and exact requests/responses saved locally and in authenticated Modal Volume.
 
-## Does not work yet / unvalidated
-- Authentication works and image builds completed. Modal then rejected GPU registration with `Please add a payment method to use L4 GPU functions.` No remote GPU function has started.
-- Model-serving image, throughput, role adherence, H public wording, I independence, monitor difficulty and realistic model-generated negatives have not been validated.
-- Candidate search is implemented but no model iteration has run. No empirically validated frozen config exists.
+## Current limitations
+- Original prompt variants had malformed JSON, H public disclosures, incomplete agreement acknowledgments, and weak H execution. These runs are retained as failed iterations.
+- Protocol 2 adds formatting constraints without choosing actions, clearer stage instructions, and a stricter I hard-negative check. Final ten-round validation remains pending.
+- Same open model currently generates and monitors in separate requests. Monitor scores are not ground truth. Two independent human label reviews are still required for reportable research.
 
-## Commands
-Run from the project root in PowerShell:
-```
-.\pilot\env\Scripts\python.exe -m unittest discover -s pilot/tests -v
-.\pilot\env\Scripts\python.exe -m pilot.cli smoke
-.\pilot\env\Scripts\python.exe -m modal setup
-.\pilot\env\Scripts\python.exe -m pilot.iterate --resume
-```
-Then review real development evidence and freeze using pilot/frozen/README.md.
-Exact held-out execution/collection/analysis commands are in pilot/README.md;
-they intentionally require a validated freeze and explicit --execute-test flag.
+## Spend
+- First four completed batches: measured-resource estimate $0.5845, not a Modal invoice.
+- Reservation ceiling before protocol 2: $6.00, including $1 setup/storage allowance and four $1.25 reservations.
+- Future batches reserve $0.75 each: above estimated $0.511 for the full 30-minute function timeout. Earlier reservations stay unchanged; stop before $20 accumulated reservations.
+- Exact current numbers: pilot/spend.json and progress entries below. External API spend $0. Actual billed total awaits Modal Billing reconciliation.
 
-At this build handoff: Modal spend initiated by this pilot $0; external API spend $0. Later runtime progress entries below carry updated reservations and estimates.
-No held-out trajectories generated or inspected. Development-only tuning required.
+## Commands / human needs
+- Offline checks: `.\pilot\env\Scripts\python.exe -X utf8 -m unittest discover -s pilot/tests -v`.
+- Current trial log: pilot/protocol2.log. Candidate: pilot/configs/Qwen2.5-3B-Instruct-protocol2.json.
+- Original four-screen runner: `python -m pilot.iterate --resume`; it retains failures and does not yet select a winner.
+- Held-out execution commands are prepared in pilot/README.md; DO NOT run before a validated freeze. This build never executes held-out families.
+- No credential or payment action currently needed.
 
-Human action: add a payment method in Modal Billing (or arrange an organizer GPU-access exemption), then notify this chat. Credits and authentication are ready; neither needs repeating.
-
-Budget protection: each actual remote batch reserves $1.25 against a $20 loop cap; failures retain reservations. Measured runtime estimates and conservative reservations are separate from actual Modal billed totals. No spend ledger exists yet because authentication failed before the local entry point.
-
-Funding gate: pilot/funding.json now enables the confirmed $50 credit envelope while retaining the $20 cap. Platform GPU eligibility is the remaining blocker.
-
-## Spend at latest checkpoint
-- GPU inference: $0; zero agent/monitor calls executed.
-- Other API spend: $0.
-- Image-build/storage billed total: not yet reconciled with the Modal dashboard; do not represent it as zero.
-- Conservative setup allowance in pilot/spend.json: $1.00 reserved, not a measured bill. It reduces the remaining loop envelope to $19 before per-batch reservations.
-- Held-out generations: zero. Empirical freeze: absent, intentionally.
-
-## Setup fixes completed on 24 October
-- Force UTF-8 for Windows Modal subprocess output.
-- Disable Modal's implicit source-package mount; upload only five explicit required Python files. This fixes changing-log build errors and avoids mounting the environment, clones or data.
-- Cached image includes vLLM 0.21.0 on CUDA 12.9/Python 3.12. The image has built; GPU serving and model behavior remain unvalidated.
-- Resume command after GPU access is ready: `.\pilot\env\Scripts\python.exe -X utf8 -m pilot.iterate --resume`.
+## Progress history (UTC timestamps)
 
 ### Progress 2026-10-24T17:38:27.035687+00:00
 Development screening: Qwen2.5-3B-Instruct-contract; held-out families remain untouched.
@@ -70,3 +48,71 @@ Modal conservative reserved ceiling: $0.00; completed-runtime estimate: $0.0000.
 ### Progress 2026-10-24T18:44:38.866723+00:00
 Development screening: Qwen2.5-3B-Instruct-contract; held-out families remain untouched.
 Modal conservative reserved ceiling: $1.00; completed-runtime estimate: $0.0000. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:44:51.586799+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-contract.json.
+Modal conservative reserved ceiling: $2.25; completed-runtime estimate: $0.0000. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:52:35.522314+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-Instruct-contract.json.
+Modal conservative reserved ceiling: $2.25; completed-runtime estimate: $0.1174. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:52:41.244351+00:00
+Development screening Qwen2.5-3B-Instruct-contract complete; data gate passed: False.
+Modal conservative reserved ceiling: $2.25; completed-runtime estimate: $0.1174. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:52:41.254098+00:00
+Development screening: Qwen2.5-3B-Instruct-allocation; held-out families remain untouched.
+Modal conservative reserved ceiling: $2.25; completed-runtime estimate: $0.1174. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:52:50.046551+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-allocation.json.
+Modal conservative reserved ceiling: $3.50; completed-runtime estimate: $0.1174. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:57:29.148021+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-3B-Instruct-allocation.json.
+Modal conservative reserved ceiling: $3.50; completed-runtime estimate: $0.1893. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:57:34.419420+00:00
+Development screening Qwen2.5-3B-Instruct-allocation complete; data gate passed: False.
+Modal conservative reserved ceiling: $3.50; completed-runtime estimate: $0.1893. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:57:34.421315+00:00
+Development screening: Qwen2.5-7B-Instruct-contract; held-out families remain untouched.
+Modal conservative reserved ceiling: $3.50; completed-runtime estimate: $0.1893. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T18:57:43.421653+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-7B-Instruct-contract.json.
+Modal conservative reserved ceiling: $4.75; completed-runtime estimate: $0.1893. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:14:21.705365+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-7B-Instruct-contract.json.
+Modal conservative reserved ceiling: $4.75; completed-runtime estimate: $0.4659. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:14:27.799443+00:00
+Development screening Qwen2.5-7B-Instruct-contract complete; data gate passed: False.
+Modal conservative reserved ceiling: $4.75; completed-runtime estimate: $0.4659. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:14:27.803442+00:00
+Development screening: Qwen2.5-7B-Instruct-allocation; held-out families remain untouched.
+Modal conservative reserved ceiling: $4.75; completed-runtime estimate: $0.4659. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:14:40.241704+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-7B-Instruct-allocation.json.
+Modal conservative reserved ceiling: $6.00; completed-runtime estimate: $0.4659. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:22:04.300347+00:00
+Batch state: completed; output pilot/runs/Qwen2.5-7B-Instruct-allocation.json.
+Modal conservative reserved ceiling: $6.00; completed-runtime estimate: $0.5845. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T19:22:10.119491+00:00
+Development screening Qwen2.5-7B-Instruct-allocation complete; data gate passed: False.
+Modal conservative reserved ceiling: $6.00; completed-runtime estimate: $0.5845. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:37:23.579419+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/Qwen2.5-3B-Instruct-protocol2.json.
+Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.5845. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T22:39:07.681014+00:00
+Initial four real screens failed. Testing protocol 2 on 3B with JSON-schema decoding and clearer stage instructions. Earlier data retained; no held-out generation.
+Modal conservative reserved ceiling: $6.75; completed-runtime estimate: $0.5845. Actual billed usage requires dashboard reconciliation. External API spend: $0.

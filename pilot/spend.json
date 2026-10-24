@@ -4,6 +4,94 @@
       "reserved_usd": 1.0,
       "state": "setup_reserve_not_measured_bill",
       "note": "Conservative allowance for image builds, earlier aborted setup, storage and non-inference overhead; reconcile with Modal billing."
+    },
+    {
+      "reserved_usd": 1.25,
+      "state": "completed",
+      "config_hash": "65dabd68b0650cc90977d63069b1a23d5bcc97f7c8fd52662f2ef100f1a58227",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-Instruct-contract.json",
+      "time_unix": 1792867491.5644476,
+      "measured_estimate_usd": 0.11737295852886838,
+      "seconds": 413.692931513
+    },
+    {
+      "reserved_usd": 1.25,
+      "state": "completed",
+      "config_hash": "28f476cc43156c1d8efeb8e50d02aeb8e86e507205ee8fe6f3891c13f5ff8266",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-Instruct-allocation.json",
+      "time_unix": 1792867970.0290198,
+      "measured_estimate_usd": 0.07189495285089816,
+      "seconds": 253.40107447799997
+    },
+    {
+      "reserved_usd": 1.25,
+      "state": "completed",
+      "config_hash": "64f23daa5e594dc01c5bb92cbb567cbb02dd2be8274c5ae32188a2abf1edb614",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-7B-Instruct-contract.json",
+      "time_unix": 1792868263.3977768,
+      "measured_estimate_usd": 0.2766583603061511,
+      "seconds": 975.110532589
+    },
+    {
+      "reserved_usd": 1.25,
+      "state": "completed",
+      "config_hash": "4ca829d8ab0a15b1f8bc4ad75691ae871e86707c94f48cdcd5e920ff54bd7ae3",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-7B-Instruct-allocation.json",
+      "time_unix": 1792869280.2049546,
+      "measured_estimate_usd": 0.11857416034749349,
+      "seconds": 417.926689509
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "7b19cd3c995e92a994d408b55c34092f4d0d900d89d406dc25dd87b1191ea76e",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/Qwen2.5-3B-Instruct-protocol2.json",
+      "time_unix": 1792881443.5634282
     }
   ]
 }

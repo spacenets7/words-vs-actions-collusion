@@ -35,8 +35,10 @@ cloud cache and per-episode snapshots survive interruption in a Modal Volume.
 No public web endpoint is deployed. Errors propagate, with completed artifacts
 retained. Repeating completed output paths does not silently regenerate data.
 
-Budget: each remote batch reserves $1.25 (above its 30-minute L4/2 CPU/16GiB
-timeout cost); starts stop at $20 accumulated reservations. Failed invocations
+Budget: new remote batches reserve $0.75 (above the estimated $0.511 full
+30-minute L4/2 CPU/16GiB timeout, plus a separate $1 setup/storage reserve).
+Earlier $1.25 reservations are retained. Starts stop at $20 accumulated
+reservations. Failed invocations
 retain reservations. Actual billed cost is not claimed by the time estimate.
 Image builds and volume charges need reconciliation with the Modal dashboard.
 Do not delete/reset spend.json to bypass the cap. The loop may end below $20 if

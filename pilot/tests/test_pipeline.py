@@ -45,6 +45,9 @@ class Pipeline(unittest.TestCase):
         self.assertFalse(fixture('I')['labels']['implementation'])
         self.assertTrue(fixture('T')['labels']['agreement'])
         self.assertFalse(fixture('T')['labels']['implementation'])
+        self.assertTrue(fixture('I')['labels']['harm'])
+        self.assertFalse(fixture('I')['labels']['execution'])
+        self.assertFalse(fixture('T')['labels']['harm'])
     def test_cache(self):
         Path('pilot/cache').mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir='pilot/cache') as t:

@@ -2,7 +2,7 @@
 
 Development command: python -m modal run -m pilot.modal_app --config ...
 Each invocation has a 30-minute GPU timeout, one replica, no platform retries.
-Local ledger reserves $1.25 before each trial (above a full L4/2CPU/16GiB timeout).
+Local ledger reserves $0.75 before each trial (above a full L4/2CPU/16GiB timeout).
 Do not change the hardware without updating the reservation and budget logic.
 """
 import time
@@ -28,6 +28,7 @@ for relative in ['__init__.py','core.py','modal_app.py','progress.py','patches/u
 def batch(config,families,conditions):
     from huggingface_hub import model_info
     from vllm import LLM,SamplingParams
+    from vllm.sampling_params import StructuredOutputsParams
     import json
     started=time.monotonic()
     revision=config.get('revision') or model_info(config['model']).sha
@@ -50,7 +51,8 @@ def batch(config,families,conditions):
         prompt_tokens=len(tokenizer.encode(text,add_special_tokens=False))
         if prompt_tokens+req['max_tokens']>config['context_limit']:
             raise ValueError('Context overflow: no silent truncation')
-        params=SamplingParams(temperature=req['temperature'],max_tokens=req['max_tokens'],seed=req['seed'])
+        params=SamplingParams(temperature=req['temperature'],max_tokens=req['max_tokens'],seed=req['seed'],
+            structured_outputs=StructuredOutputsParams(json=req['response_schema']) if req.get('response_schema') else None)
         t=time.monotonic();result=llm.generate([text],params,use_tqdm=False)[0]
         answer=result.outputs[0].text.strip();calls[key]=answer
         # Exact evidence logged, never credentials; no ambient environment serialized.
@@ -68,6 +70,7 @@ def batch(config,families,conditions):
             save(Path('/state/episodes')/(digest([config,family,condition])+'.json'),
                  {'episode':e,'scores':scores.get(e['episode_id'])})
             state.commit()
+            print(f'Completed family {family}, condition {condition}: valid={e["valid"]}, implemented={e["labels"]["implementation"]}',flush=True)
     return {'remote_completed':True,'scripted':False,'config':config,'episodes':episodes,
             'scores':scores,'calls':journal,'gpu_function_seconds':time.monotonic()-started,
             'billing_note':'Measured function time, not an authoritative Modal invoice.'}
@@ -91,9 +94,10 @@ def main(config:str='pilot/configs/candidate.json',family:int=1001,conditions:st
         c=dict(c,allow_test_execution=True)
     ledger_path=Path('pilot/spend.json');ledger=load(ledger_path) if ledger_path.exists() else {'reservations':[]}
     reserved=sum(x['reserved_usd'] for x in ledger['reservations'])
-    if reserved+1.25>min(20,funding['loop_cap_usd'],funding['reported_credit_usd']):
+    reservation=.75  # Full 1800s resource estimate is $0.511; setup/storage has a separate $1 reserve.
+    if reserved+reservation>min(20,funding['loop_cap_usd'],funding['reported_credit_usd']):
         raise ValueError('Modal batch exceeds the loop cap or available-credit envelope')
-    entry={'reserved_usd':1.25,'state':'reserved','config_hash':digest(c),'family':family,
+    entry={'reserved_usd':reservation,'state':'reserved','config_hash':digest(c),'family':family,
            'conditions':cs,'output':output,'time_unix':time.time()}
     ledger['reservations'].append(entry);save(ledger_path,ledger)
     from .progress import record

@@ -7,8 +7,8 @@ def require_funding(path='pilot/funding.json'):
     funding=load(path)
     if not funding['compute_enabled']:
         raise RuntimeError('GPU runs paused: waiting for the reported Modal credits to arrive.')
-    if funding['reported_credit_usd']<1.25:
-        raise RuntimeError('Available credit is below the conservative $1.25 batch reservation.')
+    if funding['reported_credit_usd']<.75:
+        raise RuntimeError('Available credit is below the conservative $0.75 batch reservation.')
     return funding
 
 def record(message):

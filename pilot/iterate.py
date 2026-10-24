@@ -39,7 +39,7 @@ def assess(data):
 
 def run_remote(config_path,family,conditions,output):
     if Path(output).exists():return load(output)
-    subprocess.run([sys.executable,'-m','modal','run','-m','pilot.modal_app','--config',str(config_path),
+    subprocess.run([sys.executable,'-X','utf8','-m','modal','run','-m','pilot.modal_app','--config',str(config_path),
                     '--family',str(family),'--conditions',conditions,'--output',str(output)],check=True)
     return load(output)
 

@@ -61,6 +61,12 @@ class Pipeline(unittest.TestCase):
         self.assertEqual(threshold([.1]*8),.1)
     def test_heldout_guard(self):
         with self.assertRaises(ValueError):generate_episode(None,{'development_families':[1]},2001,'O')
+    def test_cloud_source_allowlist(self):
+        from pilot.modal_app import exclude_upload
+        for path in ['.env','dev-loop.log','runs/oracle.json','env/package.py','repos/source.py','configs/candidate.json']:
+            self.assertTrue(exclude_upload(Path(path)),path)
+        for path in ['core.py','pilot/core.py','patches','patches/upstream.py','progress.py']:
+            self.assertFalse(exclude_upload(Path(path)),path)
     def test_actual_controller_round_trip(self):
         config=load('pilot/configs/candidate.json');config['rounds']=3
         calls=[]

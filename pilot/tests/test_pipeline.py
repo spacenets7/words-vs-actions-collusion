@@ -6,6 +6,7 @@ from pathlib import Path
 from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generate_episode,score_episode,load
 from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
+from pilot.review import export_review
 
 class Pipeline(unittest.TestCase):
     def test_payoff_and_upstream(self):
@@ -56,11 +57,15 @@ class Pipeline(unittest.TestCase):
             self.assertEqual(c.hits,1)
     def test_metrics_and_family_pairing(self):
         eps=[fixture(c,f) for f in [1,2,3] for c in ['B','O']]
-        scores={e['episode_id']:{v:{'implementation_score':.9 if e['labels']['implementation'] else .1} for v in ['V1','V2','V3','V4']} for e in eps}
+        scores={e['episode_id']:{v:{'implementation_score':.9 if e['labels']['implementation'] else .1,
+            'attempt_score':.9 if e['labels']['agreement'] else .1} for v in ['V1','V2','V3','V4']} for e in eps}
         data=analyze(eps,scores,[1],50)
         self.assertEqual(data['views']['V4']['AUROC'],1)
         self.assertEqual(data['paired_differences']['V4-V2']['families'],2)
         self.assertEqual(data['paired_differences']['V4-V2']['interval'],[0,0])
+        self.assertEqual(data['paired_differences']['V4-V2']['TPR_difference_interval'],[0,0])
+        self.assertEqual(data['attempt_detection']['views']['V4']['AUROC'],1)
+        self.assertEqual(data['views']['V4']['by_condition']['B']['FPR'],0)
         self.assertEqual(threshold([.1]*8),.1)
     def test_heldout_guard(self):
         with self.assertRaises(ValueError):generate_episode(None,{'development_families':[1]},2001,'O')
@@ -72,6 +77,7 @@ class Pipeline(unittest.TestCase):
             self.assertFalse(exclude_upload(Path(path)),path)
     def test_actual_controller_round_trip(self):
         config=load('pilot/configs/candidate.json');config['rounds']=3
+        config.update(protocol_version=2,structured_outputs=True)
         calls=[]
         def backend(req):
             calls.append(req);ctx=json.loads(req['user']);a=ctx['you'];r=ctx['round']
@@ -94,6 +100,19 @@ class Pipeline(unittest.TestCase):
         scores=score_episode(monitor,ep,config)
         self.assertEqual(len(monitored),4);self.assertEqual(len(scores),4)
         self.assertTrue(all('principal' in x['system'].lower() and len(x['user'])>100 for x in monitored))
+        self.assertTrue(all('response_schema' in x for x in calls+monitored))
+        for req in calls:
+            schema=req['response_schema']['properties']
+            action=schema.get('action',schema.get('claim'))
+            if action:self.assertEqual((action['minimum'],action['maximum']),(0,5))
+        with tempfile.TemporaryDirectory(dir='pilot/cache') as directory:
+            export_review({'episodes':[ep],'scores':scores},directory)
+            packet=load(Path(directory)/'packets'/(ep['episode_id']+'.json'))
+            self.assertNotIn('scores',packet);self.assertNotIn('labels',packet)
+            self.assertNotIn('condition',packet)
+            path=Path(directory)/'reviewer-1.json';path.write_text('HUMAN WORK',encoding='utf-8')
+            export_review({'episodes':[ep]},directory)
+            self.assertEqual(path.read_text(encoding='utf-8'),'HUMAN WORK')
     def test_invalid_generation_is_failure_not_zero(self):
         config=load('pilot/configs/candidate.json');config['rounds']=3
         ep=generate_episode(lambda req:'not json',config,1001,'H')

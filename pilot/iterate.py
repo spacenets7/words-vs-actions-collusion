@@ -7,7 +7,7 @@ import time
 import re
 from pathlib import Path
 from sklearn.metrics import roc_auc_score
-from .core import load,save,CONDITIONS
+from .core import load,save,CONDITIONS,digest
 from .cli import freeze
 from .progress import record,require_funding
 
@@ -51,29 +51,40 @@ def run_remote(config_path,family,conditions,output):
 
 def main():
     require_funding()
-    p=argparse.ArgumentParser();p.add_argument('--resume',action='store_true');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--resume',action='store_true');p.add_argument('--candidate');args=p.parse_args()
     base=load('pilot/configs/candidate.json');winner=None
-    for model in ['Qwen/Qwen2.5-3B-Instruct','Qwen/Qwen2.5-7B-Instruct']:
-        for variant in ['contract','allocation']:
-            name=model.split('/')[1]+'-'+variant
-            record('Development screening: '+name+'; held-out families remain untouched.')
-            config=dict(base,model=model,variant=variant,rounds=3)
-            path=Path('pilot/configs')/(name+'.json');save(path,config)
-            out='pilot/runs/'+name+'.json'
-            with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(f'\n## {name}\nStarted {time.strftime("%Y-%m-%d %H:%M:%S")} local time; development family 1001, 3 rounds.\n')
-            data=run_remote(path,1001,','.join(CONDITIONS),out)
-            report=assess(data);save(Path(out).with_suffix('.assessment.json'),report)
-            record(f'Development screening {name} complete; data gate passed: {report["passed_data_gate"]}.')
-            with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(json.dumps(report,indent=2)+'\nConservative reservation: $1.25; measured time estimate in spend.json.\n')
-            if report['passed_data_gate']:
-                winner=data['config'];break
-        if winner:break  # Increase model size only if the smaller model failed both approaches.
+    if args.candidate:
+        candidate_path=Path(args.candidate);candidate_config=load(candidate_path)
+        out='pilot/runs/'+candidate_path.stem+'.json'
+        data=run_remote(candidate_path,1001,','.join(CONDITIONS),out)
+        report=assess(data);save(Path(out).with_suffix('.assessment.json'),report)
+        with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:
+            f.write('\n## '+candidate_path.stem+' assessment\n'+json.dumps(report,indent=2)+'\n')
+        record(f'Candidate {candidate_path.stem}: data gate {report["passed_data_gate"]}.')
+        if report['passed_data_gate']:winner=data['config']
+    else:
+        for model in ['Qwen/Qwen2.5-3B-Instruct','Qwen/Qwen2.5-7B-Instruct']:
+            for variant in ['contract','allocation']:
+                name=model.split('/')[1]+'-'+variant
+                record('Development screening: '+name+'; held-out families remain untouched.')
+                config=dict(base,model=model,variant=variant,rounds=3)
+                path=Path('pilot/configs')/(name+'.json');save(path,config)
+                out='pilot/runs/'+name+'.json'
+                with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(f'\n## {name}\nStarted {time.strftime("%Y-%m-%d %H:%M:%S")} local time; development family 1001, 3 rounds.\n')
+                data=run_remote(path,1001,','.join(CONDITIONS),out)
+                report=assess(data);save(Path(out).with_suffix('.assessment.json'),report)
+                record(f'Development screening {name} complete; data gate passed: {report["passed_data_gate"]}.')
+                with Path('pilot/iterations.md').open('a',encoding='utf-8') as f:f.write(json.dumps(report,indent=2)+'\nConservative reservation: $1.25; measured time estimate in spend.json.\n')
+                if report['passed_data_gate']:
+                    winner=data['config'];break
+            if winner:break  # Increase model size only if the smaller model failed both approaches.
     if not winner:raise RuntimeError('No candidate passed data gates. No configuration frozen.')
     winner=dict(winner,rounds=10);candidate=Path('pilot/configs/selected-development.json');save(candidate,winner)
     combined={'remote_completed':True,'scripted':False,'config':winner,'episodes':[],'scores':{}}
     for family in base['development_families']:
-        for c in CONDITIONS:
-            data=run_remote(candidate,family,c,f'pilot/runs/validation-{family}-{c}.json')
+        for group in ('B,G,I','T,O,H'):
+            tag=digest(winner)[:8]
+            data=run_remote(candidate,family,group,f'pilot/runs/validation-{family}-{group.replace(chr(44), chr(45))}-{tag}.json')
             combined['episodes']+=data['episodes'];combined['scores'].update(data['scores'])
             save('pilot/runs/validation-combined.json',combined)
     reports=[assess(dict(combined,episodes=[e for e in combined['episodes'] if e['family_id']==f])) for f in base['development_families']]

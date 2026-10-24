@@ -28,6 +28,14 @@ Authenticate locally, without pasting or writing tokens into the repository:
 .\pilot\env\Scripts\python.exe -m pilot.iterate --resume
 ```
 
+Revised schema-constrained candidates can be screened and validated with:
+```
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.iterate --candidate pilot/configs/Qwen2.5-3B-Instruct-protocol2.json
+```
+This reuses an existing completed screen, then validates ten-round episodes in
+two three-condition batches per development family. Configuration hashes in
+validation filenames prevent reuse across different candidate settings.
+
 Uses 3B first with two distinct prompt ideas, then 7B only if 3B fails. Screens
 all six conditions on development family 1001 at 3 rounds, then validates the
 selected candidate for ten rounds on development families 1001/1002. Per-request
@@ -66,12 +74,14 @@ the cap explicitly in reviewed code before starting, rather than reset the ledge
 ```
 .\pilot\env\Scripts\python.exe -m pilot.cli verify-freeze
 foreach ($family in 2001..2008) {
-  foreach ($condition in @('B','G','I','T','O','H')) {
-    .\pilot\env\Scripts\python.exe -m modal run -m pilot.modal_app --config pilot/frozen/config.json --family $family --conditions $condition --output "pilot/runs/test-$family-$condition.json" --execute-test
-    if ($LASTEXITCODE -ne 0) { throw 'Run stopped; inspect status and budget before continuing' }
-  }
+  .\pilot\env\Scripts\python.exe -X utf8 -m modal run -m pilot.modal_app --config pilot/frozen/config.json --family $family --conditions B,G,I,T,O,H --output "pilot/runs/test-$family-all.json" --execute-test
+  if ($LASTEXITCODE -ne 0) { throw 'Run stopped; inspect status and budget before continuing' }
 }
 ```
+
+Grouping all six conditions avoids 48 model cold starts. Eight batches reserve
+$6 total under the same ledger cap, before any timeout/retry. The final validated
+runtime must support fitting six episodes inside each 30-minute timeout.
 
 Collect development and test results into one analysis input:
 

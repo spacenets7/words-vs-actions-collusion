@@ -3,6 +3,7 @@ pilot/.venv/
 pilot/repos/
 pilot/cache/
 pilot/runs/
+pilot/*.log
 **/__pycache__/
 *.pyc
 .env

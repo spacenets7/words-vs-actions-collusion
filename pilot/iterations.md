@@ -7,6 +7,10 @@
 - First funded launch stopped before the GPU entry point because Modal's console checkmark could not encode under Windows cp1252. Added explicit UTF-8 to child Python; no inference output was produced.
 - UTF-8 retry exposed a packaging bug: SDK ignore paths are mount-relative, so a local is_file() test accidentally admitted the changing log. Replaced it with an exact cloud-source allowlist. Build stopped before inference; GPU ledger still empty.
 - Root cause of the remaining log error was Modal's implicit entrypoint package mount, independent of the explicit filter. Disabled include_source and replaced recursive source discovery with five explicit local-file mounts. This also avoids walking the large local environment and cloned repositories.
+- Image build then succeeded: CUDA/Python base (109.58 s), vLLM dependency layer (28.84 s), environment layer (12.37 s). These timings are not billing records.
+- Modal rejected GPU registration: `Please add a payment method to use L4 GPU functions.` No GPU function, agent generation or monitor scoring started. User said they will add the payment method and notify this chat.
+- Setup allowance $1.00 reserved conservatively; actual image-build/storage bill unreconciled. GPU inference $0, other API spend $0. No model winner selected and no held-out data touched.
+- Offline regression suite now 12/12 passing. Source/image setup is saved so development can resume after GPU eligibility is enabled.
 
 ## Setup
 - Read v2 Section 21 and audit pitfalls. Use own labels; reject invalid numeric actions; no imported upstream typology or TraceGuard weights.

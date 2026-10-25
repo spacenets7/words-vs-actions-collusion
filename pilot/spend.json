@@ -502,7 +502,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
       "family": 2001,
       "conditions": [
@@ -515,6 +515,25 @@
       ],
       "output": "pilot/runs/test-2001-all.json.generation.json",
       "time_unix": 1792919306.4170582,
+      "app_id": "ap-Z00Os70I3qxHmjjwRxbJZf",
+      "measured_estimate_usd": 0.2851432335201244,
+      "seconds": 1005.0163313129999
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
+      "family": 2001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/test-2001-all.json.monitor.json",
+      "time_unix": 1792920349.5571733,
       "app_id": "ap-Z00Os70I3qxHmjjwRxbJZf"
     }
   ],

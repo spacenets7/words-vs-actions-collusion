@@ -32,5 +32,9 @@
   "no_external_submission_or_publication": true,
   "final_verification": "passed",
   "run_stage": "complete_verified_provisional",
-  "model_jobs_remaining": 0
+  "model_jobs_remaining": 0,
+  "heartbeat_active": false,
+  "heartbeat_deleted_utc": "2026-10-25T12:25:01.884096+00:00",
+  "automatic_model_jobs_remaining": 0,
+  "final_binary_commit_integrity": "PDF, ZIP and SVG Git blobs verified byte-for-byte against local artifacts"
 }

@@ -44,5 +44,9 @@
   "verified_utc": "2026-10-25T12:21:35.812049+00:00",
   "exact_offline_metrics_json_replay": true,
   "archive_sha256": "eb922f150cca648c9e44ad307b7de6b50b98bcc11824c2ed71ea928f8044bd97",
-  "archive_integrity": "all_included_hashes_and_crc_passed"
+  "archive_integrity": "all_included_hashes_and_crc_passed",
+  "heartbeat_active": false,
+  "heartbeat_deleted_utc": "2026-10-25T12:25:01.889805+00:00",
+  "automatic_model_jobs_remaining": 0,
+  "final_binary_commit_integrity": "PDF, ZIP and SVG Git blobs verified byte-for-byte against local artifacts"
 }

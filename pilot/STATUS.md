@@ -1,5 +1,13 @@
 # Track 2.2 pilot status
 
+<!-- automation:start -->
+## Live automated execution
+
+The user authorized held-out execution. The frozen full design is running automatically, followed by checks, analysis and a local report/package draft. Independent human labels and author details remain pending. Prompts, model revisions and development thresholds stay frozen; the $20 admission cap remains active.
+
+Updated 2026-10-25T09:08:00.877568+00:00. Earlier readiness statements below describe the pre-execution freeze.
+<!-- automation:end -->
+
 Updated 25 October 2026, Asia/Calcutta. **Operational configuration frozen and verified. Ready for the separate full-design command.** Development validation and the offline end-to-end rehearsal are complete. Held-out trajectories generated, inspected or scored: **ZERO**.
 
 ## Frozen configuration
@@ -369,3 +377,15 @@ Modal billed-or-reserved budget envelope: $10.04; completed-runtime estimate: $2
 ### Progress 2026-10-25T04:56:46.490894+00:00
 Empirical development configuration frozen with hashes; see pilot/frozen/config.json and WHY.md. Held-out generation remains a separate explicit command.
 Modal billed-or-reserved budget envelope: $10.04; completed-runtime estimate: $2.4519. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T09:06:25.834156+00:00
+Reconciled 4 completed app(s) from authenticated vendor billing. Original reservations retained; current budget envelope $4.9410.
+Modal billed-or-reserved budget envelope: $4.94; completed-runtime estimate: $2.4519. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T09:08:13.358404+00:00
+Reconciled 0 completed app(s) from authenticated vendor billing. Original reservations retained; current budget envelope $4.9410.
+Modal billed-or-reserved budget envelope: $4.94; completed-runtime estimate: $2.4519. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T09:08:26.438368+00:00
+Reserved development/test batch for family 2001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/test-2001-all.json.generation.json.
+Modal billed-or-reserved budget envelope: $5.69; completed-runtime estimate: $2.4519. Actual billed usage requires dashboard reconciliation. External API spend: $0.

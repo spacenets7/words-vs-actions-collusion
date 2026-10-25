@@ -10,3 +10,10 @@ pilot/*.log
 .pytest_cache/
 pilot/review-development/
 pilot/review-full/
+pilot/.automation.lock
+pilot/submission/data/
+pilot/submission/rendered/
+pilot/submission/reproducibility/
+pilot/submission/*.zip
+pilot/submission/official-template.*
+tmp/pdfs/

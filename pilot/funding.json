@@ -1,6 +1,6 @@
 {
   "compute_enabled": true,
-  "reported_credit_usd": 50.0,
+  "reported_credit_usd": 70.0,
   "loop_cap_usd": 20.0,
-  "note": "User confirmed credits ready on 24 October 2026. Development loop authorized; $20 cap unchanged."
+  "note": "User reports about $70 available and authorizes additional credit if needed to complete the frozen run. Current admission cap remains $20; no increase is presently needed."
 }

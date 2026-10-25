@@ -1,0 +1,29 @@
+{
+  "official_event": "https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25",
+  "template_doc_id": "1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg",
+  "retrieved_utc": "2026-10-25T09:10:00Z",
+  "text_sha256": "757f88a0a08bfcc7aad39ccd540bbcb9259cf5d9b9fae69dd396e688879f4618",
+  "structure": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Methods",
+    "4 Results",
+    "5 Discussion and Limitations",
+    "6 Conclusion",
+    "Code and Data",
+    "References",
+    "Appendix",
+    "LLM Usage Statement"
+  ],
+  "required_appendix": "Limitations and Dual-Use / Ethical Considerations",
+  "constraints": {
+    "main_text_pages_max": 8,
+    "abstract_words": [
+      150,
+      250
+    ],
+    "pdf_upload_mb_max": 25
+  },
+  "status": "Official text/PDF retrieved; local report adapts section structure. Final author and formatting approval pending."
+}

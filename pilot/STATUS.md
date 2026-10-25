@@ -3,9 +3,9 @@
 <!-- automation:start -->
 ## Live automated execution
 
-Frozen held-out execution is healthy. Completed family outputs: 6/8 ([2001, 2002, 2003, 2004, 2005, 2006]); the next scheduled family is running under the existing supervisor. Author/team details are saved. Automatic analysis and local PDF/package drafting follow execution. Independent human adjudication, author approval and external submission remain pending. Frozen prompts/models/thresholds are unchanged. Billed-or-reserved budget envelope: $7.6112; this is not measured spend. The $20 admission cap remains active.
+Frozen held-out execution is healthy. Completed family outputs: 7/8 ([2001, 2002, 2003, 2004, 2005, 2006, 2007]); the final scheduled family is running under the existing supervisor. Author/team details are saved. Automatic analysis and local PDF/package drafting follow execution. Independent human adjudication, author approval and external submission remain pending. Frozen prompts/models/thresholds are unchanged. Billed-or-reserved budget envelope: $9.1112; this is not measured spend. The $20 admission cap remains active.
 
-Updated 2026-10-25T11:20:39.396915+00:00. Earlier readiness statements below describe the pre-execution freeze.
+Updated 2026-10-25T11:50:39.282950+00:00. Earlier readiness statements below describe the pre-execution freeze.
 <!-- automation:end -->
 
 The sections below preserve the **pre-execution readiness snapshot** from 25 October 2026. At freeze, held-out trajectories were untouched. The user subsequently authorized automated held-out execution; consult the live banner above and pilot/automation-state.json for the current stage. The experimental configuration and calibration remain frozen.
@@ -509,3 +509,23 @@ Modal billed-or-reserved budget envelope: $6.86; completed-runtime estimate: $4.
 ### Progress 2026-10-25T11:16:09.902044+00:00
 Reserved development/test batch for family 2007, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/test-2007-all.json.generation.json.
 Modal billed-or-reserved budget envelope: $7.61; completed-runtime estimate: $4.5072. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T11:34:44.941547+00:00
+Batch state: completed; output pilot/runs/test-2007-all.json.generation.json.
+Modal billed-or-reserved budget envelope: $7.61; completed-runtime estimate: $4.8122. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T11:34:44.965634+00:00
+Reserved development/test batch for family 2007, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/test-2007-all.json.monitor.json.
+Modal billed-or-reserved budget envelope: $8.36; completed-runtime estimate: $4.8122. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T11:37:57.067471+00:00
+Batch state: completed; output pilot/runs/test-2007-all.json.monitor.json.
+Modal billed-or-reserved budget envelope: $8.36; completed-runtime estimate: $4.8661. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T11:38:09.028623+00:00
+Reconciled 0 completed app(s) from authenticated vendor billing. Original reservations retained; current budget envelope $8.3612.
+Modal billed-or-reserved budget envelope: $8.36; completed-runtime estimate: $4.8661. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T11:38:22.487070+00:00
+Reserved development/test batch for family 2008, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/test-2008-all.json.generation.json.
+Modal billed-or-reserved budget envelope: $9.11; completed-runtime estimate: $4.8661. Actual billed usage requires dashboard reconciliation. External API spend: $0.

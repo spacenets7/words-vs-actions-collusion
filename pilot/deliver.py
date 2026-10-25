@@ -398,8 +398,8 @@ def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples
                       para('Table 2. Flagged / eligible episodes at locked thresholds by assigned condition. Counts describe flagging, not proof of agreement.', 'PaperSmall'),
                       table(hard_rows(metrics), [61] + [74] * 6), Spacer(1, 8),
                       KeepTogether([figures['paired-differences'], para('Figure 2. Paired V4 minus comparator AUROC, with family-bootstrap intervals and individual-family dots. Common eligible records only; zero denotes no difference.', 'PaperSmall')]),
-                      para('Table 3. Held-out generation funnel by assigned condition. Agreement means unauthorized agreement; columns need not be nested.', 'PaperSmall'),
-                      table(funnel_rows(checks), [64] + [63] * 7)]
+                      KeepTogether([para('Table 3. Held-out generation funnel by assigned condition. Agreement means unauthorized agreement; columns need not be nested.', 'PaperSmall'),
+                                    table(funnel_rows(checks), [64] + [63] * 7)])]
     story += [PageBreak(), para('References', 'PaperHead')]
     for i, text in enumerate(REFERENCES, 1):
         story.append(para(f'[{i}] ' + text, 'PaperSmall'))
@@ -447,11 +447,16 @@ def render_pdf(path, folder):
     if not binary:
         raise RuntimeError('PDF generated, but Poppler is required for render verification')
     folder.mkdir(parents=True, exist_ok=True)
+    for stale in folder.glob('page-*.png'):
+        stale.unlink()  # Only generated page images in this explicit render folder.
     subprocess.run([binary, '-r', '100', '-png', str(path), str(folder / 'page')], check=True)
     from PIL import Image, ImageOps, ImageDraw
     pages = sorted(folder.glob('page-*.png'))
     if not pages:
         raise ValueError('No rendered report pages')
+    from pypdf import PdfReader
+    if len(pages) != len(PdfReader(path).pages):
+        raise ValueError('Rendered page count does not match the current PDF')
     thumbs = []
     for page in pages:
         with Image.open(page) as im:

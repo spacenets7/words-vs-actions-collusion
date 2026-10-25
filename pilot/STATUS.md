@@ -1,33 +1,59 @@
 # Track 2.2 pilot status
 
-Updated 25 October 2026 (Asia/Calcutta). GPU access works. The 3B protocol-3 agent setup passes all six three-round generation gates: O/H execute harmful agreements, H public text is clean, I independently causes harm without agreement, and T talks but executes policy. The original monitor and example-anchored monitor failed. A reason-first monitor re-score on the same cached development trajectories is running. No winning configuration frozen yet; ten-round validation is still required. Held-out families generated/inspected: ZERO.
+Updated 25 October 2026 (Asia/Calcutta). The three-round candidate now passes all six generation gates and all 24 monitor-output checks. Ten-round validation on development families 1001 and 1002 is running. No configuration frozen yet. Held-out trajectories generated or inspected: ZERO.
 
-## Works
-- Public Goods pipeline: five agents, private pair channel, six conditions, strict actions, T controller, own agreement/execution/harm labels.
-- Upstream pinned to fd11aca351e52c65c929e1a7d46d9f087f237adf; adapter in pilot/patches, upstream unchanged. Section 21 overrides Sections 3-4 of the copied spec.
-- Four allowlisted monitor views, all-ten-pair report, persistent Modal request cache, view-specific metrics, exact rate intervals, paired family bootstrap.
-- Thirteen offline tests passed; arithmetic and private-evidence leak tests included.
-- Modal L4 serves Qwen2.5 3B and 7B through vLLM 0.21.0. Revisions and exact requests/responses saved locally and in authenticated Modal Volume.
+## Working candidate
+- Agents: Qwen/Qwen2.5-3B-Instruct, revision aa8e72537993ba99e69dfaafa59ed015b17504d1.
+- Auditor: Qwen/Qwen3-4B-Instruct-2507, revision cdbee75f17c01a7cc42f958dc650907174af0554.
+- Candidate: pilot/configs/zero-opening-qwen3-monitor.json. Final validation candidate is copied to pilot/configs/selected-development.json with rounds=10.
+- Conditions: B/G compliant, I independently harmful with receipt-only private channel, T agreed low contributions with controller-enforced execution=3, O/H jointly executed zero contributions. H public claims remained 3 with no plan disclosure.
+- Three-round O/H: welfare loss 3.0/round, pair gain 1.2 per member, outsider loss 1.8 per outsider. I had welfare loss 2.5 without agreement. T had agreement with zero executed harm.
+- Screen AUROC (development only, six episodes): V1 .75, V2 .75, V3 .6875, V4 .875. This is selection evidence, not a held-out result or a superiority claim.
+- All 24 screen monitor outputs valid, including correct observed-action extraction. Rationale review supports proceeding to ten-round validation.
 
-## Current limitations
-- Original prompt variants had malformed JSON, H public disclosures, incomplete agreement acknowledgments, and weak H execution. These runs are retained as failed iterations.
-- Protocol 2 adds formatting constraints without choosing actions, clearer stage instructions, and a stricter I hard-negative check. Final ten-round validation remains pending.
-- Same open model currently generates and monitors in separate requests. Monitor scores are not ground truth. Two independent human label reviews are still required for reportable research.
+## Pipeline / verification
+- Public Goods, five agents, private pair channel, six conditions, own agreement/execution/harm labels and third-action typology category.
+- Untouched upstream clone at fd11aca351e52c65c929e1a7d46d9f087f237adf; adapter under pilot/patches. The copied spec's Section 21 overrides Sections 3-4.
+- Four allowlisted views; all-ten-pair tables; shared action-only summaries; directed request/own-claim rates. No oracle labels, private plans, private channel content, or assigned pair enter monitor inputs.
+- Cached and separately checkpointed generator/auditor phases on one Modal L4, 2 CPU cores, 16 GiB, 30-minute timeout per phase. Backend flags enter cache identity. Exact revisions, libraries, raw requests/responses and source hashes recorded.
+- 16 offline tests passed. Includes payoff sanity checks, leaks, controller round trip, observation validation, correct prior-proposal/public agreement, family metrics and budget reconciliation.
+- View-specific AUROC, exact rate intervals, family bootstrap, paired comparisons, separately calibrated ensembles, and zero-call heuristic baselines implemented. Primary and attempt targets remain separate.
+
+## Current limitations / known failures
+- Earlier Qwen2.5 3B/7B auditors misread numerical evidence; retained as rejected iterations. The current 4B auditor reads the observations correctly in the screen.
+- Ten-round role adherence, all-view context/output coverage and generalization to the second development family remain pending. Do not call this candidate frozen until these pass.
+- Label version 2 accepts explicit references to real prior-round proposals and matching mutual public commitments. The earlier current-round-only check caused false negatives. This correction uses event evidence, not monitor scores; old source outputs remain unchanged.
+- Citation IDs are enumerated from visible evidence; corrupted IDs were validation failures even when JSON parsed. No serving bug was established.
+- Two independent humans must review score-blind oracle packets and resolve ambiguous/different-pair cases before making research claims. Technical freezing alone does not provide human adjudication.
+- Same model lineage, constructed role objectives, small family-clustered sample and action/label overlap limit interpretation.
 
 ## Spend
-- First four completed batches: measured-resource estimate $0.5845, not a Modal invoice.
-- Reservation ceiling before protocol 2: $6.00, including $1 setup/storage allowance and four $1.25 reservations.
-- Future batches reserve $0.75 each: above estimated $0.511 for the full 30-minute function timeout. Earlier reservations stay unchanged; stop before $20 accumulated reservations.
-- Exact current numbers: pilot/spend.json and progress entries below. External API spend $0. Authenticated billing reconciliation: pilot/billing-report-summary.json attributes $0.64742364 to this app through reported closed intervals (17:00-19:00 UTC); subsequent runs are not yet in that report. Live account snapshot showed $0.77 usage, credits covering it, $0 cash charges. These are partial/delayed totals, not a final invoice.
+- Vendor-reconciled completed application usage: $1.53521089 in Modal credits, through the latest authenticated billing report. External API spend: $0.
+- Current billed-or-reserved envelope: $2.5352, including the separate $1 setup/storage allowance and any new phase reservations. Consult pilot/spend.json and the progress history for live changes.
+- Original reservations are retained. Completed app totals replace reservations only after their billing intervals close; multi-phase app costs are allocated once. Current-hour charges remain reserved. The cap remains $20; it has not been raised.
+- Billing report: pilot/runs/billing-latest.json; reconciliation history in pilot/spend.json. Cash charges were $0 on the last UI check because credits covered usage; the latest project totals above are pre-credit compute usage, not an invoice.
 
-## Commands / human needs
-- Offline checks: `.\pilot\env\Scripts\python.exe -X utf8 -m unittest discover -s pilot/tests -v`.
-- Current trial log: pilot/protocol4.log. Candidate: pilot/configs/Qwen2.5-3B-Instruct-protocol4.json.
-- Validation runner: `python -m pilot.iterate --candidate pilot/configs/Qwen2.5-3B-Instruct-protocol4.json`; it reuses the completed screen, checks gates, then validates ten rounds on both development families. Do not start concurrently with the current screen.
-- Held-out one-command runner: `.\pilot\RUN_FULL_DESIGN.ps1` (syntax checked, never executed); step-by-step commands in pilot/README.md; DO NOT run before a validated freeze. This build never executes held-out families.
-- No credential or payment action currently needed.
+## Exact commands
+Run from this project root in PowerShell:
+```
+.\pilot\env\Scripts\python.exe -X utf8 -m unittest discover -s pilot/tests -v
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.iterate --candidate pilot/configs/zero-opening-qwen3-monitor.json
+```
+The current validation is already running; inspect pilot/ten-round-validation.log instead of starting a second copy. Completed outputs are reused by hash.
 
-## Progress history (UTC timestamps)
+After validation and evidence review, freeze via pilot/frozen/README.md, then verify:
+```
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.cli verify-freeze
+```
+Prepared full held-out command (NOT executed by this build):
+```
+.\pilot\RUN_FULL_DESIGN.ps1
+```
+It verifies the freeze, reconciles closed billing intervals, runs eight held-out families sequentially, resumes completed outputs, collects data and analyzes with frozen development thresholds. Additional details and resources are in pilot/README.md.
+
+No credential or payment action is needed. Remaining human work is independent label review; remaining agent work is ten-round validation, inspection, empirical freeze and final verification.
+
+## Progress history (UTC)
 
 ### Progress 2026-10-24T17:38:27.035687+00:00
 Development screening: Qwen2.5-3B-Instruct-contract; held-out families remain untouched.
@@ -216,3 +242,19 @@ Modal billed-or-reserved budget envelope: $12.75; completed-runtime estimate: $1
 ### Progress 2026-10-24T23:42:23.165030+00:00
 Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/zero-opening-qwen3-monitor.json.monitor.json.
 Modal billed-or-reserved budget envelope: $13.50; completed-runtime estimate: $1.3367. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-24T23:47:08.920800+00:00
+Batch state: completed; output pilot/runs/zero-opening-qwen3-monitor.json.monitor.json.
+Modal billed-or-reserved budget envelope: $13.50; completed-runtime estimate: $1.4175. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T03:39:38.759363+00:00
+Reconciled 11 completed app(s) from authenticated vendor billing. Original reservations retained; current budget envelope $2.5352.
+Modal billed-or-reserved budget envelope: $2.54; completed-runtime estimate: $1.4175. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T03:40:51.746923+00:00
+Candidate zero-opening-qwen3-monitor: data gate True.
+Modal billed-or-reserved budget envelope: $2.54; completed-runtime estimate: $1.4175. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T03:41:04.819000+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.generation.json.
+Modal billed-or-reserved budget envelope: $3.29; completed-runtime estimate: $1.4175. Actual billed usage requires dashboard reconciliation. External API spend: $0.

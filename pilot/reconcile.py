@@ -8,7 +8,18 @@ from collections import defaultdict
 from datetime import datetime,timezone
 from decimal import Decimal
 from pathlib import Path
-from .core import load,save,budget_total
+from .core import load,save,budget_total,digest
+
+def recover_completed(ledger):
+    for entry in ledger['reservations']:
+        path=entry.get('output')
+        if entry['state']!='reserved' or not path or not Path(path).exists():continue
+        data=load(path)
+        if (data.get('remote_completed') and not data.get('scripted')
+            and digest(data['config'])==entry['config_hash']):
+            entry.update(state='completed',seconds=data['gpu_function_seconds'],
+                measured_estimate_usd=data['gpu_function_seconds']*1.021392/3600,
+                recovery_note='Completed immutable output recovered after interrupted local ledger update.')
 
 def settle(ledger,rows,finished,now):
     if any(e['state']=='reserved' for e in ledger['reservations']):
@@ -40,6 +51,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--report',default='pilot/runs/billing-latest.json')
     p.add_argument('--use-existing-report',action='store_true');a=p.parse_args()
     ledger=load('pilot/spend.json')
+    recover_completed(ledger)
     if any(e['state']=='reserved' for e in ledger['reservations']):raise ValueError('A Modal phase is still active; do not reconcile yet')
     if not a.use_existing_report:
         result=subprocess.run([sys.executable,'-X','utf8','-m','modal','billing','report','--start','2026-10-23',

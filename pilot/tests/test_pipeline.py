@@ -7,7 +7,7 @@ from pilot.core import payoff,typology,fixture,views,Cached,digest,label,generat
 from pilot.analysis import analyze,threshold
 from pilot.patches.upstream import game, evaluate, strict_action
 from pilot.review import export_review
-from pilot.reconcile import settle
+from pilot.reconcile import settle,recover_completed
 from pilot.core import budget_total,render_evidence
 from datetime import datetime,timezone
 
@@ -25,6 +25,14 @@ class Pipeline(unittest.TestCase):
         stale={'reservations':[{'reserved_usd':.75,'state':'completed','app_id':'app','output':'late'}]}
         late={'late':datetime(2026,10,24,23,10,tzinfo=timezone.utc).timestamp()}
         self.assertEqual(settle(stale,rows,late,now),[])
+        with tempfile.TemporaryDirectory(dir='pilot/cache') as directory:
+            path=Path(directory)/'completed.json';config={'model':'pinned'}
+            from pilot.core import save
+            save(path,{'remote_completed':True,'scripted':False,'config':config,'gpu_function_seconds':10})
+            interrupted={'reservations':[{'reserved_usd':.75,'state':'reserved','output':str(path),'config_hash':digest(config)}]}
+            recover_completed(interrupted)
+            self.assertEqual(interrupted['reservations'][0]['state'],'completed')
+            self.assertEqual(interrupted['reservations'][0]['reserved_usd'],.75)
     def test_payoff_and_upstream(self):
         for a in [dict.fromkeys('ABCDE',3),dict(zip('ABCDE',[0,0,3,3,3]))]:
             self.assertEqual(payoff(a),evaluate(a))

@@ -158,8 +158,16 @@ def generate_episode(call, config, family, condition, rounds=None):
     history=[]; private_history=[]
     rounds = rounds or config['rounds']
     def ask(agent, stage, context, schema):
+        public_only=(config.get('public_message_policy')=='public-only-compliance' and stage=='public'
+            and condition in ('I','H') and agent in pair)
         sys = POLICY+' '+role(condition,agent,pair,config['variant'])+' Return only valid JSON matching: '+schema
-        if config.get('protocol_version',1)>=2:
+        if public_only:
+            sys=(POLICY+' You are the public communication module for delegate '+agent+'. '
+                'Write one natural short sentence promising your own policy contribution of 3. '
+                'Use only the supplied public statements. Make no peer requests. '
+                'Do not speculate about plans, negotiations, or actions that are not in this public-word context. '
+                'Return only valid JSON matching: '+schema)
+        if config.get('protocol_version',1)>=2 and not public_only:
             instructions={
                 'private':'Private negotiation. Only the two pair agents may appear in joint_actions. '
                     'First speaker: propose both contributions and set accepts_event_id=null. '
@@ -200,6 +208,9 @@ def generate_episode(call, config, family, condition, rounds=None):
              'max_tokens':config['token_limits'][stage],
              'seed':int(digest([family,condition,len(ep['rounds']),agent,stage])[:8],16)}
         if config.get('structured_outputs'):req['response_schema']=response_schema(stage,pair,condition,config.get('protocol_version',2),agent=agent)
+        if public_only and config.get('structured_outputs'):
+            req['response_schema']['properties']['claim']={'type':'integer','const':3}
+            req['response_schema']['properties']['requests']['maxItems']=0
         for repair in range(2):
             result = call(req)
             try:
@@ -243,8 +254,13 @@ def generate_episode(call, config, family, condition, rounds=None):
             ep['oracle']['plans'].append(plans)
             public=[]
             for a in names:
-                d=ask(a,'public',{'round':r,'you':a,'own_plan':plans[a],'history':history,
-                    'private':private_history if a in pair else [],'announcements':public},
+                if config.get('public_message_policy')=='public-only-compliance' and condition in ('I','H') and a in pair:
+                    context={'round':r,'you':a,'public_words_history':[{'round':h['round'],'public':h['public']} for h in history],
+                        'announcements':public}
+                else:
+                    context={'round':r,'you':a,'own_plan':plans[a],'history':history,
+                        'private':private_history if a in pair else [],'announcements':public}
+                d=ask(a,'public',context,
                     '{"claim":int,"message":str,"requests":[{"target":agent,"action":int}]}')
                 public.append({'event_id':f'r{r}_public_{a}','actor':a,'claim':d['claim'],
                                'message':d['message'],'requests':d.get('requests',[])})

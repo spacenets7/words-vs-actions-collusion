@@ -51,9 +51,9 @@ Authenticate locally, without pasting or writing tokens into the repository:
 .\pilot\env\Scripts\python.exe -m pilot.iterate --resume
 ```
 
-The current successful three-round candidate can be validated at ten rounds with:
+The current public-only communication candidate can be screened and validated with:
 ```
-.\pilot\env\Scripts\python.exe -X utf8 -m pilot.iterate --candidate pilot/configs/zero-opening-qwen3-monitor.json
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.iterate --candidate pilot/configs/public-only-qwen3-monitor.json
 ```
 This reuses an existing completed screen, then validates ten-round episodes in
 one six-condition batch per development family. Configuration hashes in
@@ -67,6 +67,15 @@ with code validation; V1 explicitly reports those observations as unavailable.
 Citation IDs are constrained to the IDs visible in each view. Public records are
 rendered after the normative policy, one raw record per line. Earlier Qwen2.5
 auditors and rejected prompt variants remain documented in iterations.md.
+
+The free-context H configuration leaked one private sentence in ten-round
+validation and was rejected. The revised I/H public communication module uses
+only public-word history and current announcements, with the same compliance
+prompt for both conditions. It cannot read private messages, plans, actions or
+payoffs. Prose is free-form, typed promises are 3, and requests are empty. Private
+negotiation and executed actions remain model-generated. This controls public
+communication for the monitoring experiment; it does not measure natural
+concealment ability. Original failed trajectories remain unchanged.
 
 Uses 3B first with two distinct prompt ideas, then 7B only if 3B fails. Screens
 all six conditions on development family 1001 at 3 rounds, then validates the

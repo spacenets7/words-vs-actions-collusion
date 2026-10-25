@@ -315,7 +315,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "90d0bae432d7c5f3a2f556c7b8ef51f7ca77ba66600bcd34a6d4aa4ebfa2e50d",
       "family": 1001,
       "conditions": [
@@ -328,7 +328,85 @@
       ],
       "output": "pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.monitor.json",
       "time_unix": 1792900518.2145474,
-      "app_id": "ap-0vSRLxBa7gEGyoG8nXZOvc"
+      "app_id": "ap-0vSRLxBa7gEGyoG8nXZOvc",
+      "measured_estimate_usd": 0.06180243234649825,
+      "seconds": 217.8289593489999
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "90d0bae432d7c5f3a2f556c7b8ef51f7ca77ba66600bcd34a6d4aa4ebfa2e50d",
+      "family": 1002,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1002-B-G-I-T-O-H-90d0bae4.json.generation.json",
+      "time_unix": 1792900751.4047854,
+      "app_id": "ap-nK5Ejm34SPVmbhNR9NAixH",
+      "measured_estimate_usd": 0.2786767712666351,
+      "seconds": 982.2246273320001
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "90d0bae432d7c5f3a2f556c7b8ef51f7ca77ba66600bcd34a6d4aa4ebfa2e50d",
+      "family": 1002,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1002-B-G-I-T-O-H-90d0bae4.json.monitor.json",
+      "time_unix": 1792901846.7377436,
+      "app_id": "ap-nK5Ejm34SPVmbhNR9NAixH",
+      "measured_estimate_usd": 0.05969223955257653,
+      "seconds": 210.3913701979999
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "44b1c16b191cd77062760c4ca8a113c425ad6c4a93aba19e7daa864637aed1b7",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/public-only-qwen3-monitor.json.generation.json",
+      "time_unix": 1792902544.0415683,
+      "app_id": "ap-Hk0Gy8jyfcyvv5TvGLoFnm",
+      "measured_estimate_usd": 0.05592504105447824,
+      "seconds": 197.113495892
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "44b1c16b191cd77062760c4ca8a113c425ad6c4a93aba19e7daa864637aed1b7",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/public-only-qwen3-monitor.json.monitor.json",
+      "time_unix": 1792902781.6906319,
+      "app_id": "ap-Hk0Gy8jyfcyvv5TvGLoFnm",
+      "measured_estimate_usd": 0.02372624808849785,
+      "seconds": 83.62557482200003
     }
   ],
   "billing_reconciliations": [

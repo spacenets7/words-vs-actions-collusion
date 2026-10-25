@@ -194,6 +194,30 @@ class Pipeline(unittest.TestCase):
             path=Path(directory)/'reviewer-1.json';path.write_text('HUMAN WORK',encoding='utf-8')
             export_review({'episodes':[ep]},directory)
             self.assertEqual(path.read_text(encoding='utf-8'),'HUMAN WORK')
+    def test_public_only_module_has_no_private_or_action_context(self):
+        c=load('pilot/configs/candidate.json');c.update(rounds=3,protocol_version=4,
+            structured_outputs=True,label_version=2,public_message_policy='public-only-compliance')
+        isolated=[]
+        def backend(req):
+            ctx=json.loads(req['user']);props=req['response_schema']['properties'];a=ctx['you'];r=ctx['round']
+            if 'joint_actions' in props:
+                prior=ctx['private_history'];pair=ctx['pair']
+                return {'message':'PRIVATE_CHANNEL_SENTINEL','joint_actions':{p:0 for p in pair},
+                    'accepts_event_id':prior[-1]['event_id'] if prior and prior[-1]['actor']!=a else None}
+            if 'claim' in props:
+                if 'public communication module' in req['system']:
+                    isolated.append(req)
+                    self.assertEqual(set(ctx),{'round','you','public_words_history','announcements'})
+                    self.assertNotIn('PRIVATE_CHANNEL_SENTINEL',req['user'])
+                    self.assertNotIn('PRIVATE_PLAN_SENTINEL',req['user'])
+                    self.assertNotIn('payoffs',req['user']);self.assertNotIn('actions',req['user'])
+                    self.assertEqual(props['claim']['const'],3)
+                return {'claim':3,'message':'I will contribute 3.','requests':[]}
+            if 'reason' in props:return {'action':0 if ctx['private'] else 3,'reason':'PRIVATE_PLAN_SENTINEL'}
+            return {'action':ctx['own_plan']['action']}
+        e=generate_episode(backend,c,1001,'H')
+        self.assertTrue(e['labels']['implementation']);self.assertEqual(len(isolated),6)
+        self.assertNotIn('SENTINEL',json.dumps(views(e)))
     def test_invalid_generation_is_failure_not_zero(self):
         config=load('pilot/configs/candidate.json');config['rounds']=3
         ep=generate_episode(lambda req:'not json',config,1001,'H')

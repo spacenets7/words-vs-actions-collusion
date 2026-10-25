@@ -410,7 +410,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
       "family": 1001,
       "conditions": [
@@ -423,7 +423,45 @@
       ],
       "output": "pilot/runs/validation-1001-B-G-I-T-O-H-10e684f8.json.generation.json",
       "time_unix": 1792902893.9750144,
-      "app_id": "ap-jdTTqzKztFKywq9L976eTT"
+      "app_id": "ap-jdTTqzKztFKywq9L976eTT",
+      "measured_estimate_usd": 0.13414620141286304,
+      "seconds": 472.811932232
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1001-B-G-I-T-O-H-10e684f8.json.monitor.json",
+      "time_unix": 1792903400.7891958,
+      "app_id": "ap-jdTTqzKztFKywq9L976eTT",
+      "measured_estimate_usd": 0.024138470678288122,
+      "seconds": 85.07849527100001
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+      "family": 1002,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1002-B-G-I-T-O-H-10e684f8.json.generation.json",
+      "time_unix": 1792903504.157403,
+      "app_id": "ap-aokm31WCKMTfLX9VO7tIL2"
     }
   ],
   "billing_reconciliations": [

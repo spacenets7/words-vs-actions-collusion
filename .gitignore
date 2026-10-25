@@ -8,3 +8,5 @@ pilot/*.log
 *.pyc
 .env
 .pytest_cache/
+pilot/review-development/
+pilot/review-full/

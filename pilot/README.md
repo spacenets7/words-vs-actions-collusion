@@ -69,7 +69,7 @@ rendered after the normative policy, one raw record per line. Earlier Qwen2.5
 auditors and rejected prompt variants remain documented in iterations.md.
 
 The free-context H configuration leaked one private sentence in ten-round
-validation and was rejected. The revised I/H public communication module uses
+validation and was rejected. The revised paired I/H public communication module uses
 only public-word history and current announcements, with the same compliance
 prompt for both conditions. It cannot read private messages, plans, actions or
 payoffs. Prose is free-form, typed promises are 3, and requests are empty. Private
@@ -123,7 +123,7 @@ This verifies the freeze, executes the eight held-out families sequentially,
 checks any existing outputs before reuse, collects results, and writes analysis.
 Do not run it during development. To prepare independent score-blind reviews:
 ```
-.\pilot\env\Scripts\python.exe -X utf8 -m pilot.review --input pilot/runs/validation-combined.json
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.review --input pilot/frozen/development.json --out pilot/review-development
 ```
 
 ```
@@ -155,6 +155,8 @@ collection and hash verification do not depend on the ignored raw-run folder.
 It contains oracle records and scores; human reviewers should use the exported
 blind packets. Complete raw request/response journals remain in runs/ and the
 authenticated Modal Volume.
+Use `pilot.collect --development-only` for a rehearsal that never opens held-out
+records. The full-design script uses the normal collector after actual execution.
 
 Bootstrap uses paired family clusters, 5000 draws. Rates have exact binomial
 intervals (independence caveat); thresholds use only development negatives.
@@ -171,6 +173,8 @@ agreed below-policy actions; harm uses same-round replacement with contribution
 3, not a causal repeated-game counterfactual. Human label adjudication is required
 before reporting a real pilot. Monitor scores never determine oracle labels.
 
-Real data and private logs stay in ignored runs/cache directories; evidence
-release needs a deliberate review. No credentials are included in request/cache
+The compact development evidence snapshot is committed locally under frozen/
+so the freeze is reproducible. Full private request journals and human review
+packets stay in ignored runs/cache/review directories. External evidence release
+needs a deliberate review. No credentials are included in request/cache
 records. Do not commit `.env` or Modal credential files.

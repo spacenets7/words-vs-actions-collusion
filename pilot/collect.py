@@ -3,9 +3,11 @@ from pathlib import Path
 from .core import load,save,canonical,digest
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--output',required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--output',required=True)
+    p.add_argument('--development-only',action='store_true');a=p.parse_args()
     # Only final validation and scheduled test records: no screening runs or fixtures.
-    files=[Path('pilot/frozen/development.json')]+[p for p in sorted(Path('pilot/runs').glob('test-*.json'))
+    tests=[] if a.development_only else sorted(Path('pilot/runs').glob('test-*.json'))
+    files=[Path('pilot/frozen/development.json')]+[p for p in tests
         if not p.name.endswith(('.generation.json','.monitor.json'))]
     frozen=load('pilot/frozen/config.json')
     episodes={};scores={};config_hashes=set()

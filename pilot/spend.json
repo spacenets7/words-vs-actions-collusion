@@ -731,7 +731,9 @@
       "time_unix": 1792925618.3126853,
       "app_id": "ap-Bmh90eWrAh3Hlvn6IeIbSD",
       "measured_estimate_usd": 0.3085729395871315,
-      "seconds": 1087.596713616
+      "seconds": 1087.596713616,
+      "settled_billed_usd": 0.3742225,
+      "settlement_note": "Full app total allocated once across its completed phases; original reservations retained."
     },
     {
       "reserved_usd": 0.75,
@@ -750,7 +752,9 @@
       "time_unix": 1792926744.0422351,
       "app_id": "ap-Bmh90eWrAh3Hlvn6IeIbSD",
       "measured_estimate_usd": 0.05585026922153495,
-      "seconds": 196.8499549610001
+      "seconds": 196.8499549610001,
+      "settled_billed_usd": 0,
+      "settlement_note": "Full app total allocated once across its completed phases; original reservations retained."
     },
     {
       "reserved_usd": 0.75,
@@ -769,7 +773,9 @@
       "time_unix": 1792926969.8722801,
       "app_id": "ap-tQLaUdlXP9ObID952xNSIY",
       "measured_estimate_usd": 0.3049385844367915,
-      "seconds": 1074.7870592020001
+      "seconds": 1074.7870592020001,
+      "settled_billed_usd": 0.36854169,
+      "settlement_note": "Full app total allocated once across its completed phases; original reservations retained."
     },
     {
       "reserved_usd": 0.75,
@@ -788,11 +794,13 @@
       "time_unix": 1792928084.9465454,
       "app_id": "ap-tQLaUdlXP9ObID952xNSIY",
       "measured_estimate_usd": 0.05392626559624329,
-      "seconds": 190.06860847400003
+      "seconds": 190.06860847400003,
+      "settled_billed_usd": 0,
+      "settlement_note": "Full app total allocated once across its completed phases; original reservations retained."
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
       "family": 2008,
       "conditions": [
@@ -805,7 +813,28 @@
       ],
       "output": "pilot/runs/test-2008-all.json.generation.json",
       "time_unix": 1792928302.466848,
-      "app_id": "ap-VtVSNpCZ20HBEFxK8eprdc"
+      "app_id": "ap-VtVSNpCZ20HBEFxK8eprdc",
+      "measured_estimate_usd": 0.24577508550572177,
+      "seconds": 866.259289108
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
+      "family": 2008,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/test-2008-all.json.monitor.json",
+      "time_unix": 1792929250.654937,
+      "app_id": "ap-VtVSNpCZ20HBEFxK8eprdc",
+      "measured_estimate_usd": 0.05409447178891318,
+      "seconds": 190.66146830999992
     }
   ],
   "billing_reconciliations": [
@@ -1004,6 +1033,25 @@
       "report_sha256": "f7882ceb66b683633f8c106d357c2e8ef872b7711a21d13557598a59de732042",
       "settled_apps": [],
       "committed_usd": 8.36122059,
+      "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
+    },
+    {
+      "utc": "2026-10-25T12:04:57.441935+00:00",
+      "report": "pilot/runs/billing-latest.json",
+      "report_sha256": "aca3755529020df2b605cc0c516644edc01e69227eddf4ab5c87682b5e882892",
+      "settled_apps": [
+        {
+          "app_id": "ap-Bmh90eWrAh3Hlvn6IeIbSD",
+          "billed_usd": 0.3742225,
+          "phases": 2
+        },
+        {
+          "app_id": "ap-tQLaUdlXP9ObID952xNSIY",
+          "billed_usd": 0.36854169,
+          "phases": 2
+        }
+      ],
+      "committed_usd": 7.60398478,
       "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
     }
   ]

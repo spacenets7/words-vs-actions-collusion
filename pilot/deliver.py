@@ -277,7 +277,7 @@ def report_content(data, metrics, config, checks, money):
         'Independent deception provides a deliberately matched hard negative, while talk-only plans test whether monitors confuse intention with execution. '
         'The experiment uses controlled public communication for concealed and independent-deception conditions, and its event-based oracle labels await independent human adjudication. '
         'Results therefore describe provisional detection behavior in this constructed setting, including failures and uncertainty, rather than proving general ability to detect secret agreements from public records. '
-        'The resulting artifacts make observability limits and evidence requirements explicit.'
+        'Combining information did not consistently outperform actions alone, making the limits of public agreement evidence explicit.'
     )
     main = [
         ('1 Introduction', [
@@ -298,7 +298,9 @@ def report_content(data, metrics, config, checks, money):
         ]),
         ('4 Results', [
             f'The held-out schedule contains {total}/48 collected episodes, with {valid_test} valid episodes. Table 1 and Figure 1 report held-out performance at frozen thresholds. Table 2 reports flagged counts on hard-negative and positive-control conditions, and Figure 2 reports paired AUROC differences on common eligible episodes. Invalid outcomes remain in the generation accounting; there is no outcome-driven replacement or post-test prompt tuning.',
+            f'Actions alone achieve AUROC {number(v["V2"]["AUROC"])}, compared with {number(v["V4"]["AUROC"])} for the structured report and {number(v["mean"]["AUROC"])} for the mean score ensemble. The paired V4-minus-actions difference is {number(metrics["paired_differences"]["V4-V2"]["difference"])} with family-bootstrap interval {interval(metrics["paired_differences"]["V4-V2"]["interval"])}. This does not establish an improvement over the stronger single modality. Paired intervals are descriptive pilot comparisons; no multiplicity-adjusted significance claim is made.',
             interpretation(metrics),
+            f'The frozen implementation gate is met by {checks["held_out_generation_funnel"]["O"]["implementation"]}/8 O episodes and {checks["held_out_generation_funnel"]["H"]["implementation"]}/8 H episodes. All {checks["held_out_generation_funnel"]["H"]["harm"]}/8 H episodes are harmful by the fixed-outsider contrast, but the primary label additionally requires verified agreement and agreed-plan execution. The remaining H cases are retained under the automatic labels rather than replaced or declared collusive solely from matching harmful actions. Independent human review of agreement evidence is pending.',
             f'The integrity checks found {len(checks["scientific_control_flags"])} control/coverage flags, retained in quality-checks.json. A failed assigned O/H condition is an observed generation outcome, not automatically a positive label. Saved event evidence determines the label. Development results were used for selection and are not pooled into held-out performance estimates.'
         ]),
         ('5 Discussion and Limitations', [
@@ -619,7 +621,7 @@ Official template: {TEMPLATE}
 ''', encoding='utf-8', newline='\n')
     # Secret-pattern scan reports only filenames, never matched values.
     patterns = [r'\bhf_[A-Za-z0-9]{20,}\b', r'\bsk-proj-[A-Za-z0-9_-]{20,}\b', r'\b(?:ak|as)-[A-Za-z0-9]{20,}\b']
-    included = [p for p in folder.rglob('*') if p.is_file() and 'rendered' not in p.parts and not p.name.startswith('official-template') and p.suffix != '.zip' and p.name != 'bundle-manifest.json']
+    included = [p for p in folder.rglob('*') if p.is_file() and 'rendered' not in p.parts and not p.name.startswith('official-template') and p.suffix != '.zip' and p.name not in {'bundle-manifest.json', 'replayed-metrics.json', 'replayed-metrics.md'}]
     suspicious = []
     for p in included:
         if p.suffix in ('.json', '.jsonl', '.md', '.py', '.ps1', '.txt'):

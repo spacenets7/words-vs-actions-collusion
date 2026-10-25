@@ -1,0 +1,10 @@
+{
+  "vendor_closed_interval_report_usd": "5.41625951",
+  "latest_report_interval_start_utc": "2026-10-25T11:00:00",
+  "settled_app_usd": 5.10398478,
+  "settled_plus_unsettled_runtime_estimate_usd": 5.403854337294635,
+  "billed_or_reserved_envelope_usd": 7.60398478,
+  "setup_storage_allowance_usd": 1,
+  "external_api_usd": 0,
+  "caveat": "Report and estimate overlap; do not add them. Newer startup/storage usage may not yet be billed. Envelope is not spend."
+}

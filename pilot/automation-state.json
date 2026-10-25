@@ -1,6 +1,6 @@
 {
-  "stage": "running_frozen_design",
-  "updated_utc": "2026-10-25T09:08:00.856068+00:00",
+  "stage": "complete_verified_provisional",
+  "updated_utc": "2026-10-25T12:21:35.812049+00:00",
   "pid": 19448,
   "started_utc": "2026-10-25T09:07:50.136899+00:00",
   "authorization": "User requested all remaining automation and authorized extra Modal credit if needed.",
@@ -15,8 +15,8 @@
     2008
   ],
   "frozen_manifest_sha256": "3c3ccbfe95b31e3c96808a4b904c8e8089483a542d070563dfeffac9fcf662cc",
-  "human_review": "Pending; no automated or agent check is an independent human review.",
-  "last_health_check_utc": "2026-10-25T11:50:39.278997+00:00",
+  "human_review": "Pending; automatic checks and agent inspection do not constitute independent human annotation.",
+  "last_health_check_utc": "2026-10-25T12:16:22.115217+00:00",
   "completed_test_families": [
     2001,
     2002,
@@ -24,7 +24,25 @@
     2004,
     2005,
     2006,
-    2007
+    2007,
+    2008
   ],
-  "author_details": "Provided: Siddeshwar U S; MIT, Manipal; team spacenets."
+  "author_details": "Provided: Siddeshwar U S; MIT, Manipal; team spacenets.",
+  "completed_utc": "2026-10-25T12:05:17.248024+00:00",
+  "deliverables": {
+    "report": "pilot/submission/report.pdf",
+    "editable_source": "pilot/submission/report.md",
+    "bundle": "pilot/submission/local-reproducibility-bundle.zip",
+    "held_out_episodes": 48,
+    "integrity": "passed",
+    "human_reviews": "pending",
+    "external_submission": "not_performed",
+    "report_pages": 5,
+    "visual_inspection": "agent_viewed_all_five_latest_pages_no_layout_defects"
+  },
+  "final_verification_stage": "passed",
+  "verified_utc": "2026-10-25T12:21:35.812049+00:00",
+  "exact_offline_metrics_json_replay": true,
+  "archive_sha256": "ee6abb47dda5434afc8b76ec5b445f0b4bf583a5e8b4e603c71324e599af324a",
+  "archive_integrity": "all_included_hashes_and_crc_passed"
 }

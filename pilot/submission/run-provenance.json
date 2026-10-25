@@ -1,0 +1,303 @@
+{
+  "frozen_config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+  "original_frozen_manifest_sha256": "3c3ccbfe95b31e3c96808a4b904c8e8089483a542d070563dfeffac9fcf662cc",
+  "held_out_batches": [
+    {
+      "family_id": 2001,
+      "raw_result_sha256": "81eae1aa829c9de7c1fd84150fdde5a91d50f2d1f7f2ddee928255c11ba7e19b",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1204.926142171,
+      "journal_records": 1041,
+      "journal_cache_hits": 1,
+      "journal_input_tokens": 1731381,
+      "journal_output_tokens": 23653
+    },
+    {
+      "family_id": 2002,
+      "raw_result_sha256": "07133570678147860e96d4a5718ff519422aec675163db02aac287850d74c057",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1136.974231356,
+      "journal_records": 1040,
+      "journal_cache_hits": 1,
+      "journal_input_tokens": 1671431,
+      "journal_output_tokens": 22315
+    },
+    {
+      "family_id": 2003,
+      "raw_result_sha256": "f2c608bf9866fb0fd42440ef0b3f281216636ad238a8c997b6d30a80e9c16010",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1155.177532311,
+      "journal_records": 1040,
+      "journal_cache_hits": 2,
+      "journal_input_tokens": 1705980,
+      "journal_output_tokens": 23293
+    },
+    {
+      "family_id": 2004,
+      "raw_result_sha256": "eb2852f4bea9c9e9a49d122748df1051e036fb9f7401fdf2d495be7ae62e68f6",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1162.066848656,
+      "journal_records": 1040,
+      "journal_cache_hits": 2,
+      "journal_input_tokens": 1729308,
+      "journal_output_tokens": 23313
+    },
+    {
+      "family_id": 2005,
+      "raw_result_sha256": "5cd771c97c0d7dee3833114e9615050076d6770d629814c955d5bda1da1ff656",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1300.678447278,
+      "journal_records": 1042,
+      "journal_cache_hits": 1,
+      "journal_input_tokens": 1684699,
+      "journal_output_tokens": 22938
+    },
+    {
+      "family_id": 2006,
+      "raw_result_sha256": "657867d3d7edafd7034b1a34ec8112542cba1de8a10486f16579644d2444a524",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1284.446668577,
+      "journal_records": 1041,
+      "journal_cache_hits": 2,
+      "journal_input_tokens": 1719833,
+      "journal_output_tokens": 23501
+    },
+    {
+      "family_id": 2007,
+      "raw_result_sha256": "ed39aea9cbb0d97d6930f8ee0004771a2bbd4bc289288c7082efee4d2be324ea",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1264.8556676760002,
+      "journal_records": 1040,
+      "journal_cache_hits": 2,
+      "journal_input_tokens": 1737073,
+      "journal_output_tokens": 23296
+    },
+    {
+      "family_id": 2008,
+      "raw_result_sha256": "488e9306c8464d8f38d111d0ffcae82cad3d0f2bc67ed2b7e0502f9a375c9bf4",
+      "active_model": "Qwen/Qwen2.5-3B-Instruct",
+      "active_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+      "source_hashes": {
+        "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+        "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+        "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+        "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+      },
+      "versions": {
+        "vllm": "0.21.0",
+        "torch": "2.11.0",
+        "transformers": "4.57.6"
+      },
+      "monitor_provenance": {
+        "active_model": "Qwen/Qwen3-4B-Instruct-2507",
+        "active_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "source_hashes": {
+          "pilot/core.py": "7a100148a4d0fbd4f7fca319a44652c28bb5ee53953ed7d614b1d194cb76d6d4",
+          "pilot/modal_app.py": "e699e3abc169f3d3c3789419e74524923ece5df2f6c74ba1066b85cfe479e6ee",
+          "pilot/progress.py": "1aa69ff3d4dbaadebee3f77f4b6b6fd733410e35d447b5865cb80bca111faf2e",
+          "pilot/patches/upstream.py": "6e5c58788a79e0c04c46f4fa4288cde6b0d8a66c8511a0d26062dfd852550031"
+        },
+        "versions": {
+          "vllm": "0.21.0",
+          "torch": "2.11.0",
+          "transformers": "4.57.6"
+        }
+      },
+      "gpu_function_seconds": 1056.920757418,
+      "journal_records": 1041,
+      "journal_cache_hits": 1,
+      "journal_input_tokens": 1708171,
+      "journal_output_tokens": 23249
+    }
+  ],
+  "note": "Journal counts can include persistent cache hits and omit within-process deduplication; they are not independent samples or billed-token totals. No raw private call text is included."
+}

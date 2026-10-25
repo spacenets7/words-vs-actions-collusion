@@ -1,0 +1,34 @@
+{
+  "report_title": "Words Actions and Evidence in Collusion Detection",
+  "summary": "Detecting harmful collusion requires separating shared agreements from legitimate cooperation, independent deception, and plans that are never executed. We study whether combining public statements with executed actions improves detection in a controlled five-agent repeated public-goods game. A frozen open-model pipeline generates six conditions and evaluates four views: public text, actions, their raw union, and a code-built claim-versus-outcome report. Two development families determine configuration and thresholds; eight scheduled held-out families yield 48 episodes, of which 48 are valid under the automatic episode criteria. Held-out implementation AUROC is 0.597 for text, 0.843 for actions, 0.719 for the raw union, and 0.731 for the structured report. Comparisons use paired family bootstrap intervals and development-locked operating thresholds. Independent deception provides a deliberately matched hard negative, while talk-only plans test whether monitors confuse intention with execution. The experiment uses controlled public communication for concealed and independent-deception conditions, and its event-based oracle labels await independent human adjudication. Results therefore describe provisional detection behavior in this constructed setting, including failures and uncertainty, rather than proving general ability to detect secret agreements from public records. Combining information did not consistently outperform actions alone, making the limits of public agreement evidence explicit.",
+  "track": "Track 2: Detection and Audit of Collusion; question 2.2",
+  "authors": {
+    "authors": [
+      {
+        "name": "Siddeshwar U S",
+        "affiliation": "MIT, Manipal"
+      }
+    ],
+    "team_name": "spacenets",
+    "source": "Provided directly by the user in this chat.",
+    "location": null,
+    "contact_email": null,
+    "publication_preference": null
+  },
+  "pdf": "report.pdf",
+  "event_url": "https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25",
+  "official_template_url": "https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing",
+  "deadline_utc": "2026-10-26T11:59:00Z",
+  "deadline_ist": "2026-10-26 17:29 IST",
+  "automated_integrity": "passed",
+  "human_label_reviews": "pending",
+  "author_approval": "pending",
+  "visual_report_inspection": "agent_viewed_all_five_rendered_pages_no_layout_defects; human author approval remains pending",
+  "external_submission": "not_performed",
+  "remaining_form_fields": [
+    "contact email",
+    "location",
+    "publication preference"
+  ],
+  "template_status": "Official structure adapted; final human formatting check required."
+}

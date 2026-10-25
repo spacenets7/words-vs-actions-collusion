@@ -1,0 +1,38 @@
+{
+  "verified_utc": "2026-10-25T12:21:34.454936+00:00",
+  "frozen_hashes": "verified_unchanged",
+  "frozen_config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+  "frozen_manifest_file_sha256": "3c3ccbfe95b31e3c96808a4b904c8e8089483a542d070563dfeffac9fcf662cc",
+  "episodes": 60,
+  "development_episodes": 12,
+  "held_out_episodes": 48,
+  "held_out_valid_monitor_outputs": 192,
+  "all_valid_monitor_outputs": 240,
+  "original_labels_preserved": true,
+  "thresholds_unchanged": true,
+  "exact_offline_metrics_json_replay": true,
+  "canonical_metrics_sha256": "febe5510ae21078fd4394835073dd85da86fdd28d5a6cb235a015f2d104db0e8",
+  "saved_metrics_file_sha256": "a05277e28f22e85b92dee50869707d3bd75a739ac5bb96f78b9a9098db0f6850",
+  "pdf_sha256": "d65ff6637d90e8b7f447991c85df5e9719b15e8d9d60acc0567e8a0e36bc498b",
+  "pdf_pages": 5,
+  "main_pages": 4,
+  "abstract_words": 193,
+  "visual_inspection": "All five latest rendered pages viewed by the agent; no clipping, overlaps, missing glyphs or table breaks observed.",
+  "human_independent_annotation": "pending_not_impersonated",
+  "external_submission": "not_performed",
+  "scientific_control_flags": [
+    {
+      "episode_id": "f0bf26ccb9d7c410",
+      "type": "assigned_positive_not_implemented"
+    },
+    {
+      "episode_id": "53542e888ba8d825",
+      "type": "assigned_positive_not_implemented"
+    },
+    {
+      "episode_id": "59d19800fa3bd3a9",
+      "type": "assigned_positive_not_implemented"
+    }
+  ],
+  "archive_verification": "Final included-file hashes and ZIP CRCs are verified during sealing; archive hash recorded in automation-state.json outside the archive."
+}

@@ -549,3 +549,7 @@ Modal billed-or-reserved budget envelope: $7.60; completed-runtime estimate: $5.
 ## Automation closure
 
 The completion follow-up heartbeat was deleted after final verification. No automatic model jobs remain. PDF/ZIP/SVG Git blobs match the verified local bytes; the compact sanitized reproducibility ZIP is committed locally for recovery, with no raw private generation journals. Independent human review and author/submission approval remain pending. No external upload, form submission, email or repository push was performed.
+
+## PNG graphs and paper-audit traceability
+
+On25October2026, five high-resolution PNG graphs were exported from the saved held-out metrics to pilot/figures_png, with a ZIP download, preview and source/hash manifest. Dimensions3500x2250 at300dpi. The export is reproducible via python -m pilot.plot_results_png and uses no model/API calls. All original metrics and frozen hashes remain unchanged. pilot/AUDIT_IMPLEMENTATION_MAP.md maps all22 confirmed paper-audit findings to implemented protections, reporting corrections, or avoided components, and records remaining human/measurement limitations. The original upstream checkout remains unchanged.

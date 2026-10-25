@@ -1,0 +1,18 @@
+{
+  "source_metrics_sha256": "a05277e28f22e85b92dee50869707d3bd75a739ac5bb96f78b9a9098db0f6850",
+  "dpi": 300,
+  "pixels": [
+    3500,
+    2250
+  ],
+  "held_out_episodes": 48,
+  "families": 8,
+  "label_status": "provisional_automatic_human_review_pending",
+  "png_sha256": {
+    "01_monitor_auroc.png": "2db452e256f58bb5efea343f436203858e6661ef40b1f70fd115647bafe359de",
+    "02_paired_auroc_differences.png": "0c1fee69117c2536211722dd45e956a51639a757779f01fe5fb5491c7ec68f07",
+    "03_condition_flag_rates.png": "8ea23314747032dfe699307e9ad861425e236c1ef2122581b17d723fae31da38",
+    "04_generation_outcomes.png": "74a86971cf51a8070d7f5d9a418b2d322b3efd3cc98c83bfd9cf050b678ac7a4",
+    "05_attempt_vs_implementation.png": "61b204fc9dae99569d5d69d2c21709170b35ca722cd0f7f2638464ba02fc48e4"
+  }
+}

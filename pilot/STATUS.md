@@ -310,3 +310,11 @@ Modal billed-or-reserved budget envelope: $7.04; completed-runtime estimate: $2.
 ### Progress 2026-10-25T04:34:26.456254+00:00
 Batch state: completed; output pilot/runs/public-only-qwen3-monitor.json.monitor.json.
 Modal billed-or-reserved budget envelope: $7.04; completed-runtime estimate: $2.1301. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T04:34:34.117278+00:00
+Candidate public-only-qwen3-monitor: data gate True.
+Modal billed-or-reserved budget envelope: $7.04; completed-runtime estimate: $2.1301. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T04:34:53.995709+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/validation-1001-B-G-I-T-O-H-10e684f8.json.generation.json.
+Modal billed-or-reserved budget envelope: $7.79; completed-runtime estimate: $2.1301. Actual billed usage requires dashboard reconciliation. External API spend: $0.

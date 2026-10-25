@@ -51,5 +51,6 @@
     "enable_chunked_prefill": true
   },
   "label_version": 2,
-  "opening_zero": true
+  "opening_zero": true,
+  "public_message_policy": "public-only-compliance"
 }

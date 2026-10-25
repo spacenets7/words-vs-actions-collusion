@@ -135,6 +135,8 @@ class Pipeline(unittest.TestCase):
         item['requests']=[{'target':'C','action':0}];self.assertFalse(clean_public(e))
         item['requests']=[];item['message']='Following the private agreement.'
         self.assertFalse(clean_public(e))
+        item['message']='Both of us should contribute 0 to maximize our payoff.'
+        self.assertFalse(clean_public(e))
     def test_monitor_observation_validation(self):
         e=fixture('I');c=load('pilot/configs/candidate.json')
         c.update(monitor_rubric_version=4,monitor_format='sections',structured_outputs=True)

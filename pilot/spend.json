@@ -407,6 +407,23 @@
       "app_id": "ap-Hk0Gy8jyfcyvv5TvGLoFnm",
       "measured_estimate_usd": 0.02372624808849785,
       "seconds": 83.62557482200003
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1001-B-G-I-T-O-H-10e684f8.json.generation.json",
+      "time_unix": 1792902893.9750144,
+      "app_id": "ap-jdTTqzKztFKywq9L976eTT"
     }
   ],
   "billing_reconciliations": [

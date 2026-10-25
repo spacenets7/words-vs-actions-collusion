@@ -92,6 +92,7 @@ def main():
             combined['episodes']+=data['episodes'];combined['scores'].update(data['scores'])
             combined['batches'].append({'file':output,'sha256':hashlib.sha256(Path(output).read_bytes()).hexdigest(),
                 'source_hashes':data.get('source_hashes'),'versions':data.get('versions'),
+                'monitor_provenance':data.get('monitor_provenance'),
                 'seconds':data['gpu_function_seconds']})
             save('pilot/runs/validation-combined.json',combined)
     reports=[assess(dict(combined,episodes=[e for e in combined['episodes'] if e['family_id']==f])) for f in base['development_families']]

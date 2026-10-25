@@ -36,15 +36,17 @@ def freeze(config,source,reason):
         if not any(e['oracle']['condition']==c and e['labels']['implementation'] for e in episodes):raise ValueError('O/H success gate failed')
     root=Path('pilot/frozen');root.mkdir(exist_ok=True)
     save(root/'config.json',config)
+    save(root/'development.json',results)
     (root/'WHY.md').write_text(reason,encoding='utf-8',newline='\n')
     calibrated=analyze(episodes,results['scores'],config['development_families'],bootstrap=0)
     save(root/'calibration.json',{'config_hash':digest(config),
         'primary':{v:{k:r[k] for k in ('threshold','development_negative_calibration_n')} for v,r in calibrated['views'].items()},
         'attempt':{v:{k:r[k] for k in ('threshold','development_negative_calibration_n')} for v,r in calibrated['attempt_detection']['views'].items()},
-        'decision':'score > threshold','source':str(source),
+        'decision':'score > threshold','source':'pilot/frozen/development.json',
+        'origin_sha256':hashlib.sha256(Path(source).read_bytes()).hexdigest(),
         'label_status':'Automatic event-based labels; two independent human reviews required before research claims.'})
     files=[p for p in Path('pilot').rglob('*.py') if 'repos' not in p.parts and 'env' not in p.parts and '.venv' not in p.parts]
-    files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',root/'calibration.json',Path(source)]
+    files+=list(Path('pilot/configs').glob('*.json'))+[root/'config.json',root/'WHY.md',root/'calibration.json',root/'development.json']
     files+=[Path('pilot/RUN_FULL_DESIGN.ps1'),Path('pilot/requirements-verified.txt')]
     save(root/'hashes.json',{p.as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files})
     from .progress import record
@@ -70,7 +72,7 @@ def main():
                     raise ValueError('Development calibration differs from frozen thresholds; adjudicate/review before analysis')
         save(Path(a.out)/'metrics.json',metrics)
         write_report(metrics,Path(a.out)/'metrics.md')
-        print('Metrics saved; development-only runs have no held-out AUROC.')
+        print('Metrics saved to',a.out,'; held-out episodes scored by V4:',metrics['views']['V4']['n'])
     elif a.command=='freeze':freeze(c,a.input,a.reason)
     else:
         h=load('pilot/frozen/hashes.json')

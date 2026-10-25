@@ -141,6 +141,11 @@ The full script also exports score-blind packets to `pilot/review-full`.
 Analysis writes `metrics.json` and a readable `metrics.md`; results remain
 provisional until independent human adjudication. Development thresholds are
 saved in frozen/calibration.json and checked again during full analysis.
+The frozen development snapshot is stored in `frozen/development.json`, so
+collection and hash verification do not depend on the ignored raw-run folder.
+It contains oracle records and scores; human reviewers should use the exported
+blind packets. Complete raw request/response journals remain in runs/ and the
+authenticated Modal Volume.
 
 Bootstrap uses paired family clusters, 5000 draws. Rates have exact binomial
 intervals (independence caveat); thresholds use only development negatives.

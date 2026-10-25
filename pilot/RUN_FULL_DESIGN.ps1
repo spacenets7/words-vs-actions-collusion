@@ -13,7 +13,7 @@ try {
         $resultPath = "pilot/runs/test-$family-all.json"
         if (Test-Path -LiteralPath $resultPath) {
             # An existing output is immutable: verify its provenance before resuming.
-            & $pilotPython -X utf8 -c 'import sys; from pilot.core import load,digest; d=load(sys.argv[1]); c=dict(d["config"]); c["allow_test_execution"]=False; assert d["remote_completed"] and not d["scripted"] and digest(c)==digest(load("pilot/frozen/config.json"))' $resultPath
+            & $pilotPython -X utf8 -c 'import sys; from pilot.core import load,digest,CONDITIONS; d=load(sys.argv[1]); c=dict(d["config"]); c["allow_test_execution"]=False; assert d["remote_completed"] and not d["scripted"] and digest(c)==digest(load("pilot/frozen/config.json")); assert len(d["episodes"])==6 and {e["oracle"]["condition"] for e in d["episodes"]}==set(CONDITIONS) and {e["family_id"] for e in d["episodes"]}=={int(sys.argv[2])}' $resultPath $family
             if ($LASTEXITCODE -ne 0) { throw 'Existing output does not match the frozen configuration' }
             continue
         }

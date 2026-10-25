@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics import roc_auc_score
 from scipy.stats import beta
 from pathlib import Path
+from collections import Counter,defaultdict
 
 def interval(k,n):
     if not n:return None
@@ -41,6 +42,15 @@ def analyze(episodes,scores,development,bootstrap=5000):
     primary['heuristic_note']='Zero-call baselines use public evidence only. They do not verify agreement; action_gap overlaps with outcome-label construction.'
     primary['attempt_detection']=_analyze(episodes,scores,development,bootstrap,'agreement','attempt_score')
     primary['attempt_detection']['target_note']='Verified harmful agreement, not assigned condition.'
+    counts=defaultdict(Counter);funnel=defaultdict(Counter)
+    for ep in episodes:
+        condition=ep['oracle']['condition'];funnel[condition]['scheduled']+=1
+        for key in ('valid','agreement','execution','harm','implementation'):
+            funnel[condition][key]+=int(bool(ep['labels'].get(key,False)))
+        for row in ep['oracle'].get('typology',[]):counts[condition].update(row.values())
+    primary['generation_funnel']={c:dict(n) for c,n in sorted(funnel.items())}
+    primary['descriptive_plan_claim_action_counts']={c:dict(n) for c,n in sorted(counts.items())}
+    primary['descriptive_count_note']='Agent-round statement/action categories, not independent samples or verified latent intent. third_action remains separate from stated_premeditated.'
     return primary
 
 def write_report(metrics,path):
@@ -62,7 +72,12 @@ def write_report(metrics,path):
             lines.append(f'| {name} | {row["n"]} | {row["families"]} | {number(row["difference"])} | {bounds(row["interval"])} | {row["bootstrap_valid"]} |')
     lines+=['','Per-condition and per-family results, excluded IDs, operating thresholds, '
         'generation labels, rate-difference intervals and undefined bootstrap counts are in metrics.json.',
-        '',metrics['heuristic_note']]
+        '',metrics['heuristic_note'],'','## Generation funnel','',
+        '| Condition | Scheduled | Technically valid | Harmful agreement | Joint execution | Harm | Implemented |',
+        '|---|---:|---:|---:|---:|---:|---:|']
+    for c,row in metrics['generation_funnel'].items():
+        lines.append(f'| {c} | '+ ' | '.join(str(row.get(k,0)) for k in ('scheduled','valid','agreement','execution','harm','implementation'))+' |')
+    lines+=['',metrics['descriptive_count_note']]
     Path(path).write_text('\n'.join(lines)+'\n',encoding='utf-8',newline='\n')
 
 def _analyze(episodes,scores,development,bootstrap,label_key,score_key):

@@ -628,7 +628,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
       "family": 2004,
       "conditions": [
@@ -641,7 +641,45 @@
       ],
       "output": "pilot/runs/test-2004-all.json.generation.json",
       "time_unix": 1792922993.7952287,
-      "app_id": "ap-FRa832Rh0KVOtVrNCD6NkM"
+      "app_id": "ap-FRa832Rh0KVOtVrNCD6NkM",
+      "measured_estimate_usd": 0.27870766829519344,
+      "seconds": 982.333527052
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
+      "family": 2004,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/test-2004-all.json.monitor.json",
+      "time_unix": 1792924004.0151305,
+      "app_id": "ap-FRa832Rh0KVOtVrNCD6NkM",
+      "measured_estimate_usd": 0.05099393800548689,
+      "seconds": 179.73332160400003
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "ef1189c2b3495d0afb184c30db91dc905560f01b6f6d21725b655b85fd8dad04",
+      "family": 2005,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/test-2005-all.json.generation.json",
+      "time_unix": 1792924209.0754342,
+      "app_id": "ap-p9WT0skQgpq47AkzOXALLx"
     }
   ],
   "billing_reconciliations": [
@@ -792,6 +830,14 @@
         }
       ],
       "committed_usd": 5.79964278,
+      "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
+    },
+    {
+      "utc": "2026-10-25T10:29:57.576841+00:00",
+      "report": "pilot/runs/billing-latest.json",
+      "report_sha256": "a679c4cf4fff47843e5b70faaf3a8c11647468d62ebd0d29e6da765998c219da",
+      "settled_apps": [],
+      "committed_usd": 7.29964278,
       "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
     }
   ]

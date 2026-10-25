@@ -296,7 +296,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "90d0bae432d7c5f3a2f556c7b8ef51f7ca77ba66600bcd34a6d4aa4ebfa2e50d",
       "family": 1001,
       "conditions": [
@@ -309,6 +309,25 @@
       ],
       "output": "pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.generation.json",
       "time_unix": 1792899664.799708,
+      "app_id": "ap-0vSRLxBa7gEGyoG8nXZOvc",
+      "measured_estimate_usd": 0.23276414427916906,
+      "seconds": 820.400903282
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "reserved",
+      "config_hash": "90d0bae432d7c5f3a2f556c7b8ef51f7ca77ba66600bcd34a6d4aa4ebfa2e50d",
+      "family": 1001,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.monitor.json",
+      "time_unix": 1792900518.2145474,
       "app_id": "ap-0vSRLxBa7gEGyoG8nXZOvc"
     }
   ],

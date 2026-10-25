@@ -12,6 +12,20 @@ from pilot.core import budget_total,render_evidence
 from datetime import datetime,timezone
 
 class Pipeline(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        Path('pilot/cache').mkdir(parents=True,exist_ok=True)
+
+    def test_freeze_refuses_scripted_evidence_without_touching_snapshot(self):
+        from pilot.cli import freeze
+        from pilot.core import save
+        snapshot=Path('pilot/frozen/config.json')
+        before=snapshot.read_bytes() if snapshot.exists() else None
+        with tempfile.TemporaryDirectory(dir='pilot/cache') as directory:
+            path=Path(directory)/'scripted.json';save(path,{'scripted':True,'remote_completed':True})
+            with self.assertRaises(ValueError):freeze({},path,'A fixture must never win.')
+        self.assertEqual(snapshot.read_bytes() if snapshot.exists() else None,before)
+
     def test_billing_settlement_keeps_original_reservations(self):
         now=datetime(2026,10,25,0,tzinfo=timezone.utc)
         ledger={'reservations':[{'reserved_usd':.75,'state':'completed','app_id':'app','output':p} for p in ['gen','monitor']]}

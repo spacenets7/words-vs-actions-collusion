@@ -22,6 +22,8 @@ try {
     }
     & $pilotPython -X utf8 -m pilot.collect --output pilot/runs/all.json
     if ($LASTEXITCODE -ne 0) { throw 'Collection failed' }
+    & $pilotPython -X utf8 -m pilot.review --input pilot/runs/all.json --out pilot/review-full
+    if ($LASTEXITCODE -ne 0) { throw 'Blind review export failed' }
     & $pilotPython -X utf8 -m pilot.cli analyze --config pilot/frozen/config.json --input pilot/runs/all.json --out pilot/results
     if ($LASTEXITCODE -ne 0) { throw 'Analysis failed' }
 }

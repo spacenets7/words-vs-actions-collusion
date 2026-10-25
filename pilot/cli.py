@@ -3,7 +3,7 @@ import hashlib
 import subprocess
 from pathlib import Path
 from .core import CONDITIONS, fixture, views, save, load, digest, POLICY, MONITOR,clean_public
-from .analysis import analyze
+from .analysis import analyze,write_report
 
 def freeze(config,source,reason):
     # A freeze is valid only with a real development report and complete provenance.
@@ -69,6 +69,7 @@ def main():
                 if any(block['views'][v]['threshold']!=r['threshold'] for v,r in frozen[section].items()):
                     raise ValueError('Development calibration differs from frozen thresholds; adjudicate/review before analysis')
         save(Path(a.out)/'metrics.json',metrics)
+        write_report(metrics,Path(a.out)/'metrics.md')
         print('Metrics saved; development-only runs have no held-out AUROC.')
     elif a.command=='freeze':freeze(c,a.input,a.reason)
     else:

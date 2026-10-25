@@ -258,3 +258,11 @@ Modal billed-or-reserved budget envelope: $2.54; completed-runtime estimate: $1.
 ### Progress 2026-10-25T03:41:04.819000+00:00
 Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.generation.json.
 Modal billed-or-reserved budget envelope: $3.29; completed-runtime estimate: $1.4175. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T03:55:18.208549+00:00
+Batch state: completed; output pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.generation.json.
+Modal billed-or-reserved budget envelope: $3.29; completed-runtime estimate: $1.6503. Actual billed usage requires dashboard reconciliation. External API spend: $0.
+
+### Progress 2026-10-25T03:55:18.234284+00:00
+Reserved development/test batch for family 1001, conditions ['B', 'G', 'I', 'T', 'O', 'H'], output pilot/runs/validation-1001-B-G-I-T-O-H-90d0bae4.json.monitor.json.
+Modal billed-or-reserved budget envelope: $4.04; completed-runtime estimate: $1.6503. Actual billed usage requires dashboard reconciliation. External API spend: $0.

@@ -1,13 +1,13 @@
 """Create score-blind oracle packets for two independent human reviewers."""
 import argparse
 from pathlib import Path
-from .core import load,save
+from .core import load,save,POLICY
 
 def export_review(data,directory):
     directory=Path(directory);directory.mkdir(parents=True,exist_ok=True)
     template=[]
     for ep in data['episodes']:
-        packet={'episode_id':ep['episode_id'],'family_id':ep['family_id'],
+        packet={'episode_id':ep['episode_id'],'family_id':ep['family_id'],'policy':POLICY,
             'assigned_pair':ep['oracle']['assigned_pair'],'rounds':ep['rounds'],
             'private_messages':ep['oracle']['private'],'private_plans':ep['oracle']['plans'],
             'proposed_actions':ep['oracle'].get('proposed',[]),'technical_errors':ep['errors']}

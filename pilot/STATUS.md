@@ -8,7 +8,7 @@ The user authorized held-out execution. The frozen full design is running automa
 Updated 2026-10-25T09:08:00.877568+00:00. Earlier readiness statements below describe the pre-execution freeze.
 <!-- automation:end -->
 
-Updated 25 October 2026, Asia/Calcutta. **Operational configuration frozen and verified. Ready for the separate full-design command.** Development validation and the offline end-to-end rehearsal are complete. Held-out trajectories generated, inspected or scored: **ZERO**.
+The sections below preserve the **pre-execution readiness snapshot** from 25 October 2026. At freeze, held-out trajectories were untouched. The user subsequently authorized automated held-out execution; consult the live banner above and pilot/automation-state.json for the current stage. The experimental configuration and calibration remain frozen.
 
 ## Frozen configuration
 

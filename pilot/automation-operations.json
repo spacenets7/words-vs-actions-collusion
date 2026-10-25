@@ -1,0 +1,33 @@
+{
+  "supervisor_command": ".\\pilot\\env\\Scripts\\python.exe -X utf8 -m pilot.automate run",
+  "status_command": ".\\pilot\\env\\Scripts\\python.exe -X utf8 -m pilot.automate status",
+  "finish_without_model_calls": ".\\pilot\\env\\Scripts\\python.exe -X utf8 -m pilot.automate finish",
+  "heartbeat_id": "track-2-2-experiment-follow-up",
+  "heartbeat_minutes": 15,
+  "notice_policy": "Meaningful completion, actual failure, or required human action; healthy unchanged states remain quiet.",
+  "expected_test_episodes": 48,
+  "human_review": "Pending; never impersonated.",
+  "author": "Siddeshwar U S",
+  "affiliation": "MIT, Manipal",
+  "team": "spacenets",
+  "frozen_config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+  "cap_usd_current": 20,
+  "reported_available_credit_usd": 70,
+  "additional_credit_permission": "User authorizes extra if needed; no cap increase performed.",
+  "tests_passed": 23,
+  "report_rehearsal": {
+    "pages": 5,
+    "main_pages": 4,
+    "abstract_words": 187,
+    "data": "development only, no held-out results used for report layout"
+  },
+  "preview_is_not_final_report": true,
+  "remaining_final_checks": [
+    "Visual inspect actual final report PNGs",
+    "Exact metrics replay from sanitized bundle",
+    "Final closed-interval billing",
+    "Independent human label adjudication and author approval",
+    "Final submission details/consent"
+  ],
+  "no_external_submission_or_publication": true
+}

@@ -34,5 +34,6 @@
       "type": "assigned_positive_not_implemented"
     }
   ],
-  "archive_verification": "Final included-file hashes and ZIP CRCs are verified during sealing; archive hash recorded in automation-state.json outside the archive."
+  "archive_verification": "Final included-file hashes and ZIP CRCs are verified during sealing; archive hash recorded in automation-state.json outside the archive.",
+  "portable_artifacts": "PDF/ZIP/PNG/JPG marked binary in Git; generated SVG text normalized to LF."
 }

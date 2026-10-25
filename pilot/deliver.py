@@ -229,6 +229,8 @@ def write_figures(metrics, directory):
         drawing.add(Line(x0, 35, x1, 35))
         drawing.add(String((x0 + x1) / 2, 3, 'Held-out AUROC' if name == 'auroc' else 'Paired AUROC difference V4 minus comparator', fontSize=9, textAnchor='middle'))
         renderSVG.drawToFile(drawing, str(directory / (name + '.svg')))
+        svg_path = directory / (name + '.svg')
+        svg_path.write_text(svg_path.read_text(encoding='utf-8'), encoding='utf-8', newline='\n')
         drawings[name] = drawing
     return drawings
 

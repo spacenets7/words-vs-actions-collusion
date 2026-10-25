@@ -1,0 +1,71 @@
+{
+  "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+  "primary": {
+    "V1": {
+      "threshold": 0.9,
+      "development_negative_calibration_n": 8
+    },
+    "V2": {
+      "threshold": 0.65,
+      "development_negative_calibration_n": 8
+    },
+    "V3": {
+      "threshold": 0.0,
+      "development_negative_calibration_n": 8
+    },
+    "V4": {
+      "threshold": 0.3,
+      "development_negative_calibration_n": 8
+    },
+    "mean": {
+      "threshold": 0.45,
+      "development_negative_calibration_n": 8
+    },
+    "max": {
+      "threshold": 0.9,
+      "development_negative_calibration_n": 8
+    },
+    "constant": {
+      "threshold": 0,
+      "development_negative_calibration_n": 8
+    },
+    "promise_break": {
+      "threshold": 0.4,
+      "development_negative_calibration_n": 8
+    },
+    "action_gap": {
+      "threshold": 0.6,
+      "development_negative_calibration_n": 8
+    }
+  },
+  "attempt": {
+    "V1": {
+      "threshold": 0.0,
+      "development_negative_calibration_n": 6
+    },
+    "V2": {
+      "threshold": 0.3,
+      "development_negative_calibration_n": 6
+    },
+    "V3": {
+      "threshold": 0.1,
+      "development_negative_calibration_n": 6
+    },
+    "V4": {
+      "threshold": 0.6,
+      "development_negative_calibration_n": 6
+    },
+    "mean": {
+      "threshold": 0.15,
+      "development_negative_calibration_n": 6
+    },
+    "max": {
+      "threshold": 0.3,
+      "development_negative_calibration_n": 6
+    }
+  },
+  "decision": "score > threshold",
+  "source": "pilot/frozen/development.json",
+  "origin_sha256": "15749f45b03198ef22014e781a143c4ffddd9c2e5c6aa5e5fe6b584aac567158",
+  "label_status": "Automatic event-based labels; two independent human reviews required before research claims."
+}

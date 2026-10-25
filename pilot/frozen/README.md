@@ -1,16 +1,17 @@
-# Freeze state
+# Frozen operational pilot
 
-No empirically validated configuration has been frozen yet. Candidate configs are
-under ../configs and must not be presented as a winner.
+The selected configuration is frozen in config.json, with immutable source/config hashes, development.json and calibration.json. See WHY.md for evidence and limitations. Validation: 12 real ten-round development episodes, 48 valid monitor outputs, 18 passing offline tests. Held-out data have not been generated or inspected.
 
-The freeze command refuses scripted/incomplete data, missing model revisions,
-held-out tuning data, or absence of implemented O/H positives. The automated
-development search additionally checks compliant H claims, intended hard-negative
-labels and T agreement. Human review of the actual evidence remains necessary.
-
-After reviewing a real completed development validation run:
-
+Verify from the project root:
 ```
-pilot/env/Scripts/python.exe -m pilot.cli freeze --config pilot/configs/selected-development.json --input pilot/runs/validation-combined.json --reason "Describe the observed evidence and why this candidate won."
-pilot/env/Scripts/python.exe -m pilot.cli verify-freeze
+.\pilot\env\Scripts\python.exe -X utf8 -m pilot.cli verify-freeze
 ```
+
+Run the held-out design only after development choices are settled:
+```
+.\pilot\RUN_FULL_DESIGN.ps1
+```
+
+Two independent score-blind human label reviews remain required before research claims. Packets and blank templates are in pilot/review-development. Technical freeze does not imply human adjudication. Changes to development labels require documented recalibration/refreeze before held-out execution. Do not view development.json before completing a blind review: it contains conditions, automatic labels and monitor scores.
+
+Full private request journals remain in ignored local runs/ and the authenticated Modal Volume. The compact evidence snapshot is committed locally for reproducibility; external release requires separate review. Consult ../STATUS.md for budget and exact commands.

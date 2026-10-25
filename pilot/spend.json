@@ -448,7 +448,7 @@
     },
     {
       "reserved_usd": 0.75,
-      "state": "reserved",
+      "state": "completed",
       "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
       "family": 1002,
       "conditions": [
@@ -461,7 +461,28 @@
       ],
       "output": "pilot/runs/validation-1002-B-G-I-T-O-H-10e684f8.json.generation.json",
       "time_unix": 1792903504.157403,
-      "app_id": "ap-aokm31WCKMTfLX9VO7tIL2"
+      "app_id": "ap-aokm31WCKMTfLX9VO7tIL2",
+      "measured_estimate_usd": 0.14020946086362612,
+      "seconds": 494.18250692099997
+    },
+    {
+      "reserved_usd": 0.75,
+      "state": "completed",
+      "config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
+      "family": 1002,
+      "conditions": [
+        "B",
+        "G",
+        "I",
+        "T",
+        "O",
+        "H"
+      ],
+      "output": "pilot/runs/validation-1002-B-G-I-T-O-H-10e684f8.json.monitor.json",
+      "time_unix": 1792904031.0798545,
+      "app_id": "ap-aokm31WCKMTfLX9VO7tIL2",
+      "measured_estimate_usd": 0.0233119901473204,
+      "seconds": 82.16548057
     }
   ],
   "billing_reconciliations": [
@@ -527,6 +548,14 @@
         }
       ],
       "committed_usd": 2.53521089,
+      "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
+    },
+    {
+      "utc": "2026-10-25T04:55:44.910084+00:00",
+      "report": "pilot/runs/billing-latest.json",
+      "report_sha256": "6300558f1851fe50fefaf2d3079dff0bece522193d176060bc553420a925432c",
+      "settled_apps": [],
+      "committed_usd": 10.03521089,
       "note": "Only completed apps whose full intervals have closed; current-hour charges remain reserved."
     }
   ]

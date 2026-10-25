@@ -523,6 +523,36 @@ Existing paper code/models are preexisting work. This project implements the new
 ''', encoding='utf-8', newline='\n')
 
 
+def export_provenance(config, folder):
+    frozen_hashes = load(ROOT / 'pilot/frozen/hashes.json')
+    batches = []
+    for family in config['test_families']:
+        path = ROOT / f'pilot/runs/test-{family}-all.json'
+        raw = load(path)
+        normalized = dict(raw['config'], allow_test_execution=False)
+        if digest(normalized) != digest(config) or not raw.get('remote_completed') or raw.get('scripted'):
+            raise ValueError('Held-out batch provenance mismatch')
+        if len(raw['episodes']) != 6 or {e['family_id'] for e in raw['episodes']} != {family} or {e['oracle']['condition'] for e in raw['episodes']} != set(CONDITIONS):
+            raise ValueError('Held-out batch schedule mismatch')
+        monitor = raw.get('monitor_provenance', {})
+        if monitor.get('active_model') != config['monitor_model'] or monitor.get('active_revision') != config['monitor_revision']:
+            raise ValueError('Monitor model provenance mismatch')
+        for hashes in [raw.get('source_hashes', {}), monitor.get('source_hashes', {})]:
+            if len(hashes) != 4 or any(frozen_hashes.get(p.replace('\\', '/')) != h for p, h in hashes.items()):
+                raise ValueError('Cloud experimental source differs from frozen sources')
+        calls = raw.get('calls', [])
+        batches.append({'family_id': family, 'raw_result_sha256': sha(path),
+                        'active_model': raw['active_model'], 'active_revision': raw['active_revision'],
+                        'source_hashes': raw['source_hashes'], 'versions': raw['versions'],
+                        'monitor_provenance': monitor, 'gpu_function_seconds': raw['gpu_function_seconds'],
+                        'journal_records': len(calls), 'journal_cache_hits': sum(bool(x.get('cache_hit')) for x in calls),
+                        'journal_input_tokens': sum(x.get('input_tokens', 0) for x in calls),
+                        'journal_output_tokens': sum(x.get('output_tokens', 0) for x in calls)})
+    save(folder / 'run-provenance.json', {'frozen_config_hash': digest(config),
+         'original_frozen_manifest_sha256': sha(ROOT / 'pilot/frozen/hashes.json'), 'held_out_batches': batches,
+         'note': 'Journal counts can include persistent cache hits and omit within-process deduplication; they are not independent samples or billed-token totals. No raw private call text is included.'})
+
+
 def build(preview=False):
     verify_manifest()
     config = load(ROOT / 'pilot/frozen/config.json')
@@ -547,6 +577,7 @@ def build(preview=False):
         return {'rehearsal_only': True, 'report': str(folder / 'report.pdf'), **pdf_checks, **rendering}
     for name in ['metrics.json', 'metrics.md']:
         shutil.copyfile(ROOT / 'pilot/results' / name, folder / name)
+    export_provenance(config, folder)
     source_bundle(folder)
     # Exporting full canonical joins permits offline reanalysis without exposing
     # the private plans/messages to a monitor or including them in release data.

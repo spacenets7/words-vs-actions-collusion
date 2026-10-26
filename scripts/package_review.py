@@ -43,6 +43,7 @@ def main():
    'provenance/original-frozen-hashes.json':'pilot/frozen/hashes.json',
    'reproducibility/pilot/analysis.py':'pilot/analysis.py','reproducibility/pilot/core.py':'pilot/core.py',
    'reproducibility/pilot/__init__.py':'pilot/__init__.py',
+   'reproducibility/pilot/patches/upstream.py':'pilot/patches/upstream.py',
    'reproducibility/pilot/frozen/config.json':'pilot/frozen/config.json',
    'reproducibility/pilot/frozen/calibration.json':'pilot/frozen/calibration.json',
  }.items():payload[target]=(ROOT/source).read_bytes()

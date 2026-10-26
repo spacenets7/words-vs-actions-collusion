@@ -30,6 +30,10 @@ def verify():
   names=set(z.namelist());assert z.testzip() is None
   assert not any('__pycache__' in n or n.endswith('.pyc') or Path(n).name in ['.env','.modal.toml','development.json'] for n in names)
   inside=json.loads(z.read('bundle-manifest.json'));assert names==set(inside)|{'bundle-manifest.json'}
+  required={'reproducibility/pilot/analysis.py','reproducibility/pilot/core.py',
+            'reproducibility/pilot/__init__.py','reproducibility/pilot/patches/upstream.py',
+            'reproducibility/pilot/frozen/config.json','replay.py','verify.py'}
+  assert required<=names,'Incomplete portable replay dependencies'
   for name,expected in inside.items():assert sha(z.read(name))==expected,name
   for name,expected in manifest['original_dataset_exports'].items():assert sha(z.read(name))==expected,name
   assert z.read('report.pdf')==(ROOT/'pilot/submission/final-report.pdf').read_bytes()

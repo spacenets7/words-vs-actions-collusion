@@ -1,3 +1,5 @@
+Latest template-based report: **final-report.pdf** and editable **final-report.docx** (13 total pages, six main pages). All final pages were visually checked; ten equation groups, six tables and three figures. Independent human label review and author approval remain pending. The earlier report.pdf/report.md and their page counts below describe the prior expanded version.
+
 # Local submission draft
 
 The frozen experiment and automated checks/analysis are complete. report.pdf and report.md are provisional drafts using automatic labels. No Apart project has been submitted and no email sent. The project now has a private GitHub backup at https://github.com/spacenets7/words-vs-actions-collusion; see the root README for its contents and data boundaries. Author: Siddeshwar U S, MIT, Manipal; team spacenets.

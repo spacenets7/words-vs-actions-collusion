@@ -15,7 +15,7 @@
     "contact_email": null,
     "publication_preference": null
   },
-  "pdf": "report.pdf",
+  "pdf": "final-report.pdf",
   "event_url": "https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25",
   "official_template_url": "https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing",
   "deadline_utc": "2026-10-26T11:59:00Z",
@@ -23,15 +23,16 @@
   "automated_integrity": "passed",
   "human_label_reviews": "pending",
   "author_approval": "pending",
-  "visual_report_inspection": "agent_viewed_all_nine_latest_pages_no_layout_defects; author approval remains pending",
+  "visual_report_inspection": "agent_viewed_all13_final_template_pages; author approval remains pending",
   "external_submission": "not_performed",
   "remaining_form_fields": [
     "contact email",
     "location",
     "publication preference"
   ],
-  "template_status": "Official structure adapted; final human formatting check required.",
-  "report_pages": 9,
-  "main_text_pages": 7,
-  "numbered_equations": 10
+  "template_status": "Supplied DOCX filled with all12 preserve-only parts byte-identical; all13 rendered pages visually checked.",
+  "report_pages": 13,
+  "main_text_pages": 6,
+  "numbered_equations": 10,
+  "editable_report": "final-report.docx"
 }

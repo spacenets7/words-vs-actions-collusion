@@ -1,3 +1,5 @@
+Latest template-based report: **final-report.pdf** and editable **final-report.docx** (13 total pages, six main pages). All final pages were visually checked; ten equation groups, six tables and three figures. Independent human label review and author approval remain pending. The earlier report.pdf/report.md and their page counts below describe the prior expanded version.
+
 # Remaining human work
 
 The compute run, automatic analysis and draft package are complete. The final PDF remains provisional until actual human review. Author supplied directly: Siddeshwar U S; MIT, Manipal. Team: spacenets.

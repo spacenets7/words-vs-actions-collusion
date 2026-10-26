@@ -10,7 +10,7 @@ Can a monitor distinguish harmful collusion from legitimate cooperation, indepen
 
 ## Read the outputs
 
-- [Research report (PDF)](pilot/submission/report.pdf) and [editable manuscript](pilot/submission/report.md): nine pages, seven main-text pages, ten numbered equations, seven tables and four figures.
+- [Final report in your Apart template (PDF)](pilot/submission/final-report.pdf) and [editable Word report](pilot/submission/final-report.docx): 13 pages, six main pages including the title page, ten numbered equations, six tables and three figures. The [earlier expanded manuscript](pilot/submission/report.md) is retained for provenance.
 - [Five downloadable PNG graphs](pilot/figures_png/README.md) and [graph ZIP](pilot/figures_png/track_2_2_png_graphs.zip).
 - [Metrics and uncertainty](pilot/results/metrics.md), [formula reference](pilot/submission/FORMULAS.md) and [verified presentation checks](pilot/submission/presentation-verification.json).
 - [Self-contained offline analysis bundle](pilot/submission/local-reproducibility-bundle.zip): sanitized trajectories, separate automatic labels, monitor evidence, analysis code and exact metrics replay.

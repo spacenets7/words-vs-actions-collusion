@@ -6,6 +6,8 @@
 The manuscript was revised on26October2026 using the prior PrefKit report as a presentation reference. It now has nine total pages, seven main-text pages, ten numbered equations, five explicit audit requirements, nine methods subsections, seven tables and four figures. All pages were visually checked; independent equation checks and all23 tests pass. Original data, metrics, labels, thresholds and frozen experimental hashes are unchanged; no new model/API calls or Modal spend. The reproducibility bundle and editable source are synchronized. Independent human label adjudication and author approval remain pending; no external submission or publication has been made. The completion heartbeat remains deleted.
 
 Updated 2026-10-26T05:57:36.194058+00:00. Earlier readiness statements below describe the pre-execution freeze.
+Latest deliverables: pilot/submission/final-report.docx and final-report.pdf, filled from the user-supplied Apart Word template. There are13 total pages and6 main pages including the title page; ten native editable equation groups, six evidence tables and three figures. All13 final pages were visually checked. The source template and12 opaque package parts (including fonts/styles/footnote) remain byte-identical. Held-out-only table counts were independently checked against the saved generation labels. The LLM statement uses the user's GPT-6.1/GPT Astra attribution and distinguishes numerical checks from pending human agreement adjudication. Original frozen files and metrics are unchanged; no model calls or new Modal spend. See template-report-quality.json for exact hashes. Earlier report.pdf/report.md and their verification records are historical expanded versions.
+
 <!-- automation:end -->
 
 ## GitHub backup — 26 October 2026

@@ -1,6 +1,6 @@
 # Formal definitions for the Track 2.2 report
 
-This section formalizes the **implemented, frozen experiment**. It introduces notation, not a new model, theorem, detector or experiment. It is an insertable methods section; the existing PDF has not been revised in this step. Labels remain provisional pending independent human adjudication.
+This section formalizes the **implemented, frozen experiment**. It introduces notation, not a new model, theorem, detector or experiment. The revised PDF incorporates the central definitions as ten grouped, numbered equations. This sheet retains the expanded notation and edge-case detail. Labels remain provisional pending independent human adjudication.
 
 The presentation follows the useful pattern in the author's previous PrefKit report: define the evaluated object and estimand explicitly. CMS itself is not transferred: agreement between monitors does not establish correct detection when all can make the same mistake.
 
@@ -122,10 +122,10 @@ The secondary attempt target is A_e^label, not Y_e. An assigned O/H condition do
 
 ## 5 Monitor function and frozen operating threshold
 
-Let tau_e be a logged episode, V_v its allowlisted evidence projection, and M_theta the pinned auditor under the fixed rubric and decoding configuration. Its scored output can be summarized as
+Let tau_e be a logged episode, V_v its allowlisted evidence projection, and M_Theta the pinned auditor under the fixed rubric and decoding configuration. Its scored output can be summarized as
 
 \[
-M_\theta\!\left(\mathcal V_v(\tau_e)\right)
+M_\Theta\!\left(\mathcal V_v(\tau_e)\right)
 \longrightarrow (s^{\rm att}_{ev},s^{\rm imp}_{ev})\in[0,1]^2\cup\{\bot\}.
 \tag{12}
 \]
@@ -185,4 +185,4 @@ In the saved primary results, there are 13 positive and 35 negative held-out epi
 - Equation 13: threshold() and _analyze() in pilot/analysis.py; exact values in pilot/frozen/calibration.json.
 - Equations 14-16 and intervals: pilot/analysis.py; saved numeric values in pilot/results/metrics.json.
 
-The original experimental code, labels, calibration, scores and PDF draft are unchanged by this notation document.
+The reporting revision changes presentation only. Original experimental code, labels, calibration, scores and metrics remain unchanged. The main manuscript uses A_e for the Boolean agreement label; this expanded sheet distinguishes the commitment set A_e from its Boolean label explicitly.

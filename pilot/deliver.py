@@ -232,6 +232,12 @@ def write_figures(metrics, directory):
         svg_path = directory / (name + '.svg')
         svg_path.write_text(svg_path.read_text(encoding='utf-8'), encoding='utf-8', newline='\n')
         drawings[name] = drawing
+    from .paper_structure import pipeline_figure, attempts_figure
+    for name, drawing in [('pipeline', pipeline_figure()), ('attempts', attempts_figure(metrics))]:
+        renderSVG.drawToFile(drawing, str(directory / (name + '.svg')))
+        svg_path = directory / (name + '.svg')
+        svg_path.write_text(svg_path.read_text(encoding='utf-8'), encoding='utf-8', newline='\n')
+        drawings[name] = drawing
     return drawings
 
 
@@ -331,6 +337,9 @@ def report_content(data, metrics, config, checks, money):
             'An AI coding assistant implemented, tested and operated the pipeline and generated this draft from saved artifacts. Experimental agents and monitors are the pinned open models described above. Offline assertions reproduce payoff and label arithmetic; this does not replace independent human review. The human author remains responsible for the report, citations, interpretation and final submission. No claim that all results were independently human verified is made.'
         ])
     ]
+    from .paper_structure import revise
+    main, appendix = revise(main, appendix, metrics, config, checks,
+                           table_rows(metrics), hard_rows(metrics), funnel_rows(checks))
     return abstract, main, appendix
 
 
@@ -360,19 +369,38 @@ def funnel_rows(checks):
 def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples, checks):
     from reportlab.lib import colors
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib.enums import TA_CENTER
+    from reportlab.lib.enums import TA_CENTER, TA_RIGHT
     from reportlab.lib.pagesizes import A4
     from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak, KeepTogether
     from pypdf import PdfReader
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle('PaperTitle', fontName='Times-Bold', fontSize=19, leading=22, alignment=TA_CENTER, spaceAfter=11))
-    styles.add(ParagraphStyle('PaperBody', fontName='Times-Roman', fontSize=10, leading=12.4, spaceAfter=6))
+    styles.add(ParagraphStyle('PaperBody', fontName='Times-Roman', fontSize=10, leading=12.4, spaceAfter=6,
+                              allowWidows=0, allowOrphans=0))
     styles.add(ParagraphStyle('PaperHead', fontName='Times-Bold', fontSize=12, leading=14, spaceBefore=9, spaceAfter=6, keepWithNext=True))
     styles.add(ParagraphStyle('PaperSmall', fontName='Times-Roman', fontSize=8, leading=9.5, spaceAfter=5))
     styles.add(ParagraphStyle('PaperCenter', fontName='Times-Roman', fontSize=10, leading=12, alignment=TA_CENTER, spaceAfter=6))
+    from .paper_structure import math_font
+    styles.add(ParagraphStyle('PaperMath', fontName=math_font(), fontSize=10.7, leading=19,
+                              alignment=TA_CENTER, spaceAfter=0))
+    styles.add(ParagraphStyle('PaperEqNum', fontName='Times-Roman', fontSize=10, leading=13, alignment=TA_RIGHT))
+    styles.add(ParagraphStyle('PaperSubhead', fontName='Times-Bold', fontSize=10.5, leading=13,
+                              spaceBefore=7, spaceAfter=5, keepWithNext=True))
     doc = SimpleDocTemplate(str(path), pagesize=A4, leftMargin=45, rightMargin=45, topMargin=39, bottomMargin=40,
                             title=TITLE, author=', '.join(x['name'] for x in authors['authors']))
-    para = lambda s, style='PaperBody': Paragraph(escape(s).replace('\n', '<br/>'), styles[style])
+    def para(s, style='PaperBody'):
+        markup = escape(s).replace('\n', '<br/>')
+        symbols = {'tau_e':'τ<sub>e</sub>', 'V_v':'V<sub>v</sub>', 'C_e':'C<sub>e</sub>',
+                   'A_e':'A<sub>e</sub>', 'V_e':'V<sub>e</sub>', 'Y_e':'Y<sub>e</sub>',
+                   'X_e':'X<sub>e</sub>', 'L_e':'L<sub>e</sub>', 'G_e':'G<sub>e</sub>',
+                   'O_e':'O<sub>e</sub>', 'c_it':'c<sub>it</sub>', 'p_it':'p<sub>it</sub>',
+                   'd_it':'d<sub>it</sub>', 'a*_it':'a*<sub>it</sub>', 'm_v':'m<sub>v</sub>',
+                   'R_(i-&gt;j)':'R<sub>i→j</sub>', 'E_(4,v)':'E<sub>4,v</sub>',
+                   'Theta':'Θ', 'psi':'ψ', 'delta':'δ'}
+        for token, value in symbols.items():
+            markup = re.sub(r'(?<![A-Za-z0-9_])' + re.escape(token) + r'(?![A-Za-z0-9_])',
+                            '<font name="PaperMath">' + value + '</font>', markup)
+        return Paragraph(markup, styles[style])
 
     def table(rows, widths):
         values = [[para(str(x), 'PaperSmall') for x in row] for row in rows]
@@ -385,6 +413,33 @@ def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples
                                ('BOTTOMPADDING', (0, 0), (-1, -1), 4)]))
         return t
 
+    def add_block(block, keep_next=False):
+        if isinstance(block, str):
+            paragraph=para(block)
+            if keep_next:paragraph.keepWithNext=True
+            story.append(paragraph)
+        elif block['kind'] == 'subhead':
+            story.append(para(block['title'], 'PaperSubhead'))
+        elif block['kind'] == 'equation':
+            equation = Table([[Paragraph(block['html'], styles['PaperMath']),
+                               para('(' + block['number'] + ')', 'PaperEqNum')]],
+                             colWidths=[467,38], hAlign='LEFT')
+            equation.setStyle(TableStyle([('VALIGN',(0,0),(-1,-1),'MIDDLE'),
+                                           ('TOPPADDING',(0,0),(-1,-1),2),
+                                           ('BOTTOMPADDING',(0,0),(-1,-1),7),
+                                           ('LEFTPADDING',(0,0),(-1,-1),2),
+                                           ('RIGHTPADDING',(0,0),(-1,-1),2)]))
+            story.append(KeepTogether([equation]))
+        elif block['kind'] == 'table':
+            story.append(KeepTogether([para(block['caption'], 'PaperSmall'),
+                                      table(block['rows'], block['widths'])]))
+            story.append(Spacer(1,6))
+        elif block['kind'] == 'figure':
+            story.append(KeepTogether([figures[block['name']], para(block['caption'], 'PaperSmall')]))
+            story.append(Spacer(1,6))
+        else:
+            raise ValueError('Unknown manuscript block')
+
     story = [para(TITLE, 'PaperTitle')]
     for a in authors['authors']:
         story.append(para(a['name'] + ' | ' + a['affiliation'], 'PaperCenter'))
@@ -393,23 +448,16 @@ def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples
               para('Abstract', 'PaperHead'), para(abstract)]
     for head, paragraphs in main:
         story.append(para(head, 'PaperHead'))
-        for p in paragraphs:
-            story.append(para(p))
-        if head.startswith('4 '):
-            story += [para('Table 1. Implemented harmful collusion on held-out episodes. Family bootstrap for AUROC; episode-binomial intervals for rates.', 'PaperSmall'),
-                      table(table_rows(metrics), [60, 25, 140, 140, 140]), Spacer(1, 8),
-                      KeepTogether([figures['auroc'], para('Figure 1. Held-out AUROC with 95% family-bootstrap intervals. The dashed reference is chance ranking, not a significance test.', 'PaperSmall')]),
-                      para('Table 2. Flagged / eligible episodes at locked thresholds by assigned condition. Counts describe flagging, not proof of agreement.', 'PaperSmall'),
-                      table(hard_rows(metrics), [61] + [74] * 6), Spacer(1, 8),
-                      KeepTogether([figures['paired-differences'], para('Figure 2. Paired V4 minus comparator AUROC, with family-bootstrap intervals and individual-family dots. Common eligible records only; zero denotes no difference.', 'PaperSmall')]),
-                      KeepTogether([para('Table 3. Held-out generation funnel by assigned condition. Agreement means unauthorized agreement; columns need not be nested.', 'PaperSmall'),
-                                    table(funnel_rows(checks), [64] + [63] * 7)])]
+        for i,p in enumerate(paragraphs):
+            next_is_equation=i+1<len(paragraphs) and isinstance(paragraphs[i+1],dict) and paragraphs[i+1].get('kind')=='equation'
+            add_block(p, keep_next=next_is_equation)
     story += [PageBreak(), para('References', 'PaperHead')]
     for i, text in enumerate(REFERENCES, 1):
         story.append(para(f'[{i}] ' + text, 'PaperSmall'))
     for head, paragraphs in appendix:
+        if head.startswith(('Appendix E','Appendix F')):continue
         story.append(para(head, 'PaperHead'))
-        story += [para(p) for p in paragraphs]
+        for p in paragraphs:add_block(p)
     story.append(para('Appendix D Prespecified Trace Examples', 'PaperHead'))
     for x in examples:
         c = x['public_event']
@@ -421,6 +469,10 @@ def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples
                 'Private agreement event IDs in the separate oracle export are ground-truth evidence, never monitor inputs. '
                 + x['selection'])
         story.append(para(text, 'PaperSmall'))
+    for head, paragraphs in appendix:
+        if not head.startswith(('Appendix E','Appendix F')):continue
+        story.append(para(head, 'PaperHead'))
+        for p in paragraphs:add_block(p)
 
     def footer(canvas, doc):
         canvas.saveState()
@@ -439,7 +491,9 @@ def make_pdf(path, abstract, main, appendix, metrics, figures, authors, examples
     if not 150 <= len(abstract.split()) <= 250:
         raise ValueError('Abstract word count outside official limits')
     return {'pages': len(reader.pages), 'main_text_pages': reference_page - 1,
-            'abstract_words': len(abstract.split()), 'bytes': path.stat().st_size}
+            'abstract_words': len(abstract.split()), 'bytes': path.stat().st_size,
+            'numbered_equations': sum(isinstance(b,dict) and b.get('kind')=='equation' for _,bb in main for b in bb),
+            'requirements': 5, 'presentation': 'formal_requirement_led_methods'}
 
 
 def render_pdf(path, folder):
@@ -477,23 +531,43 @@ def render_pdf(path, folder):
             'visual_inspection': 'pending_agent_or_human_png_inspection'}
 
 
-def write_markdown(folder, abstract, main, appendix, metrics, authors, checks):
+def write_markdown(folder, abstract, main, appendix, metrics, authors, checks, examples):
     text = '# ' + TITLE + '\n\n'
     text += '\n'.join(a['name'] + ' - ' + a['affiliation'] for a in authors['authors']) + '\n\nTeam: ' + authors['team_name'] + '\n\n'
     text += '**PROVISIONAL DRAFT: automatic labels, independent human adjudication pending.**\n\n## Abstract\n\n' + abstract + '\n'
     for head, paragraphs in main:
-        text += '\n## ' + head + '\n\n' + '\n\n'.join(paragraphs) + '\n'
-        if head.startswith('4 '):
-            for title, rows in [('Table 1 Implementation metrics', table_rows(metrics)), ('Table 2 Flagged counts', hard_rows(metrics))]:
-                text += '\n### ' + title + '\n\n| ' + ' | '.join(rows[0]) + ' |\n| ' + ' | '.join(['---'] * len(rows[0])) + ' |\n'
+        text += '\n## ' + head + '\n'
+        for block in paragraphs:
+            if isinstance(block,str):
+                text += '\n' + block + '\n'
+            elif block['kind']=='subhead':
+                text += '\n### ' + block['title'] + '\n'
+            elif block['kind']=='equation':
+                text += '\n\\[\n' + block['latex'] + '\n\\tag{' + block['number'] + '}\n\\]\n'
+            elif block['kind']=='figure':
+                text += '\n![' + block['caption'] + '](figures/' + block['name'] + '.svg)\n'
+            elif block['kind']=='table':
+                rows=block['rows']
+                text += '\n' + block['caption'] + '\n\n| ' + ' | '.join(rows[0]) + ' |\n| ' + ' | '.join(['---']*len(rows[0])) + ' |\n'
                 text += ''.join('| ' + ' | '.join(r) + ' |\n' for r in rows[1:])
-            text += '\n![AUROC](figures/auroc.svg)\n\n![Paired differences](figures/paired-differences.svg)\n'
-            rows = funnel_rows(checks)
-            text += '\n### Table 3 Held out generation funnel\n\n| ' + ' | '.join(rows[0]) + ' |\n| ' + ' | '.join(['---'] * len(rows[0])) + ' |\n'
-            text += ''.join('| ' + ' | '.join(r) + ' |\n' for r in rows[1:])
     text += '\n## References\n\n' + '\n\n'.join(f'[{i}] {r}' for i, r in enumerate(REFERENCES, 1)) + '\n'
     for head, paragraphs in appendix:
+        if head.startswith(('Appendix E','Appendix F')):continue
         text += '\n## ' + head + '\n\n' + '\n\n'.join(paragraphs) + '\n'
+    text += '\n## Appendix D Prespecified Trace Examples\n'
+    for example in examples:
+        public=example['public_event']
+        text += f'\n{example["condition"]}, family {example["family_id"]}, episode {example["episode_id"]}: '
+        text += f'{public["event_id"]}, actor {public["actor"]}, claim {public["claim"]}: "{public["message"]}". '
+        text += f'{example["executed_event"]}: actions {example["actual_actions"]}; payoffs {example["payoffs"]}. '
+        text += 'Automatic agreement/execution/harm: ' + '/'.join(str(example['automatic_labels'][k]) for k in ['agreement','execution','harm']) + '. '
+        text += 'Oracle event references were not monitor inputs. ' + example['selection'] + '\n'
+    for head, paragraphs in appendix:
+        if not head.startswith(('Appendix E','Appendix F')):continue
+        text += '\n## ' + head + '\n'
+        for block in paragraphs:
+            if isinstance(block,str):text += '\n' + block + '\n'
+            elif block['kind']=='figure':text += '\n![' + block['caption'] + '](figures/' + block['name'] + '.svg)\n'
     (folder / 'report.md').write_text(text, encoding='utf-8', newline='\n')
     save(folder / 'quality-checks.json', checks)
 
@@ -504,6 +578,7 @@ def source_bundle(folder):
     destination.mkdir(exist_ok=True)
     source = ['pilot/' + x for x in ['__init__.py', 'core.py', 'analysis.py', 'cli.py', 'collect.py',
               'review.py', 'modal_app.py', 'progress.py', 'reconcile.py', 'automate.py', 'deliver.py',
+              'paper_structure.py', 'plot_results_png.py', 'AUDIT_IMPLEMENTATION_MAP.md',
               'RUN_FULL_DESIGN.ps1', 'requirements-verified.txt', 'requirements-report.txt',
               'patches/__init__.py', 'patches/upstream.py', 'patches/README.md',
               'frozen/config.json', 'frozen/calibration.json', 'frozen/hashes.json', 'frozen/WHY.md']]
@@ -572,7 +647,7 @@ def build(preview=False):
     export_data(data, folder / 'data')
     figures = write_figures(metrics, folder / 'figures')
     abstract, main, appendix = report_content(data, metrics, config, checks, money)
-    write_markdown(folder, abstract, main, appendix, metrics, authors, checks)
+    write_markdown(folder, abstract, main, appendix, metrics, authors, checks, selected_examples(data,config))
     pdf_checks = make_pdf(folder / 'report.pdf', abstract, main, appendix, metrics, figures, authors, selected_examples(data, config), checks)
     rendering = render_pdf(folder / 'report.pdf', folder / 'rendered')
     checks.update(pdf=pdf_checks, rendering=rendering)

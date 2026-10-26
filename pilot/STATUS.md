@@ -2,6 +2,11 @@
 
 <!-- automation:start -->
 
+Judge-readiness update26October2026: GitHub visibility was independently observed as PUBLIC; no visibility change or history rewrite was made. The front page now links the current report, JUDGES.md, REPRODUCIBILITY.md, clean data card, result tables, citation, notices, artifact manifest and a new review/reproducibility.zip. The new archive keeps all three original dataset exports byte-identical and omits private strategies, compiled caches and stale reports. The report's Code and Data section now correctly describes public access; only page6 changed visually and was rechecked. The exact LLM statement, 13-page layout and all scientific results remain unchanged.
+
+The five delivery tests now use the same committed development records and a saved metrics fixture instead of ignored local readiness files. Original frozen experimental hashes remain unchanged, and all23 tests pass. A read-only CPU GitHub Actions workflow checks a fresh checkout and runs full exact metrics replay, with no cloud credentials or inference. Remote CI/release verification is in progress.
+
+
 Latest report revision: removed pending human-review/adjudication wording from the submission PDF and its three embedded figure footers at the user's request. The LLM Usage Statement is the exact user-supplied two-sentence text. Frozen event-based label definitions, scientific limitations, all results, thresholds and experimental hashes remain unchanged. Final PDF and synchronized Word source have13 total pages and6 main pages; all13 were visually checked. Abstract188 words. No inference calls or new Modal spend; internal review-status records are preserved without claiming completed human annotation. See template-report-quality.json for artifact hashes and exact-text checks.
 
 ## Live automated execution

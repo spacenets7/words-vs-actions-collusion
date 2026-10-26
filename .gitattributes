@@ -7,3 +7,9 @@ pilot/**/*.docx binary
 /*.md text eol=lf
 /.gitignore text eol=lf
 /audit/** text eol=lf
+/review/** text eol=lf
+/review/**/*.png binary
+/review/*.zip binary
+/scripts/** text eol=lf
+/.github/** text eol=lf
+/CITATION.cff text eol=lf

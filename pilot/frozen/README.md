@@ -1,3 +1,5 @@
+Current review entry points: [judge guide](../../JUDGES.md) and [reproduction guide](../../REPRODUCIBILITY.md). The completed experiment has60 episodes,48 held-out cases and240 monitor outputs. The text below is retained as a historical operator/freeze record; its statements about pre-execution readiness describe25October2026.
+
 # Frozen operational pilot
 
 The selected configuration is frozen in config.json, with immutable source/config hashes, development.json and calibration.json. See WHY.md for evidence and limitations. Validation: 12 real ten-round development episodes, 48 valid monitor outputs, 18 passing offline tests. Held-out data have not been generated or inspected.

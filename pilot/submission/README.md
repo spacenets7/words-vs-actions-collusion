@@ -1,29 +1,10 @@
-Latest template-based report: **final-report.pdf** and editable **final-report.docx** (13 total pages, six main pages). All final pages were visually checked; ten equation groups, six tables and three figures. Independent human label review and author approval remain pending. The earlier report.pdf/report.md and their page counts below describe the prior expanded version.
+# Final submission artifacts
 
-# Local submission draft
+- [Final Apart-template PDF](final-report.pdf) and [editable Word source](final-report.docx):13 pages total, six main pages including the title page, ten equation groups, six tables and three figures. All final rendered pages were visually checked.
+- [Judge guide](../../JUDGES.md), [complete result tables](../../review/RESULTS.md) and [public reproducibility archive](../../review/reproducibility.zip).
+- [Artifact manifest](../../review/manifest.json) and [report-specific verification](template-report-quality.json).
+- [CPU-only reproduction instructions](../../REPRODUCIBILITY.md). No model-provider keys, GPU or Docker are needed to verify/replay the saved results.
 
-The frozen experiment and automated checks/analysis are complete. report.pdf and report.md are provisional drafts using automatic labels. No Apart project has been submitted and no email sent. The project now has a private GitHub backup at https://github.com/spacenets7/words-vs-actions-collusion; see the root README for its contents and data boundaries. Author: Siddeshwar U S, MIT, Manipal; team spacenets.
+The report uses the exact author-provided LLM usage statement. Outcome labels remain the frozen event-based automatic definitions; no results, thresholds or held-out records were changed for presentation.
 
-## Prepared automatically
-
-- Results and uncertainty: metrics.json / metrics.md; figures contain held-out estimates only.
-- Report: official template structure, 150-250 word abstract, author block, numbered sections, references and required limitations/dual-use appendix.
-- Data: public trajectories, separate oracle labels, monitor evidence/outputs and data card. This is a local candidate release, not a publication approval.
-- Reproducibility sources, offline replay.py, source/data hashes, cost accounting, technical checks and deterministic trace examples.
-- All nine rendered report pages were visually checked by the agent. quality-checks.json records the exact inspected PDF hash; author approval remains pending.
-
-## Human tasks that cannot be impersonated
-
-1. Two independent score-blind label reviews and documented adjudication. Development labels/calibration were already frozen; do not recalibrate using held-out labels or scores. Preserve originals and report disagreements/sensitivity explicitly.
-2. Read and approve the actual report, including limitations, sprint/preexisting-work attribution, exact affiliation and official-template conformity. Review rendered pages. Automatic checks are not independent human verification.
-3. Supply contact email, location and publication preference; review prize terms and data/source release licensing.
-4. Submit the approved PDF through the official form and retain confirmation. Deadline: 26 October 2026, 17:29 IST (25 October 23:59 AoE). Report cap: eight main-text pages excluding references/appendices and 25 MB upload.
-
-The automation never fills human review templates or invents consent. The private backup does not grant reviewers public access; optional public repository/video links for a submission remain undecided. report.pdf is not represented as a human-approved final submission.
-
-Official event: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25
-Official template: https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing
-
-## PrefKit inspired presentation revision
-
-The updated manuscript has nine total pages and seven main-text pages, with ten numbered equations, five verification requirements, seven tables, four figures and a193-word abstract. Sections3.1-3.9 formalize the audit method; AppendixE documents its operational checks. Original data, metrics and thresholds are unchanged, with23 passing tests and independent equation checks. See PRESENTATION_REVISION.md and presentation-verification.json. Report rebuilding needs Cambria Math on Windows or a mathematical-glyph-capable DejaVu Serif on Linux; the delivered PDF embeds its math font. Human labels and author approval remain pending.
+Historical report.pdf/report.md, HANDOFF.md, the original local-reproducibility-bundle.zip and earlier checks remain for provenance. They are earlier versions; the final-report files and review/ package linked above are the judge-facing artifacts. The public dataset exports in the review package are byte-identical to the originals. External form submission is handled separately from this repository.

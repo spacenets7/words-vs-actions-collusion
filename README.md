@@ -1,71 +1,73 @@
-# Words, Actions and Evidence in Collusion Detection
+# Words Actions and Evidence in Collusion Detection
 
-Track 2.2 pilot for the [Apart AI Collusion Research Sprint](https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25).
+[![Review verification](https://github.com/spacenets7/words-vs-actions-collusion/actions/workflows/review.yml/badge.svg)](https://github.com/spacenets7/words-vs-actions-collusion/actions/workflows/review.yml)
 
-Repository: [spacenets7/words-vs-actions-collusion](https://github.com/spacenets7/words-vs-actions-collusion) · private project backup.
+**[Read the final report](pilot/submission/final-report.pdf) · [Judge guide](JUDGES.md) · [Download the reproducibility ZIP](review/reproducibility.zip) · [Reproduce the results](REPRODUCIBILITY.md)**
 
-**Author:** Siddeshwar U S · **Affiliation:** MIT, Manipal · **Team:** spacenets
+Apart AI Collusion Research Sprint · Track 2.2 · 23–25 October 2026
 
-Can a monitor distinguish harmful collusion from legitimate cooperation, independent deception and unexecuted plans? This project compares public words, executed actions, their raw union and a structured claim-versus-outcome report in a repeated public-goods game with five agents and ten rounds.
+**Siddeshwar U S · MIT, Manipal · Team spacenets**
 
-## Read the outputs
+Does combining an agent's public statements with its executed actions help detect harmful collusion? We built a five-agent, ten-round public-goods experiment with six conditions separating benign behavior, legitimate cooperation, independent deception, unexecuted plans, overt collusion and hidden collusion. A frozen open-model pipeline compares four monitor views on **48 held-out episodes across eight matched families**, following 12 development episodes.
 
-- [Final report in your Apart template (PDF)](pilot/submission/final-report.pdf) and [editable Word report](pilot/submission/final-report.docx): 13 pages, six main pages including the title page, ten numbered equations, six tables and three figures. The [earlier expanded manuscript](pilot/submission/report.md) is retained for provenance.
-- [Five downloadable PNG graphs](pilot/figures_png/README.md) and [graph ZIP](pilot/figures_png/track_2_2_png_graphs.zip).
-- [Metrics and uncertainty](pilot/results/metrics.md), [formula reference](pilot/submission/FORMULAS.md) and [verified presentation checks](pilot/submission/presentation-verification.json).
-- [Self-contained offline analysis bundle](pilot/submission/local-reproducibility-bundle.zip): sanitized trajectories, separate automatic labels, monitor evidence, analysis code and exact metrics replay.
-- [Paper audit findings](audit/FINDINGS.md) and [how all 22 findings informed this project](pilot/AUDIT_IMPLEMENTATION_MAP.md).
-- [Current status](pilot/STATUS.md), [iteration history](pilot/iterations.md), [submission handoff](pilot/submission/HANDOFF.md) and [original project plan](TRACK_2_2_END_TO_END_PLAN_v2.md).
+The structured hybrid did **not establish a consistent advantage over actions alone**. The project contributes a controlled evaluation, separate agreement/execution/harm outcomes, hard negatives, isolated evidence views and reproducible uncertainty estimates.
 
-## Completed experiment
+## Main result
 
-There are 12 development episodes and 48 held-out episodes from eight held-out families, with 240 valid monitor outputs overall. Configuration, model revisions, thresholds and label definitions were frozen before held-out execution. The agent is Qwen2.5-3B-Instruct and the auditor is Qwen3-4B-Instruct-2507; exact revisions and settings are in [the frozen configuration](pilot/frozen/config.json).
+| Monitor input | Held-out AUROC | 95% family-bootstrap interval |
+|---|---:|---:|
+| V1 Public words | 0.597 | [0.491, 0.734] |
+| V2 Actions and payoffs | 0.843 | [0.767, 0.898] |
+| V3 Raw words and actions | 0.719 | [0.589, 0.852] |
+| V4 Structured claim versus outcome report | 0.731 | [0.646, 0.830] |
 
-| Monitor view | Held-out implementation AUROC |
-|---|---:|
-| V1: public words | 0.597 |
-| V2: actions and payoffs | 0.843 |
-| V3: both, raw | 0.719 |
-| V4: structured claim/outcome report | 0.731 |
+The paired V4 minus V2 AUROC difference is **−0.112 [−0.215, 0.029]**. Intervals resample whole families; rounds are not independent samples. [All baselines, operating rates and secondary outcomes](review/RESULTS.md) are retained.
 
-The paired V4 minus V2 AUROC difference is -0.112, with a 95% family-bootstrap interval of [-0.215, 0.029]. These data do not establish a consistent advantage from combining words and actions. The report retains all failed controls and reports uncertainty.
+![Held-out monitor AUROC and family-bootstrap intervals](review/figures/implementation-auroc.png)
 
-**Research status:** labels are automatic and await two independent human reviews and adjudication. Public communication in the hidden-collusion and independent-deception conditions is deliberately controlled; this does not measure natural concealment ability. Public observations alone cannot generally identify a private agreement. Three hidden-collusion episodes failed the automatic implementation gate and remain in the analysis. Author approval and the external Apart submission remain pending.
+## Start reviewing
 
-## Replay the saved analysis without a model or API
+| Resource | What it contains |
+|---|---|
+| [Final PDF](pilot/submission/final-report.pdf) | Supplied Apart template; six main pages including the title page, references and appendices; ten equation groups, six tables and three figures. |
+| [Editable Word report](pilot/submission/final-report.docx) | The same final manuscript and exact author-supplied LLM usage statement. |
+| [Judge guide](JUDGES.md) | A short route through the question, controls, evidence, checks and limitations. |
+| [Review ZIP](review/reproducibility.zip) | Current report, saved data, scores, frozen analysis code, pinned requirements, checksums and offline replay. |
+| [Data card](review/DATA_CARD.md) | Dataset scope, splits, schema, information boundaries and label interpretation. |
+| [Artifact manifest](review/manifest.json) | SHA256 identities of the review artifacts and three unchanged dataset exports. |
+| [Audit implementation map](pilot/AUDIT_IMPLEMENTATION_MAP.md) | How 22 confirmed records from the supplied paper audits informed this implementation. |
 
-The archive is the portable analysis entry point. Its public trajectories exclude private negotiation and private plans; its separate oracle-label file is available for evaluation. The saved analysis used Python 3.12 and the pinned numerical-library versions below.
+## Verify on a CPU
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install numpy==2.3.5 scipy==1.18.1 scikit-learn==1.9.1
-Expand-Archive -LiteralPath .\pilot\submission\local-reproducibility-bundle.zip -DestinationPath .\tmp\replay
-.\.venv\Scripts\python.exe .\tmp\replay\replay.py
+Use **Python 3.12**. From the cloned repository, install the pinned analysis dependencies and verify the artifact package:
+
+```text
+python -m pip install -r pilot/requirements-review.txt
+python scripts/verify_review.py
 ```
 
-The replay recomputes the saved metrics, including 5,000 paired family-bootstrap draws, and requires exact JSON equality. A full replay can take several minutes on CPU. It makes no model or API calls. Use an empty destination for a new extraction. The archived analysis dependencies and model/source provenance are included for reproducibility.
+To recompute the complete saved metrics, including the 5,000-draw paired family bootstrap:
 
-## Work with the complete pipeline
-
-The runtime is separate from the untouched upstream checkout. Clone the pinned dependency locally before the upstream-equivalence tests:
-
-```powershell
-python -m venv pilot/env
-.\pilot\env\Scripts\python.exe -m pip install -r pilot/requirements-verified.txt
-git clone https://github.com/Jerick-1380/LLM-Trust-Breaking pilot/repos/LLM-Trust-Breaking
-git -C pilot/repos/LLM-Trust-Breaking checkout fd11aca351e52c65c929e1a7d46d9f087f237adf
-.\pilot\env\Scripts\python.exe -m pilot.cli verify-freeze
-.\pilot\env\Scripts\python.exe -m unittest discover -s pilot/tests -v
+```text
+python scripts/replay_results.py
 ```
 
-The delivered checkout passed 23 tests. The [implementation guide](pilot/README.md) describes offline fixtures, private-channel isolation, caching, labels and monitor views. [The adapter notes](pilot/patches/README.md) explain upstream reuse and the decision to implement a separate controller. [The frozen run script](pilot/RUN_FULL_DESIGN.ps1) documents the paid execution entry point; running it is not necessary to inspect or replay the completed results. New cloud generation requires locally authenticated Modal credentials, GPU access and budget reservations. Preserve the spend ledger and held-out checkpoints.
+The replay requires exact JSON equality with the saved metrics. It can take several minutes and prints progress before starting the calculation. **No API keys, Modal login, local GPU, Docker or model downloads are needed for review.** Installation and cloning require a network connection; the replay itself runs offline. [Platform setup and the complete test suite](REPRODUCIBILITY.md).
 
-Report construction additionally uses [the report requirements](pilot/requirements-report.txt), a suitable math font and Poppler for rendering. Full report regeneration and presentation verification also use local run journals omitted from this repository; the included PDF and portable analysis replay are the delivered outputs.
+## Interpret the evidence
 
-## Repository and data boundaries
+- Outcomes use frozen event-based **automatic labels**. An assigned condition is not the ground-truth outcome; agreement, agreed-plan execution and harm are separate.
+- The 48 held-out cases contain **13 implementation positives and 35 negatives**. All eight overt cases and five of eight hidden cases pass the primary gate. The three remaining hidden cases stay in the analysis.
+- Hidden and independent-deception conditions use a deliberately controlled public communication module. This experiment does not establish natural concealment ability.
+- Public observations alone may not identify a private agreement. The action-gap baseline overlaps the outcome construction; scores are suspicion rankings, not calibrated probabilities.
+- There are eight held-out family clusters, prompted objectives and shared model lineage. The fixed-outsider welfare contrast is accounting within a round, not a repeated-game causal effect. No deployment-level FPR or multiplicity-adjusted superiority is claimed.
 
-This private repository preserves the project's source and Git history, development configurations, frozen configuration and development snapshot, own paper-audit reports/scripts, costs, aggregate results, figures and submission artifacts. The development snapshot includes private oracle material; it must never be supplied to a monitor as evidence. Treat a future public release as a separate data and licensing review.
+## Implementation and provenance
 
-Credentials, environments, model weights, caches, paid-run journals, human-review packets, third-party checkouts, original paper PDFs, extracted full paper text and downloaded tools are excluded. The audit's own reports and numeric checks are included; reproducing those checks requires the separately acquired inputs described in [audit/REPRODUCE.md](audit/REPRODUCE.md). Their original local-file links may require those inputs. Third-party code and model licenses remain with their authors; no project-wide release license has been selected.
+Agents use **Qwen2.5-3B-Instruct**, audited by **Qwen3-4B-Instruct-2507**. Exact revisions, prompts, decoding settings and development-only thresholds are in [the frozen configuration](pilot/frozen/config.json) and [calibration](pilot/frozen/calibration.json). Generation used one Modal L4, 2 CPU cores and 16 GiB through vLLM; there is no hosted service for judges to start.
 
-The latest saved Modal closed-interval usage report is **$5.41625951**. The runtime estimate overlaps that report; the **$7.60398478** billed/reserved envelope includes unsettled reservations and a setup/storage allowance and is not an additional charge. External API spend was $0. See [cost-summary.json](pilot/submission/cost-summary.json) for the billing interval and caveats. Repository packaging does not launch GPU jobs.
+The controller and monitor views are our implementation. [The adapter](pilot/patches/README.md) checks payoff equivalence against the pinned, untouched [LLM-Trust-Breaking](https://github.com/Jerick-1380/LLM-Trust-Breaking) checkout. Original paper code, model weights and the supplied report template are preexisting resources. [Source and asset notices](NOTICE.md), [citation](CITATION.cff), [iteration history](pilot/iterations.md) and [current status](pilot/STATUS.md) provide the provenance trail.
+
+The review ZIP excludes private plans/messages and raw generation journals. The repository separately retains the **development oracle snapshot** required to verify the original freeze; that labeled simulation record is evaluation evidence and must never be supplied as a monitor input. Historical reports, operational notes and the original local bundle remain in Git for provenance; use the final PDF and `review/` package linked above for judging.
+
+The saved Modal closed-interval usage report is **$5.41625951**; the overlapping billed/reserved envelope is **$7.60398478**, including unsettled reservations and a setup/storage allowance. These are not additive and are not a final invoice. [Cost details](pilot/submission/cost-summary.json). Review and replay launch no GPU jobs.

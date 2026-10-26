@@ -116,7 +116,7 @@ def build(template):
     heading('6. Conclusion')
     add('Combining words and actions did not consistently improve detection over actions alone in this controlled setting. The project provides an inspectable separation of agreement, execution and harm, with hard negatives, uncertainty and retained failed controls. The numerical findings are reproducible; their interpretation remains conditional on the operational automatic labels and the limitations above.')
     heading('Code and Data')
-    add('Code repository: https://github.com/spacenets7/words-vs-actions-collusion (private; access requires authorization). The included reproducibility ZIP provides sanitized public trajectories, separate automatic labels, monitor evidence/outputs, frozen analysis sources, figures and exact offline metrics replay. Private plans/messages, raw generation journals, credentials, downloaded papers and third-party checkouts are excluded from that release candidate. No public dataset release is provided.')
+    add('Code and data: https://github.com/spacenets7/words-vs-actions-collusion. The public review/reproducibility.zip archive provides sanitized public trajectories, separate automatic labels, monitor evidence/outputs, frozen analysis sources, figures and exact offline metrics replay. Private plans/messages, raw generation journals, credentials, downloaded papers and third-party checkouts are excluded from this review archive. The repository guide describes data boundaries, source provenance and CPU-only reproduction.')
     heading('References',page=True)
     source=(P/'report.md').read_text(encoding='utf-8')
     refs=source.split('## References\n',1)[1].split('\n## Appendix',1)[0].strip()

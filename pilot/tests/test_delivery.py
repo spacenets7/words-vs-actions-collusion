@@ -11,8 +11,10 @@ from pilot.deliver import audit, export_data, ROOT
 class Delivery(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.data = load(ROOT / 'pilot/runs/readiness-check/all.json')
-        cls.metrics = load(ROOT / 'pilot/runs/readiness-check/analysis/metrics.json')
+        # Identical development records are tracked in the frozen snapshot.
+        # A fresh clone must not depend on the author's ignored local run folder.
+        cls.data = load(ROOT / 'pilot/frozen/development.json')
+        cls.metrics = load(ROOT / 'pilot/tests/fixtures/development-metrics.json')
         cls.config = load(ROOT / 'pilot/frozen/config.json')
 
     def test_development_rehearsal_cannot_pass_as_complete_design(self):

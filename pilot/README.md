@@ -1,3 +1,5 @@
+For the completed experiment, start with the [judge guide](../JUDGES.md) and [reproduction guide](../REPRODUCIBILITY.md). This page retains the detailed operator workflow; paid generation commands are not needed for judging.
+
 # Track 2.2 implementation
 
 Run commands from the workspace root in PowerShell. The upstream checkout is

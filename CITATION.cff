@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "Please cite the report when using this evaluation, its data or implementation."
+title: "Words Actions and Evidence in Collusion Detection"
+type: software
+authors:
+  - family-names: "U S"
+    given-names: "Siddeshwar"
+    affiliation: "MIT, Manipal"
+date-released: 2026-10-26
+repository-code: "https://github.com/spacenets7/words-vs-actions-collusion"
+url: "https://github.com/spacenets7/words-vs-actions-collusion"
+keywords:
+  - AI safety
+  - collusion detection
+  - multi-agent systems
+  - reproducibility

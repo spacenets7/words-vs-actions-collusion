@@ -1,0 +1,9 @@
+{
+  "written": 400,
+  "skipped": [
+    "src/cot_red_handed/completed_ids/llama-3.3-70b-instruct:free_varname_implementation_template_completed_ids.txt",
+    "src/cot_red_handed/completed_ids/llama-3.3-70b-instruct:free_varname_monitor_notice_completed_ids.txt",
+    "src/cot_red_handed/completed_ids/llama-3.3-70b-instruct:free_varname_must_use_completed_ids.txt",
+    "src/cot_red_handed/completed_ids/llama-3.3-70b-instruct:free_varname_stealth_completed_ids.txt"
+  ]
+}

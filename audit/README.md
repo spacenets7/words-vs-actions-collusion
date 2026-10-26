@@ -1,0 +1,5 @@
+# Audit materials included with the Track 2.2 project
+
+These are this project's own audit reports, extraction/checking scripts, source-PDF hash manifest and numeric verification records. The [22 confirmed findings](FINDINGS.md) distinguish released-code defects from claims about the papers' historical experiments, and retain unresolved questions separately. The [implementation map](../pilot/AUDIT_IMPLEMENTATION_MAP.md) explains how each finding was addressed, avoided or qualified in the pilot.
+
+Original paper PDFs, full extracted paper text, page images, cloned third-party repositories, downloaded wheels/source archives and Poppler binaries remain local and are not redistributed in this repository. Some historical report links therefore refer to omitted local evidence. The reports record the inspected source revisions and paper versions; [REPRODUCE.md](REPRODUCE.md) documents the original workflow and its dependencies. Reacquire those inputs and choose your own Python/Poppler paths before rerunning it. The saved numeric records are evidence from component checks, not full reproductions of the papers' paid model experiments.

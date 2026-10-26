@@ -1,0 +1,37 @@
+[
+  {
+    "file": "papers\\2601.21112v2.pdf",
+    "sha256": "18b152577287bfcb451e47f39595a5cc38f7f44c42ceee7f998a980ef05efdbf",
+    "pages": 54,
+    "pdftotext": true,
+    "layout_sha256": "23c0b5d68d09bb2f8f710d2e944b8f4aa46121a8f68410b2cdab669e3ebdd649"
+  },
+  {
+    "file": "papers\\2602.15198v2.pdf",
+    "sha256": "d990ebbb7aa1ad1be94b5364c86a7ab25441810c262f8085ef3b48e44f8c4369",
+    "pages": 27,
+    "pdftotext": true,
+    "layout_sha256": "a6cd3a7c1d365f3ae56a4328ef9a9882a9d923d5784b0a9b31890ebb57ccb1cb"
+  },
+  {
+    "file": "papers\\2604.03968v1.pdf",
+    "sha256": "eb49aa426debb55164675881d6af91c26e438e408d460f2d28428c022e9c1c27",
+    "pages": 19,
+    "pdftotext": true,
+    "layout_sha256": "340aa325e78b613e0cc88713586baddf0a63f61b4fd088d3435c875fc1a7bd11"
+  },
+  {
+    "file": "papers\\2605.29178v1.pdf",
+    "sha256": "85f27b4c7aa7d606e0c12cd2094b0c3b45378a75f4750a99e947707082dfe477",
+    "pages": 33,
+    "pdftotext": true,
+    "layout_sha256": "2c48d26198d2eecebafdbcec69a9933863e0866b34b2095fd2017baf0b603644"
+  },
+  {
+    "file": "papers\\2607.05132v2.pdf",
+    "sha256": "4fbf9b1ed28f442bbf42780238a07e9805daaed9bc2f33724e9ba427e908c219",
+    "pages": 28,
+    "pdftotext": true,
+    "layout_sha256": "6256c96cf6d40ba8eda6c76b170c3c5f01f8d2c2c65f251f6271b386e78d32ea"
+  }
+]

@@ -18,3 +18,26 @@ pilot/submission/*.zip
 pilot/submission/official-template.*
 tmp/pdfs/
 pilot/submission/replayed-metrics.*
+
+# Local environments, credentials and downloaded dependencies.
+.venv/
+.env.*
+!.env.example
+.modal.toml
+.modal/
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+papers/
+repos/
+tmp/
+
+# Publish our audit reports/scripts and numeric evidence, not source papers/tools.
+audit/tools/
+audit/poppler.zip
+audit/text/*
+!audit/text/manifest.json
+audit/evidence/*
+!audit/evidence/*.json
+!audit/evidence/verification.log

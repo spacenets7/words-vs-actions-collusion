@@ -3,3 +3,6 @@ pilot/**/*.pdf binary
 pilot/**/*.zip binary
 pilot/**/*.png binary
 pilot/**/*.jpg binary
+/*.md text eol=lf
+/.gitignore text eol=lf
+/audit/** text eol=lf

@@ -1,6 +1,6 @@
 # Local submission draft
 
-The frozen experiment and automated checks/analysis are complete. report.pdf and report.md are provisional drafts using automatic labels. No project has been submitted, no email sent and no repository pushed. Author: Siddeshwar U S, MIT, Manipal; team spacenets.
+The frozen experiment and automated checks/analysis are complete. report.pdf and report.md are provisional drafts using automatic labels. No Apart project has been submitted and no email sent. The project now has a private GitHub backup at https://github.com/spacenets7/words-vs-actions-collusion; see the root README for its contents and data boundaries. Author: Siddeshwar U S, MIT, Manipal; team spacenets.
 
 ## Prepared automatically
 
@@ -17,7 +17,7 @@ The frozen experiment and automated checks/analysis are complete. report.pdf and
 3. Supply contact email, location and publication preference; review prize terms and data/source release licensing.
 4. Submit the approved PDF through the official form and retain confirmation. Deadline: 26 October 2026, 17:29 IST (25 October 23:59 AoE). Report cap: eight main-text pages excluding references/appendices and 25 MB upload.
 
-The automation never fills human review templates or invents consent. Optional repository/video links remain absent. report.pdf is not represented as a human-approved final submission.
+The automation never fills human review templates or invents consent. The private backup does not grant reviewers public access; optional public repository/video links for a submission remain undecided. report.pdf is not represented as a human-approved final submission.
 
 Official event: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25
 Official template: https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing

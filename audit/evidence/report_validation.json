@@ -1,0 +1,13 @@
+{
+  "records": 22,
+  "severities": {
+    "major": 10,
+    "minor": 12
+  },
+  "required_reports": 6,
+  "local_links_exist": true,
+  "all_required_sections": true,
+  "ranked_items": 10,
+  "sprint_claims": 5,
+  "layout_pdf_pages": 161
+}

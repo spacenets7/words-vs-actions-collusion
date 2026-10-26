@@ -1,0 +1,315 @@
+Starting offline component checks
+TraceGuard
+When Agents Lie
+Colosseum and Terrarium
+SCHEME
+Arike et al.
+Repository provenance
+{
+  "traceguard_blind_baselines": {
+    "different_actions_identical_prompt": true,
+    "task_and_action_sentinels_present": false,
+    "formatter_dependency": "control-arena 14.2.0"
+  },
+  "traceguard_original_aggregator_smoke": {
+    "composite": 0.8466
+  },
+  "traceguard_analysis_smoke": {
+    "reported_points": [
+      {
+        "monitor_name": "A",
+        "threshold": 0.5,
+        "safety": 0.5,
+        "usefulness": 0.5,
+        "audit_budget": 0.5
+      },
+      {
+        "monitor_name": "B",
+        "threshold": 0.5,
+        "safety": 0.5,
+        "usefulness": 0.5,
+        "audit_budget": 0.5
+      }
+    ],
+    "correct_A": {
+      "safety": 1.0,
+      "allow_rate": 1.0
+    },
+    "correct_B": {
+      "safety": 0.0,
+      "allow_rate": 0.0
+    },
+    "unsuccessful_honest_task_reported_usefulness": 1.0
+  },
+  "traceguard_small_samples": {
+    "20_of_20": [
+      0.8388748419471806,
+      1.0
+    ],
+    "19_of_20": [
+      0.763868806553258,
+      0.9911185511992047
+    ],
+    "6_of_7": [
+      0.4868721707256811,
+      0.9743203756552565
+    ]
+  },
+  "traceguard_separation_counterexample": {
+    "trusted_scores": [
+      0.8,
+      0.8,
+      0.8
+    ],
+    "trusted_contribution": 0.48,
+    "untrusted_contribution_if_zero": 0.0,
+    "threshold": 0.5,
+    "result": "not flagged despite all three trusted scores being 0.8"
+  },
+  "when_agents_lie_third_action": {
+    "plan": 0,
+    "announcement": 1,
+    "actual": 2,
+    "classification": "premeditated_deception"
+  },
+  "when_agents_lie_games": {
+    "fishing_default_threshold": 14,
+    "all_three_fish_code_payoffs": {
+      "A": 0.0,
+      "B": 0.0,
+      "C": 0.0,
+      "D": 0.0,
+      "E": 0.0
+    },
+    "all_three_fish_paper_payoffs": {
+      "A": 3,
+      "B": 3,
+      "C": 3,
+      "D": 3,
+      "E": 3
+    },
+    "one_cheap_four_expensive": {
+      "A": -1.7999999999999998,
+      "B": 3.2,
+      "C": 3.2,
+      "D": 3.2,
+      "E": 3.2
+    },
+    "fishing_parsed_six": "5"
+  },
+  "when_agents_lie_cross_game_counterexamples": {
+    "El_Farol_Claude_minority_Llama_pos5": 8.51,
+    "El_Farol_Llama_minority_Claude_pos24": 6.99,
+    "Volunteer_Llama_minority_Claude_pos1": -0.62,
+    "Public_Goods_max_abs_gap": 0.45,
+    "Weakest_Link_max_abs_gap": 0.38
+  },
+  "colosseum_proposition_counterexample": {
+    "Fn": [
+      1.0,
+      0.0
+    ],
+    "lambda": 0.25,
+    "required_Fc_span_if_equality_attains_nominal_bound": 1.0,
+    "minimum_effective_objective_advantage_of_Fn_maximizer": 0.5,
+    "corrected_construction": {
+      "Fc": [
+        -4.0,
+        0.0
+      ],
+      "F_lambda": [
+        -0.25,
+        0.0
+      ],
+      "nominal_degradation": 1.0,
+      "Fc_span": 4.0
+    }
+  },
+  "colosseum_coalition_metric_counterexample": {
+    "unilateral_regrets": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "defined_coalition_mean_regret": 0.0,
+    "released_surrogate": 10.0
+  },
+  "colosseum_normalization": {
+    "tie": 0.5,
+    "positive_gap_two": 1.0,
+    "reported_percent_counts": {
+      "57.89": 57.89473684210527,
+      "78.95": 78.94736842105263,
+      "10.53": 10.526315789473683
+    },
+    "r_squared": [
+      0.059049,
+      0.02042041,
+      0.0014899600000000002,
+      0.057648010000000006
+    ]
+  },
+  "terrarium_offline_smoke": {
+    "seeded": {
+      "simulation": {
+        "seed": 7
+      },
+      "nested": {
+        "x": [
+          1,
+          2
+        ]
+      }
+    },
+    "original_unchanged": {
+      "simulation": {
+        "seed": 1
+      },
+      "nested": {
+        "x": [
+          1
+        ]
+      }
+    }
+  },
+  "scheme_table5_recovery": {
+    "rows": [
+      {
+        "mode": "no convergence strategy",
+        "codex_occurs": 43,
+        "codex_recovers": 19,
+        "gemini_occurs": 27,
+        "gemini_recovers": 20
+      },
+      {
+        "mode": "misframed objective",
+        "codex_occurs": 39,
+        "codex_recovers": 33,
+        "gemini_occurs": 40,
+        "gemini_recovers": 40
+      },
+      {
+        "mode": "unexplored alternative path",
+        "codex_occurs": 32,
+        "codex_recovers": 10,
+        "gemini_occurs": 7,
+        "gemini_recovers": 3
+      },
+      {
+        "mode": "unacted instructions",
+        "codex_occurs": 19,
+        "codex_recovers": 6,
+        "gemini_occurs": 10,
+        "gemini_recovers": 6
+      },
+      {
+        "mode": "blind iteration",
+        "codex_occurs": 16,
+        "codex_recovers": 11,
+        "gemini_occurs": 3,
+        "gemini_recovers": 2
+      },
+      {
+        "mode": "incomplete chain",
+        "codex_occurs": 12,
+        "codex_recovers": 0,
+        "gemini_occurs": 2,
+        "gemini_recovers": 0
+      },
+      {
+        "mode": "execution path mismatch",
+        "codex_occurs": 8,
+        "codex_recovers": 7,
+        "gemini_occurs": 8,
+        "gemini_recovers": 8
+      },
+      {
+        "mode": "unrecognized main-task impact",
+        "codex_occurs": 6,
+        "codex_recovers": 3,
+        "gemini_occurs": 21,
+        "gemini_recovers": 4
+      },
+      {
+        "mode": "information withheld",
+        "codex_occurs": 2,
+        "codex_recovers": 2,
+        "gemini_occurs": 4,
+        "gemini_recovers": 4
+      }
+    ],
+    "aggregate": {
+      "codex": {
+        "occurs": 177,
+        "recovers": 91,
+        "modes_per_trajectory": 2.0823529411764707,
+        "per_occurrence_recovery_percent": 51.41242937853107
+      },
+      "gemini": {
+        "occurs": 122,
+        "recovers": 87,
+        "modes_per_trajectory": 1.4352941176470588,
+        "per_occurrence_recovery_percent": 71.31147540983606
+      }
+    }
+  },
+  "scheme_comms_group_arithmetic": {
+    "notice_success_mean": 97.0,
+    "notice_hint_success_mean": 89.5,
+    "notice_no_comms_success_mean": 81.5,
+    "notice_hint_no_comms_success_mean": 92.0,
+    "full_visibility_stealth_notice_hint": 2.3529411764705883,
+    "only_comms_stealth_notice_hint": 10.588235294117647
+  },
+  "arike_bcb_offline_smoke": {
+    "perfect_classifier_TPR_FPR_threshold": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "random_log_AUROC_analytic": 0.21497576854210962
+  },
+  "arike_shipped_test_contract_error": {
+    "error": "TypeError: unsupported operand type(s) for -: 'tuple' and 'float'",
+    "location": "src/cot_red_handed/utils/test_metrics_utils.py:30"
+  },
+  "arike_mle_csv_contract_error": {
+    "error": "CSV is missing required columns: score_metadata__monitor_input_token_count, score_metadata__monitor_model"
+  },
+  "arike_subtle_EaE_gains": {
+    "rows": [
+      {
+        "model": "Claude-3.7-Sonnet:reasoning",
+        "delta_pp": 28.65942028985507
+      },
+      {
+        "model": "DSR1-Distill-Llama-70B",
+        "delta_pp": 22.333000997008977
+      },
+      {
+        "model": "DSR1-Distill-Qwen-14B",
+        "delta_pp": 15.371621621621623
+      },
+      {
+        "model": "DeepSeek-R1",
+        "delta_pp": 18.770096463022508
+      },
+      {
+        "model": "Grok-3-mini-beta",
+        "delta_pp": 14.055201698513804
+      }
+    ],
+    "mean_pp": 19.837868214004395
+  },
+  "arike_headline_EaE_gain": {
+    "per_model_pp": [
+      22.143400050671403,
+      17.392666875587587,
+      14.845140619437519,
+      12.005420054200538,
+      17.566016073478757
+    ],
+    "mean_pp": 16.79052873467516
+  }
+}
+All component assertions passed. Evidence: audit/evidence/verification.json

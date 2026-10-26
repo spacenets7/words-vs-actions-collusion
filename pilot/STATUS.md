@@ -8,6 +8,12 @@ The manuscript was revised on26October2026 using the prior PrefKit report as a p
 Updated 2026-10-26T05:57:36.194058+00:00. Earlier readiness statements below describe the pre-execution freeze.
 <!-- automation:end -->
 
+## GitHub backup — 26 October 2026
+
+Private repository: https://github.com/spacenets7/words-vs-actions-collusion. The backup includes the project's committed history, implementation, development configurations, frozen snapshot, report, results, PNG graphs, reproducibility ZIP and own paper-audit reports/scripts/numeric evidence. The root README documents setup, exact offline analysis replay and data boundaries. A scan of all 46 pre-backup reachable commits (292 blobs), current archive contents and newly included audit files found no credential-pattern matches. The verified current PDF and both ZIPs match their committed binary contents; current ZIP CRC checks and frozen-hash verification pass. An old malformed ZIP remains in historical commits; the delivered current archive is valid.
+
+Credentials, environments, downloaded papers/full extracted text, third-party checkouts, model weights, caches, raw paid-run journals and human-review packets remain excluded. The private development snapshot contains oracle material and needs review before any future public release. This backup does not submit the research to Apart or provide human label/author approval. No new model/API calls or Modal charges were incurred.
+
 The sections below preserve the **pre-execution readiness snapshot** from 25 October 2026. At freeze, held-out trajectories were untouched. The user subsequently authorized automated held-out execution; consult the live banner above and pilot/automation-state.json for the current stage. The experimental configuration and calibration remain frozen.
 
 ## Frozen configuration

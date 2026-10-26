@@ -81,24 +81,54 @@
   "design_changed_after_test": false,
   "note": "Control failures are retained. These checks are not independent human annotation.",
   "pdf": {
-    "pages": 5,
-    "main_text_pages": 4,
+    "pages": 9,
+    "main_text_pages": 7,
     "abstract_words": 193,
-    "bytes": 22087
+    "bytes": 68056,
+    "numbered_equations": 10,
+    "requirements": 5,
+    "presentation": "formal_requirement_led_methods"
   },
   "rendering": {
-    "rendered_pages": 5,
+    "rendered_pages": 9,
     "montage": "pilot\\submission\\rendered\\montage.png",
-    "visual_inspection": "agent_viewed_all_five_rendered_pages_no_layout_defects",
-    "inspected_utc": "2026-10-25T12:16:22.105119+00:00",
-    "inspected_pdf_sha256": "d65ff6637d90e8b7f447991c85df5e9719b15e8d9d60acc0567e8a0e36bc498b"
+    "visual_inspection": "agent_viewed_all_nine_latest_pages_no_layout_defects",
+    "inspected_utc": "2026-10-26T05:57:34.771195+00:00",
+    "inspected_pdf_sha256": "a4c40994b6d7a0f735cd0251a469ca906869b0e71f52e52dd801000583981651"
+  },
+  "held_out_monitor_outputs_valid": 192,
+  "development_monitor_outputs_valid": 48,
+  "presentation_verification": {
+    "original_metrics_and_replay_equal": true,
+    "frozen_hashes_unchanged": true,
+    "payoff_harm_and_gate_equations_checked_on_episodes": 60,
+    "auroc_tie_and_threshold_formulas_checked": [
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ],
+    "numbered_equations": 10,
+    "numbered_tables": 7,
+    "numbered_figures": 4,
+    "requirements": 5,
+    "pages": 9,
+    "main_text_pages": 7,
+    "math_glyphs_present": true,
+    "appendix_headings_ordered": true,
+    "model_api_calls": 0,
+    "human_review": "pending_not_impersonated",
+    "original_data_exports_unchanged": true,
+    "visual_inspection": "All nine latest pages inspected by agent; unchanged page images verified against prior inspection after localized edits.",
+    "pdf_sha256": "a4c40994b6d7a0f735cd0251a469ca906869b0e71f52e52dd801000583981651",
+    "verified_utc": "2026-10-26T05:57:34.771195+00:00",
+    "client_date": "2026-10-26",
+    "tests_passed": 23
   },
   "offline_replay": {
     "exact_json_equality": true,
-    "model_api_calls": 0,
     "canonical_metrics_sha256": "febe5510ae21078fd4394835073dd85da86fdd28d5a6cb235a015f2d104db0e8",
-    "completed_utc": "2026-10-25T12:21:34.452268+00:00"
-  },
-  "held_out_monitor_outputs_valid": 192,
-  "development_monitor_outputs_valid": 48
+    "note": "Previously recomputed bootstrap replay retained; saved data, original metrics and frozen experiment hashes remain unchanged in this presentation-only revision.",
+    "model_api_calls_for_revision": 0
+  }
 }

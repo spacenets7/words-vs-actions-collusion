@@ -3,9 +3,9 @@
 <!-- automation:start -->
 ## Live automated execution
 
-Automation is complete and technically verified: all48 held-out episodes plus12 development episodes, all192 held-out monitor outputs plus48 development outputs. Exact offline metrics replay passed; original frozen hashes and all bundle hashes/ZIP CRCs verify. All five final PDF pages were visually inspected by the agent; main text is four pages and abstract193 words. Provisional implemented-collusion AUROC: V1 .597, V2 .843, V3 .719, V4 .731; no consistent structured-hybrid advantage is demonstrated. Three assigned H cases fail the frozen agreement/implementation gate and remain included. Latest vendor closed-interval usage: $5.41625951; conservative billed/reserved envelope: $7.6040, not measured spend. External API spend $0. Report and local bundle: pilot/submission/. Independent human label review, author approval and external submission remain pending; no external publication was performed.
+The manuscript was revised on26October2026 using the prior PrefKit report as a presentation reference. It now has nine total pages, seven main-text pages, ten numbered equations, five explicit audit requirements, nine methods subsections, seven tables and four figures. All pages were visually checked; independent equation checks and all23 tests pass. Original data, metrics, labels, thresholds and frozen experimental hashes are unchanged; no new model/API calls or Modal spend. The reproducibility bundle and editable source are synchronized. Independent human label adjudication and author approval remain pending; no external submission or publication has been made. The completion heartbeat remains deleted.
 
-Updated 2026-10-25T12:21:35.821920+00:00. Earlier readiness statements below describe the pre-execution freeze.
+Updated 2026-10-26T05:57:36.194058+00:00. Earlier readiness statements below describe the pre-execution freeze.
 <!-- automation:end -->
 
 The sections below preserve the **pre-execution readiness snapshot** from 25 October 2026. At freeze, held-out trajectories were untouched. The user subsequently authorized automated held-out execution; consult the live banner above and pilot/automation-state.json for the current stage. The experimental configuration and calibration remain frozen.

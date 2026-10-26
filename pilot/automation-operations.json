@@ -36,5 +36,10 @@
   "heartbeat_active": false,
   "heartbeat_deleted_utc": "2026-10-25T12:25:01.884096+00:00",
   "automatic_model_jobs_remaining": 0,
-  "final_binary_commit_integrity": "PDF, ZIP and SVG Git blobs verified byte-for-byte against local artifacts"
+  "final_binary_commit_integrity": "PDF, ZIP and SVG Git blobs verified byte-for-byte against local artifacts",
+  "report_revision_client_date": "2026-10-26",
+  "current_report_pages": 9,
+  "current_main_pages": 7,
+  "current_numbered_equations": 10,
+  "report_revision_model_calls": 0
 }

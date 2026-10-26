@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="505" height="150" preserveAspectRatio="xMinYMin meet" viewBox="0 0 505 150" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="505" height="150"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-150)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="96" width="128" height="48" rx="4" ry="4" style="stroke: rgb(60%,67%,72%); stroke-linecap: butt; stroke-width: 0.6; fill: rgb(91%,94%,95%); fill-rule: evenodd;"/>
+			<text x="23.239000000000004" y="129" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,258) scale(1,-1)">Five-agent episode</text>
+			<text x="15.756" y="116" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,232) scale(1,-1)">Private plans / pair channel</text>
+			<text x="25.32" y="105" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,210) scale(1,-1)">Public words / actions</text>
+			<rect x="171" y="96" width="154" height="48" rx="4" ry="4" style="stroke: rgb(60%,67%,72%); stroke-linecap: butt; stroke-width: 0.6; fill: rgb(91%,94%,95%); fill-rule: evenodd;"/>
+			<text x="189.23" y="129" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,258) scale(1,-1)">Allowlisted public evidence</text>
+			<text x="210.428" y="116" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,232) scale(1,-1)">V1 words; V2 actions</text>
+			<text x="199.088" y="105" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,210) scale(1,-1)">V3 raw union; V4 alignment</text>
+			<rect x="363" y="96" width="142" height="48" rx="4" ry="4" style="stroke: rgb(60%,67%,72%); stroke-linecap: butt; stroke-width: 0.6; fill: rgb(89%,94%,94%); fill-rule: evenodd;"/>
+			<text x="402.4955" y="129" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,258) scale(1,-1)">Pinned auditor</text>
+			<text x="388.536" y="116" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,232) scale(1,-1)">Attempt + implementation</text>
+			<text x="392.648" y="105" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,210) scale(1,-1)">Scores / cited evidence</text>
+			<rect x="0" y="3" width="163" height="48" rx="4" ry="4" style="stroke: rgb(60%,67%,72%); stroke-linecap: butt; stroke-width: 0.6; fill: rgb(91%,94%,95%); fill-rule: evenodd;"/>
+			<text x="13.725499999999997" y="36" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,72) scale(1,-1)">Oracle commitments and labels</text>
+			<text x="28.144" y="23" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,46) scale(1,-1)">Explicit agreement / execution</text>
+			<text x="30.595999999999997" y="12" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,24) scale(1,-1)">Fixed-outsider harm contrast</text>
+			<rect x="237" y="3" width="268" height="48" rx="4" ry="4" style="stroke: rgb(60%,67%,72%); stroke-linecap: butt; stroke-width: 0.6; fill: rgb(89%,94%,94%); fill-rule: evenodd;"/>
+			<text x="319.736" y="36" style="font-family: Helvetica-Bold; font-size: 9px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,72) scale(1,-1)">Evaluation after scoring</text>
+			<text x="281.18" y="23" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,46) scale(1,-1)">Frozen development thresholds; held-out episodes</text>
+			<text x="295.192" y="12" style="font-family: Helvetica; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,24) scale(1,-1)">Paired family bootstrap; ambiguity retained</text>
+			<path d="M 128,120 L 171,120 Z" style="stroke: rgb(9%,21%,29%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="171 120, 166 117, 166 123" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,21%,29%); fill-rule: evenodd;"/>
+			<path d="M 325,120 L 363,120 Z" style="stroke: rgb(9%,21%,29%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="363 120, 358 117, 358 123" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,21%,29%); fill-rule: evenodd;"/>
+			<path d="M 64,96 L 64,51 Z" style="stroke: rgb(9%,21%,29%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="64 51, 61 56, 67 56" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,21%,29%); fill-rule: evenodd;"/>
+			<path d="M 163,27 L 237,27 Z" style="stroke: rgb(9%,21%,29%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="237 27, 232 24, 232 30" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,21%,29%); fill-rule: evenodd;"/>
+			<path d="M 434,96 L 434,51 Z" style="stroke: rgb(9%,21%,29%); stroke-linecap: butt; stroke-width: 0.8;"/>
+			<polygon points="434 51, 431 56, 437 56" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(9%,21%,29%); fill-rule: evenodd;"/>
+			<text x="89" y="71" style="font-family: Helvetica-Oblique; font-size: 8px;fill: rgb(9%,21%,29%); stroke:none;" transform="translate(0,142) scale(1,-1)">Oracle fields never enter the auditor input</text>
+		</g>
+	</g>
+</svg>

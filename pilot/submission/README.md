@@ -8,7 +8,7 @@ The frozen experiment and automated checks/analysis are complete. report.pdf and
 - Report: official template structure, 150-250 word abstract, author block, numbered sections, references and required limitations/dual-use appendix.
 - Data: public trajectories, separate oracle labels, monitor evidence/outputs and data card. This is a local candidate release, not a publication approval.
 - Reproducibility sources, offline replay.py, source/data hashes, cost accounting, technical checks and deterministic trace examples.
-- All five rendered report pages were visually inspected by the agent with no layout defects. quality-checks.json records the exact PDF hash. This is not human author approval.
+- All nine rendered report pages were visually checked by the agent. quality-checks.json records the exact inspected PDF hash; author approval remains pending.
 
 ## Human tasks that cannot be impersonated
 
@@ -22,6 +22,6 @@ The automation never fills human review templates or invents consent. Optional r
 Official event: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25
 Official template: https://docs.google.com/document/d/1Y5wd3VRbXU5N08BvAGiJUQTaWbMCSPjhzXsR-ozuehg/copy?usp=sharing
 
-## Final automated verification
+## PrefKit inspired presentation revision
 
-All 60 episodes (12 development, 48 held-out) and 240 monitor outputs are technically valid. All 48 held-out episodes have all four monitor outputs. Exact offline JSON metrics replay, original frozen hashes, source/data/ZIP integrity and all five final PDF page images were checked. Main text: four pages; abstract:193 words. Three assigned H episodes fail the automatic agreement/implementation gate and remain in the analysis. See final-verification.json and HANDOFF.md. These checks do not replace independent human labels.
+The updated manuscript has nine total pages and seven main-text pages, with ten numbered equations, five verification requirements, seven tables, four figures and a193-word abstract. Sections3.1-3.9 formalize the audit method; AppendixE documents its operational checks. Original data, metrics and thresholds are unchanged, with23 passing tests and independent equation checks. See PRESENTATION_REVISION.md and presentation-verification.json. Report rebuilding needs Cambria Math on Windows or a mathematical-glyph-capable DejaVu Serif on Linux; the delivered PDF embeds its math font. Human labels and author approval remain pending.

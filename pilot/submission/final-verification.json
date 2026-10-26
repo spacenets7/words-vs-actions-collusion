@@ -1,5 +1,5 @@
 {
-  "verified_utc": "2026-10-25T12:21:34.454936+00:00",
+  "verified_utc": "2026-10-26T05:57:34.771195+00:00",
   "frozen_hashes": "verified_unchanged",
   "frozen_config_hash": "10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414",
   "frozen_manifest_file_sha256": "3c3ccbfe95b31e3c96808a4b904c8e8089483a542d070563dfeffac9fcf662cc",
@@ -13,11 +13,11 @@
   "exact_offline_metrics_json_replay": true,
   "canonical_metrics_sha256": "febe5510ae21078fd4394835073dd85da86fdd28d5a6cb235a015f2d104db0e8",
   "saved_metrics_file_sha256": "a05277e28f22e85b92dee50869707d3bd75a739ac5bb96f78b9a9098db0f6850",
-  "pdf_sha256": "d65ff6637d90e8b7f447991c85df5e9719b15e8d9d60acc0567e8a0e36bc498b",
-  "pdf_pages": 5,
-  "main_pages": 4,
+  "pdf_sha256": "a4c40994b6d7a0f735cd0251a469ca906869b0e71f52e52dd801000583981651",
+  "pdf_pages": 9,
+  "main_pages": 7,
   "abstract_words": 193,
-  "visual_inspection": "All five latest rendered pages viewed by the agent; no clipping, overlaps, missing glyphs or table breaks observed.",
+  "visual_inspection": "All nine final rendered pages were viewed; no clipping, overlaps, broken tables or missing mathematical glyphs were observed.",
   "human_independent_annotation": "pending_not_impersonated",
   "external_submission": "not_performed",
   "scientific_control_flags": [
@@ -35,5 +35,37 @@
     }
   ],
   "archive_verification": "Final included-file hashes and ZIP CRCs are verified during sealing; archive hash recorded in automation-state.json outside the archive.",
-  "portable_artifacts": "PDF/ZIP/PNG/JPG marked binary in Git; generated SVG text normalized to LF."
+  "portable_artifacts": "PDF/ZIP/PNG/JPG marked binary in Git; generated SVG text normalized to LF.",
+  "numbered_equations": 10,
+  "requirements": 5,
+  "numbered_tables": 7,
+  "numbered_figures": 4,
+  "presentation_revision": {
+    "original_metrics_and_replay_equal": true,
+    "frozen_hashes_unchanged": true,
+    "payoff_harm_and_gate_equations_checked_on_episodes": 60,
+    "auroc_tie_and_threshold_formulas_checked": [
+      "V1",
+      "V2",
+      "V3",
+      "V4"
+    ],
+    "numbered_equations": 10,
+    "numbered_tables": 7,
+    "numbered_figures": 4,
+    "requirements": 5,
+    "pages": 9,
+    "main_text_pages": 7,
+    "math_glyphs_present": true,
+    "appendix_headings_ordered": true,
+    "model_api_calls": 0,
+    "human_review": "pending_not_impersonated",
+    "original_data_exports_unchanged": true,
+    "visual_inspection": "All nine latest pages inspected by agent; unchanged page images verified against prior inspection after localized edits.",
+    "pdf_sha256": "a4c40994b6d7a0f735cd0251a469ca906869b0e71f52e52dd801000583981651",
+    "verified_utc": "2026-10-26T05:57:34.771195+00:00",
+    "client_date": "2026-10-26",
+    "tests_passed": 23
+  },
+  "original_experiment_verification_utc": "2026-10-25T12:21:34.454936+00:00"
 }

@@ -23,12 +23,15 @@
   "automated_integrity": "passed",
   "human_label_reviews": "pending",
   "author_approval": "pending",
-  "visual_report_inspection": "agent_viewed_all_five_rendered_pages_no_layout_defects; human author approval remains pending",
+  "visual_report_inspection": "agent_viewed_all_nine_latest_pages_no_layout_defects; author approval remains pending",
   "external_submission": "not_performed",
   "remaining_form_fields": [
     "contact email",
     "location",
     "publication preference"
   ],
-  "template_status": "Official structure adapted; final human formatting check required."
+  "template_status": "Official structure adapted; final human formatting check required.",
+  "report_pages": 9,
+  "main_text_pages": 7,
+  "numbered_equations": 10
 }

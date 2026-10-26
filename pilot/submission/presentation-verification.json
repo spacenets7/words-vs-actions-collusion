@@ -1,0 +1,27 @@
+{
+  "original_metrics_and_replay_equal": true,
+  "frozen_hashes_unchanged": true,
+  "payoff_harm_and_gate_equations_checked_on_episodes": 60,
+  "auroc_tie_and_threshold_formulas_checked": [
+    "V1",
+    "V2",
+    "V3",
+    "V4"
+  ],
+  "numbered_equations": 10,
+  "numbered_tables": 7,
+  "numbered_figures": 4,
+  "requirements": 5,
+  "pages": 9,
+  "main_text_pages": 7,
+  "math_glyphs_present": true,
+  "appendix_headings_ordered": true,
+  "model_api_calls": 0,
+  "human_review": "pending_not_impersonated",
+  "original_data_exports_unchanged": true,
+  "visual_inspection": "All nine latest pages inspected by agent; unchanged page images verified against prior inspection after localized edits.",
+  "pdf_sha256": "a4c40994b6d7a0f735cd0251a469ca906869b0e71f52e52dd801000583981651",
+  "verified_utc": "2026-10-26T05:57:34.771195+00:00",
+  "client_date": "2026-10-26",
+  "tests_passed": 23
+}

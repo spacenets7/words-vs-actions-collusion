@@ -14,7 +14,7 @@ Read the actual report, approve the interpretation, confirm exact affiliation, a
 
 The remaining form details are contact email, location, and publication preference. Review the event/prize terms and approve any source/data release before external submission. No optional repository/video link has been invented or published.
 
-Submit the approved PDF through the official sprint form and retain confirmation. Published cutoff: 25 October 2026 at 23:59 AoE, equivalent to 26 October 2026 at 17:29 IST. Current form limits: eight main-text pages excluding references/appendices, 150-250 word abstract, PDF up to 25 MB. The draft is five pages in total, four main-text pages.
+Submit the approved PDF through the official sprint form and retain confirmation. Published cutoff: 25 October 2026 at 23:59 AoE, equivalent to 26 October 2026 at 17:29 IST. Current form limits: eight main-text pages excluding references/appendices, 150-250 word abstract, PDF up to 25 MB. Consult quality-checks.json for the current verified report and main-text page counts.
 
 Official form and guidelines: https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25
 

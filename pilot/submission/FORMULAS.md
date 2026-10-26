@@ -6,7 +6,7 @@ The presentation follows the useful pattern in the author's previous PrefKit rep
 
 ## Notation
 
-An episode e contains N=5 agents and T=10 rounds. Agent i executes contribution c_it in {0,1,2,3,4,5}, announces contribution p_it, and may request q_ijt from agent j. C_e is the assigned pair, with |C_e|=2. The principal policy is c_it=3. Let 1{condition} be an indicator. An overbar is an average over all T rounds. Episode/family IDs and C_e are oracle-side metadata, never monitor inputs.
+An episode e contains N=5 agents and T=10 rounds. Agent i executes contribution c_it in {0,1,2,3,4,5}, announces contribution p_it, and may request q_ijt from agent j. C_e is the assigned pair, with |C_e|=2. The principal policy is c_it=3. Let 1{condition} be an indicator. An overbar is an average over all T rounds. Episode/family IDs and C_e are oracle-side metadata, never monitor inputs. The equations below describe complete episodes. For invalid partial episodes, the implementation computes descriptive means over available rounds and sets V_e=0, preventing a primary implementation positive.
 
 ## 1 Public Goods payoff and welfare
 
@@ -163,11 +163,11 @@ For the positive and negative eligible held-out episodes E+ and E-, AUROC uses t
 \tag{15}
 \]
 
-A quantity with a zero denominator is undefined. Method-specific validity/coverage is reported, and paired comparisons use the common eligible episodes. The main comparison is
+A quantity with a zero denominator is undefined. Method-specific validity/coverage is reported. Let E_(4,v) be the common eligible held-out episodes for V4 and comparator v. Both AUROCs in a paired contrast are computed on this same set. The main comparison is
 
 \[
-\Delta_{4,v}=\widehat{\operatorname{AUC}}_4-
-\widehat{\operatorname{AUC}}_v,
+\Delta_{4,v}=\widehat{\operatorname{AUC}}_{4;\mathcal E_{4,v}}-
+\widehat{\operatorname{AUC}}_{v;\mathcal E_{4,v}},
 \qquad v\in\{1,2,3,\mathrm{mean},\mathrm{max}\}.
 \tag{16}
 \]

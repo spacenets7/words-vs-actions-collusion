@@ -3,7 +3,11 @@ name: Review verification
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - '**/*.md'
   pull_request:
+    paths-ignore:
+      - '**/*.md'
   workflow_dispatch:
 
 permissions:

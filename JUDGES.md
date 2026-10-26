@@ -4,6 +4,8 @@
 
 **Track:** 2.2 · **Author:** Siddeshwar U S · **Affiliation:** MIT, Manipal · **Team:** spacenets
 
+[Tagged review package and checksums](https://github.com/spacenets7/words-vs-actions-collusion/releases/tag/submission-2026-10-26) · [Passing fresh-checkout verification](https://github.com/spacenets7/words-vs-actions-collusion/actions/runs/40324152258)
+
 ## A five minute route
 
 1. Read the abstract and Results in the [final report](pilot/submission/final-report.pdf). It uses the supplied Apart template: six main pages including the title page, with references and appendices afterward.

@@ -2,7 +2,7 @@
 
 [![Review verification](https://github.com/spacenets7/words-vs-actions-collusion/actions/workflows/review.yml/badge.svg)](https://github.com/spacenets7/words-vs-actions-collusion/actions/workflows/review.yml)
 
-**[Read the final report](pilot/submission/final-report.pdf) · [Judge guide](JUDGES.md) · [Download the reproducibility ZIP](review/reproducibility.zip) · [Reproduce the results](REPRODUCIBILITY.md)**
+**[Download the tagged review package](https://github.com/spacenets7/words-vs-actions-collusion/releases/tag/submission-2026-10-26) · [Read the final report](pilot/submission/final-report.pdf) · [Judge guide](JUDGES.md) · [Download the reproducibility ZIP](review/reproducibility.zip) · [Reproduce the results](REPRODUCIBILITY.md)**
 
 Apart AI Collusion Research Sprint · Track 2.2 · 23–25 October 2026
 

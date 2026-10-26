@@ -34,16 +34,16 @@ The paired V4 minus V2 AUROC difference is -0.112, with a 95% family-bootstrap i
 
 ## Replay the saved analysis without a model or API
 
-The archive is the portable analysis entry point. Its public trajectories exclude private negotiation and private plans; its separate oracle-label file is available for evaluation.
+The archive is the portable analysis entry point. Its public trajectories exclude private negotiation and private plans; its separate oracle-label file is available for evaluation. The saved analysis used Python 3.12 and the pinned numerical-library versions below.
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install numpy scipy scikit-learn
+.\.venv\Scripts\python.exe -m pip install numpy==2.3.5 scipy==1.18.1 scikit-learn==1.9.1
 Expand-Archive -LiteralPath .\pilot\submission\local-reproducibility-bundle.zip -DestinationPath .\tmp\replay
 .\.venv\Scripts\python.exe .\tmp\replay\replay.py
 ```
 
-The replay recomputes the saved metrics, including 5,000 paired family-bootstrap draws, and requires exact JSON equality. It makes no model or API calls. Use an empty destination for a new extraction. The archived analysis dependencies and model/source provenance are included for reproducibility.
+The replay recomputes the saved metrics, including 5,000 paired family-bootstrap draws, and requires exact JSON equality. A full replay can take several minutes on CPU. It makes no model or API calls. Use an empty destination for a new extraction. The archived analysis dependencies and model/source provenance are included for reproducibility.
 
 ## Work with the complete pipeline
 

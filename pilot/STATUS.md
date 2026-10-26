@@ -14,6 +14,8 @@ Private repository: https://github.com/spacenets7/words-vs-actions-collusion. Th
 
 Credentials, environments, downloaded papers/full extracted text, third-party checkouts, model weights, caches, raw paid-run journals and human-review packets remain excluded. The private development snapshot contains oracle material and needs review before any future public release. This backup does not submit the research to Apart or provide human label/author approval. No new model/API calls or Modal charges were incurred.
 
+GitHub verification confirmed private visibility, default branch master and exact equality of all 122 tracked file blob IDs at the initial backup commit 6fddc4d99894d91720fa066b13145cd173f4861f. The reproducibility ZIP was downloaded back from GitHub, compared byte for byte with the delivered archive and extracted into a fresh isolated directory. Its full 5,000-draw offline replay reproduced the saved metrics exactly without model/API calls. The root README now pins the numerical dependencies and notes the CPU replay time.
+
 The sections below preserve the **pre-execution readiness snapshot** from 25 October 2026. At freeze, held-out trajectories were untouched. The user subsequently authorized automated held-out execution; consult the live banner above and pilot/automation-state.json for the current stage. The experimental configuration and calibration remain frozen.
 
 ## Frozen configuration

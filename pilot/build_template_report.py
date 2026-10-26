@@ -195,7 +195,7 @@ def build(template):
     assert not re.search(r'human review|adjudicat|review pending|pending.*review',alltext,re.I)
     assert sha(template.read_bytes())==EXPECTED
     proof={'template_sha256':EXPECTED,'docx_sha256':sha(final.read_bytes()),'original_preserve_only_parts':preserved,'all_preserve_only_parts_byte_identical':True,'section_count':1,'abstract_words':len(abstract.split()),'equation_count':10,'figure_count':len(media),'table_count':6,'metrics_sha256':sha((P/'metrics.json').read_bytes()),'frozen_manifest_sha256':sha(Path('pilot/frozen/hashes.json').read_bytes()),'visual_review':'pending','independent_human_label_review':'pending','author_approval':'pending','external_submission':'not_performed','report_wording':'User-requested review reminders removed; automatic label method and scientific limitations retained.'}
-    (P/'template-report-quality.json').write_text(json.dumps(proof,indent=2),encoding='utf-8')
+    (P/'template-report-quality.json').write_text(json.dumps(proof,indent=2),encoding='utf-8',newline='\n')
     inventory={n:{'bytes':len(b),'sha256':sha(b),'classification':'editable' if n in editable else 'preserve-only'} for n,b in parts.items() if n not in media}
     Path('tmp/final-report-template/package-inventory.json').write_text(json.dumps(inventory,indent=2),encoding='utf-8')
     print('Created',final,'with',len(preserved),'original parts preserved byte-for-byte.')

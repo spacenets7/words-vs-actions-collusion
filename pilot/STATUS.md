@@ -1,6 +1,9 @@
 # Track 2.2 pilot status
 
 <!-- automation:start -->
+
+Latest report revision: removed pending human-review/adjudication wording from the submission PDF and its three embedded figure footers at the user's request. The LLM Usage Statement is the exact user-supplied two-sentence text. Frozen event-based label definitions, scientific limitations, all results, thresholds and experimental hashes remain unchanged. Final PDF and synchronized Word source have13 total pages and6 main pages; all13 were visually checked. Abstract188 words. No inference calls or new Modal spend; internal review-status records are preserved without claiming completed human annotation. See template-report-quality.json for artifact hashes and exact-text checks.
+
 ## Live automated execution
 
 The manuscript was revised on26October2026 using the prior PrefKit report as a presentation reference. It now has nine total pages, seven main-text pages, ten numbered equations, five explicit audit requirements, nine methods subsections, seven tables and four figures. All pages were visually checked; independent equation checks and all23 tests pass. Original data, metrics, labels, thresholds and frozen experimental hashes are unchanged; no new model/API calls or Modal spend. The reproducibility bundle and editable source are synchronized. Independent human label adjudication and author approval remain pending; no external submission or publication has been made. The completion heartbeat remains deleted.

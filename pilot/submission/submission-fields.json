@@ -1,6 +1,6 @@
 {
   "report_title": "Words Actions and Evidence in Collusion Detection",
-  "summary": "Detecting harmful collusion requires separating shared agreements from legitimate cooperation, independent deception, and plans that are never executed. We study whether combining public statements with executed actions improves detection in a controlled five-agent repeated public-goods game. A frozen open-model pipeline generates six conditions and evaluates four views: public text, actions, their raw union, and a code-built claim-versus-outcome report. Two development families determine configuration and thresholds; eight scheduled held-out families yield 48 episodes, of which 48 are valid under the automatic episode criteria. Held-out implementation AUROC is 0.597 for text, 0.843 for actions, 0.719 for the raw union, and 0.731 for the structured report. Comparisons use paired family bootstrap intervals and development-locked operating thresholds. Independent deception provides a deliberately matched hard negative, while talk-only plans test whether monitors confuse intention with execution. The experiment uses controlled public communication for concealed and independent-deception conditions, and its event-based oracle labels await independent human adjudication. Results therefore describe provisional detection behavior in this constructed setting, including failures and uncertainty, rather than proving general ability to detect secret agreements from public records. Combining information did not consistently outperform actions alone, making the limits of public agreement evidence explicit.",
+  "summary": "Detecting harmful collusion requires separating shared agreements from legitimate cooperation, independent deception, and plans that are never executed. We study whether combining public statements with executed actions improves detection in a controlled five-agent repeated public-goods game. A frozen open-model pipeline generates six conditions and evaluates four views: public text, actions, their raw union, and a code-built claim-versus-outcome report. Two development families determine configuration and thresholds; eight scheduled held-out families yield 48 episodes, of which 48 are valid under the automatic episode criteria. Held-out implementation AUROC is 0.597 for text, 0.843 for actions, 0.719 for the raw union, and 0.731 for the structured report. Comparisons use paired family bootstrap intervals and development-locked operating thresholds. Independent deception provides a deliberately matched hard negative, while talk-only plans test whether monitors confuse intention with execution. The experiment uses controlled public communication for concealed and independent-deception conditions, and uses event-based automatic outcome labels. Results describe detection behavior in this constructed setting, including failures and uncertainty, rather than proving general ability to detect secret agreements from public records. Combining information did not consistently outperform actions alone, making the limits of public agreement evidence explicit.",
   "track": "Track 2: Detection and Audit of Collusion; question 2.2",
   "authors": {
     "authors": [
@@ -23,7 +23,7 @@
   "automated_integrity": "passed",
   "human_label_reviews": "pending",
   "author_approval": "pending",
-  "visual_report_inspection": "agent_viewed_all13_final_template_pages; author approval remains pending",
+  "visual_report_inspection": "agent_viewed_all13_latest_pages",
   "external_submission": "not_performed",
   "remaining_form_fields": [
     "contact email",
@@ -34,5 +34,7 @@
   "report_pages": 13,
   "main_text_pages": 6,
   "numbered_equations": 10,
-  "editable_report": "final-report.docx"
+  "editable_report": "final-report.docx",
+  "llm_usage_statement": "We used GPT-6.1 to brainstorm approaches and help draft sections, and GPT Astra for assistance in building out notebooks. Numerical results were checked through independent payoff calculations, automated tests and exact offline replay.",
+  "abstract_words": 188
 }

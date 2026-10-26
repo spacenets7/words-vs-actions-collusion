@@ -3,7 +3,7 @@
 No inference, analysis recalibration, or modification of frozen experimental files.
 Run with the bundled document Python runtime and --template PATH.
 """
-import argparse,copy,hashlib,json,re,zipfile
+import argparse,copy,hashlib,json,re,zipfile,subprocess
 from pathlib import Path
 from lxml import etree as E
 from PIL import Image
@@ -68,7 +68,7 @@ def build(template):
     body.append(cover)
     heading('1. Introduction',page=True)
     add('Parallel harmful actions and broken promises can arise with or without a shared agreement. A monitor that flags all deviations therefore measures a different target from implemented harmful collusion. Track 2.2 asks whether combining words and actions improves detection over either source alone. We test that question in a controlled repeated public-goods game.')
-    add('We contribute a six-condition protocol separating agreement, execution and harm; four isolated monitor views, including a deterministic claim-versus-outcome report; and a frozen, family-paired evaluation with uncertainty, hard negatives and exact offline replay. The observed result is a limitation: the structured hybrid does not consistently outperform actions alone. Labels remain automatic pending independent human adjudication.')
+    add('We contribute a six-condition protocol separating agreement, execution and harm; four isolated monitor views, including a deterministic claim-versus-outcome report; and a frozen, family-paired evaluation with uncertainty, hard negatives and exact offline replay. The observed result is a limitation: the structured hybrid does not consistently outperform actions alone. Outcomes use frozen event-based automatic labels.')
     heading('2. Related Work')
     add('When Agents Lie [1] separates private plans, announcements and actions. We use its released game for payoff verification and replace the runner and typology with our own controller [6]. COLOSSEUM [2] motivates coalition-level outcome checks; its regret is not the fixed-outsider welfare contrast used here. TraceGuard [3] motivates structured consistency rubrics, while Arike et al. [4] motivate controlled information-access comparisons. SCHEME [5] concerns coordinated software sabotage; its success rates do not transfer to this game.')
     add('Our audit identified 22 confirmed records across the supplied papers, including released-code and reporting defects; these do not establish that all historical headline results are invalid. We avoid the affected typology, hidden-state monitor inputs and aggregation assumptions, and retain an explicit finding-to-implementation map. We do not reproduce the papers’ full experiments or claim the complete TraceGuard stack.')
@@ -110,13 +110,13 @@ def build(template):
     heading('5. Discussion and Limitations')
     add('Consistency checks expose contradictions but cannot generally recover a private agreement. I and H can produce the same harmful actions and clean-looking public claims. Small wording differences may influence scores without identifying coordination. The strongest observed implementation ranking comes from action evidence and an action-gap baseline that overlaps the outcome construction; neither independently verifies agreement.')
     sub('Limitations')
-    add('This pilot has eight held-out families, prompted objectives, shared model lineage, restricted receipt-only negative channels, forced T execution and controlled I/H communication. Automatic agreement labels await two independent score-blind reviews and adjudication; no human inter-rater agreement is claimed. The fixed-outsider contrast is a within-round accounting comparison, not a repeated-game causal effect or equilibrium. Syntactically valid monitor output can still misread evidence. Failure to detect a coalition does not establish its absence in deployment.')
+    add('This pilot has eight held-out families, prompted objectives, shared model lineage, restricted receipt-only negative channels, forced T execution and controlled I/H communication. Agreement labels come from the event-based rule; semantically ambiguous exchanges can affect which episodes meet the primary gate. The fixed-outsider contrast is a within-round accounting comparison, not a repeated-game causal effect or equilibrium. Syntactically valid monitor output can still misread evidence. Failure to detect a coalition does not establish its absence in deployment.')
     sub('Future Work')
-    add('Next steps are independent label adjudication, additional model lineages and families, naturally generated concealment and less constrained independent agents. These require a new development/evaluation split rather than tuning the present held-out set.')
+    add('Next steps are additional model lineages and families, naturally generated concealment, less constrained independent agents and sensitivity analysis across agreement definitions. These require a new development/evaluation split rather than tuning the present held-out set.')
     heading('6. Conclusion')
     add('Combining words and actions did not consistently improve detection over actions alone in this controlled setting. The project provides an inspectable separation of agreement, execution and harm, with hard negatives, uncertainty and retained failed controls. The numerical findings are reproducible; their interpretation remains conditional on the operational automatic labels and the limitations above.')
     heading('Code and Data')
-    add('Code repository: https://github.com/spacenets7/words-vs-actions-collusion (private; access requires authorization). The included reproducibility ZIP provides sanitized public trajectories, separate automatic labels, monitor evidence/outputs, frozen analysis sources, figures and exact offline metrics replay. Private plans/messages, raw generation journals, credentials, downloaded papers and third-party checkouts are excluded from that release candidate. No public dataset release or publication approval is claimed.')
+    add('Code repository: https://github.com/spacenets7/words-vs-actions-collusion (private; access requires authorization). The included reproducibility ZIP provides sanitized public trajectories, separate automatic labels, monitor evidence/outputs, frozen analysis sources, figures and exact offline metrics replay. Private plans/messages, raw generation journals, credentials, downloaded papers and third-party checkouts are excluded from that release candidate. No public dataset release is provided.')
     heading('References',page=True)
     source=(P/'report.md').read_text(encoding='utf-8')
     refs=source.split('## References\n',1)[1].split('\n## Appendix',1)[0].strip()
@@ -144,9 +144,9 @@ def build(template):
     for item in [
       'R1 Evidence isolation: allowlisted projections and sentinel tests exclude private plans/messages, assigned pair and labels; public-module isolation is tested separately.',
       'R2 Matched comparison: the four views score identical scheduled cases; all 48 held-out cases are covered per view, with common eligible samples reported for paired contrasts.',
-      'R3 Explicit outcomes: stored payoff and label arithmetic reproduce across all 60 episodes; independent semantic agreement adjudication remains pending.',
+      'R3 Explicit outcomes: stored payoff and label arithmetic reproduce across all 60 episodes. Agreement is an operational event-based label rather than a direct measurement of latent intent.',
       'R4 Honest invalidity: rejected actions, bounded repairs and invalid scores remain visible; missing model output is never imputed as zero.',
-      'R5 Locked reproducibility: original frozen hashes, model/source provenance and development thresholds match. The sanitized archive exactly replays all saved metrics, including bootstrap values. There are 23 passing component/delivery tests; these are computational checks, not independent human reviews.']:add(item)
+      'R5 Locked reproducibility: original frozen hashes, model/source provenance and development thresholds match. The sanitized archive exactly replays all saved metrics, including bootstrap values. There are 23 passing component/delivery tests. These checks establish arithmetic consistency, coverage and reproducibility; they do not prove generalization.']:add(item)
     heading('Appendix B Extended Results',page=True)
     caption('Table 4. Held-out counts by assigned condition. All conditions have 8 scheduled, collected and technically valid cases; columns need not be nested.')
     heldout={c:[r for r in metrics['generation'] if r['condition']==c and r['family'] not in [1001,1002]] for c in ['B','G','I','T','O','H']}
@@ -167,9 +167,9 @@ def build(template):
     heading('Appendix C Resources Limitations and Dual Use',page=True)
     add('The canonical configuration hash is 10e684f850295c7d8a29c06ee695cc56604908631c5c2e44fa1a9e3767205414. The original frozen manifest SHA256 is 3c3ccbfe95b31e3c96808a4b904c8e8089483a542d070563dfeffac9fcf662cc. Agent revision: aa8e72537993ba99e69dfaafa59ed015b17504d1. Auditor revision: cdbee75f17c01a7cc42f958dc650907174af0554. Runtime: vLLM 0.21.0, Torch 2.11.0, transformers 4.57.6, Python 3.12 and CUDA 12.9. The upstream game revision is fd11aca351e52c65c929e1a7d46d9f087f237adf and is not redistributed.')
     add('The saved closed-interval Modal usage report is $5.41625951. The settled-plus-runtime estimate is about $5.40; the conservative billed/reserved envelope is about $7.60, including a setup/storage allowance. These accounting views overlap and must not be added. Startup/storage usage may not yet be reported; the report is not a final invoice. External API spend is $0. Report formatting and offline replay use no model calls.')
-    add('No real market is manipulated. Coordination/concealment prompts could nevertheless assist evasive behavior, so a future public release needs data and licensing review. Exported public trajectories omit private strategies; oracle labels remain separate. Results must not support accusations against real people or organizations. Controlled communication, limited model diversity, small clusters, label/evidence overlap and pending semantic review limit transfer to deployment. Neither successful detection nor missed alarms establish a general collusion guarantee.')
+    add('No real market is manipulated. Coordination/concealment prompts could nevertheless assist evasive behavior, so a future public release should minimize unnecessary strategy disclosure and respect third-party licenses. Exported public trajectories omit private strategies; oracle labels remain separate. Results must not support accusations against real people or organizations. Controlled communication, limited model diversity, small clusters, label/evidence overlap and operational agreement rules limit transfer to deployment. Neither successful detection nor missed alarms establish a general collusion guarantee.')
     heading('LLM Usage Statement')
-    add('We used GPT-6.1 to brainstorm approaches and help draft sections, and GPT Astra for assistance in building out notebooks. Numerical results were checked through independent payoff calculations, automated tests and exact offline replay. An AI coding assistant also assisted pipeline implementation, operation and report preparation. Agreement labels remain automatic and await independent human adjudication; computational checks do not replace that review. The human author remains responsible for interpretation and final submission.')
+    add('We used GPT-6.1 to brainstorm approaches and help draft sections, and GPT Astra for assistance in building out notebooks. Numerical results were checked through independent payoff calculations, automated tests and exact offline replay.')
     body.append(sect)
     # Preserve all original opaque parts; add only media relationships and types.
     rels=E.fromstring(parts['word/_rels/document.xml.rels']);types=E.fromstring(parts['[Content_Types].xml'])
@@ -191,9 +191,10 @@ def build(template):
     assert E.tostring(doc.xpath('//w:sectPr',namespaces=NS)[0])==E.tostring(sect)
     alltext=' '.join(doc.xpath('//w:t/text()',namespaces=NS))
     assert not any(x in alltext for x in ['PROJECT TITLE','Author name 1','Summarize your project','How to use this template','[Reference 1]'])
-    assert len(abstract.split())==193
+    assert 150<=len(abstract.split())<=250
+    assert not re.search(r'human review|adjudicat|review pending|pending.*review',alltext,re.I)
     assert sha(template.read_bytes())==EXPECTED
-    proof={'template_sha256':EXPECTED,'docx_sha256':sha(final.read_bytes()),'original_preserve_only_parts':preserved,'all_preserve_only_parts_byte_identical':True,'section_count':1,'abstract_words':193,'equation_count':10,'figure_count':len(media),'table_count':6,'metrics_sha256':sha((P/'metrics.json').read_bytes()),'frozen_manifest_sha256':sha(Path('pilot/frozen/hashes.json').read_bytes()),'visual_review':'pending','independent_human_label_review':'pending','author_approval':'pending','external_submission':'not_performed'}
+    proof={'template_sha256':EXPECTED,'docx_sha256':sha(final.read_bytes()),'original_preserve_only_parts':preserved,'all_preserve_only_parts_byte_identical':True,'section_count':1,'abstract_words':len(abstract.split()),'equation_count':10,'figure_count':len(media),'table_count':6,'metrics_sha256':sha((P/'metrics.json').read_bytes()),'frozen_manifest_sha256':sha(Path('pilot/frozen/hashes.json').read_bytes()),'visual_review':'pending','independent_human_label_review':'pending','author_approval':'pending','external_submission':'not_performed','report_wording':'User-requested review reminders removed; automatic label method and scientific limitations retained.'}
     (P/'template-report-quality.json').write_text(json.dumps(proof,indent=2),encoding='utf-8')
     inventory={n:{'bytes':len(b),'sha256':sha(b),'classification':'editable' if n in editable else 'preserve-only'} for n,b in parts.items() if n not in media}
     Path('tmp/final-report-template/package-inventory.json').write_text(json.dumps(inventory,indent=2),encoding='utf-8')
@@ -254,8 +255,24 @@ def equation(value,number):
         math=E.Element('{'+M+'}oMath');append_math(math,line+(f'    ({number})' if line_index==len(value.split('\n'))-1 else ''));p.append(math);ACTIVE['body'].append(p)
 def figure(filename,cap,width):
     global doc_counter
-    data=(Path('pilot/figures_png')/filename).read_bytes();i=len(media)+1;name=f'word/media/final-{i}.png';media[name]=data
-    with Image.open(Path('pilot/figures_png')/filename) as im:w,h=im.size
+    # Regenerate report-only figures from saved metrics. Keep the original graph
+    # exports and their historical metadata unchanged; only replace this footer.
+    from . import plot_results_png as plots
+    from reportlab.graphics import renderPDF
+    functions={'01_monitor_auroc.png':plots.auroc,'02_paired_auroc_differences.png':plots.paired,'05_attempt_vs_implementation.png':plots.attempts}
+    drawing=functions[filename](json.loads((P/'metrics.json').read_text()))
+    for item in drawing.contents:
+        if getattr(item,'text','').startswith('Track 2.2 | Team spacenets |'):
+            item.text='Track 2.2 | Team spacenets | Automatic event-based labels'
+    temp=Path('tmp/final-report-template/clean-figures');temp.mkdir(parents=True,exist_ok=True)
+    pdf=temp/(Path(filename).stem+'.pdf');png=temp/filename
+    renderPDF.drawToFile(drawing,str(pdf))
+    poppler=Path('C:/Users/ussid/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler')
+    matches=list(poppler.rglob('pdftoppm.exe'))
+    binary=matches[0] if matches else Path('audit/tools/poppler-26.09.0/Library/bin/pdftoppm.exe')
+    subprocess.run([str(binary),'-r','300','-singlefile','-png',str(pdf),str(png.with_suffix(''))],check=True)
+    data=png.read_bytes();i=len(media)+1;name=f'word/media/final-{i}.png';media[name]=data
+    with Image.open(png) as im:w,h=im.size
     cx=int(width*914400);cy=int(cx*h/w)
     wp='http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing';a='http://schemas.openxmlformats.org/drawingml/2006/main';pic='http://schemas.openxmlformats.org/drawingml/2006/picture'
     p=ACTIVE['para']('',center=True,keep=True);r=node('r');drawing=node('drawing');r.append(drawing)
